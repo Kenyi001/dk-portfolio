@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap');
+
+:root {
+  --bg-primary:    #0D1017;
+  --bg-secondary:  #13161C;
+  --bg-surface:    #1A1D24;
+  --bg-surface-2:  #22262F;
+  --ink-primary:   #E8E0D4;
+  --ink-secondary: #6B7280;
+  --ink-dim:       #2A3040;
+  --accent:        #D4513A;
+  --accent-glow:   rgba(212,81,58,0.12);
+  --hash-color:    #4B8A6E;
+  --log-ok:        #3D7A5A;
+  --border-subtle: rgba(232,224,212,0.07);
+  --border-mid:    rgba(232,224,212,0.15);
+  --border-strong: rgba(232,224,212,0.35);
+  --font-display:  'Space Grotesk', 'Arial Black', sans-serif;
+  --font-mono:     'JetBrains Mono', 'Courier New', monospace;
+  --font-body:     'Inter', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--ink-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  cursor: crosshair;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+a, button, [role="button"] {
+  cursor: crosshair;
+}

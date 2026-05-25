@@ -1,0 +1,185 @@
+---
+---
+<section class="experience-section">
+  <div class="container">
+    <h2 class="section-title">// experience · labor_logs</h2>
+    
+    <div class="experience-list">
+      
+      <!-- Hola S.R.L. -->
+      <div class="job-card hola-card">
+        <div class="job-header">
+          <div class="job-title-group">
+            <h3 class="role">Analista Técnico — Equipo de IA</h3>
+            <span class="company">Hola S.R.L. · BCP de Bolivia S.A.</span>
+          </div>
+          <span class="duration">Ago 2025 — Abr 2026</span>
+        </div>
+        <ul class="job-logros">
+          <li>Servicios backend Node.js para backoffice con IA integrada.</li>
+          <li>Sistema RAG + compresión de prompts + Redis → reducción drástica de costos de API.</li>
+          <li>Pipelines asíncronos con Webhooks para el procesamiento seguro de inferencias pesadas.</li>
+          <li>OCR automatizado + restauración avanzada de imágenes (watermark removal).</li>
+        </ul>
+      </div>
+
+      <!-- Tigo -->
+      <div class="job-card tigo-card">
+        <div class="job-header">
+          <div class="job-title-group">
+            <h3 class="role">Pasantía — Analista de Datos & QA</h3>
+            <span class="company">Tigo Bolivia · Tigo Money</span>
+          </div>
+          <span class="duration">Jun 2023 — Jun 2024</span>
+        </div>
+        <ul class="job-logros">
+          <li>Automatización con Python → scraping y limpieza automática de datos con un ahorro de 5h/semana.</li>
+          <li>Dashboards Tableau/Power BI para KPIs → mejora de la visibilidad operativa en un 30%.</li>
+          <li>QA sobre pasarela de pagos + optimización de procesos ETL.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience-section {
+    padding: 6rem 2rem;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--hash-color);
+    margin-bottom: 3rem;
+    font-weight: 500;
+  }
+
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .job-card {
+    padding: 2.5rem;
+    background-color: var(--bg-surface);
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    border-left: 4px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .job-card:hover {
+    transform: translateX(8px);
+    border-color: var(--border-accent);
+  }
+
+  /* Specific styles for companies */
+  .hola-card {
+    border-left-color: var(--accent);
+  }
+  
+  .tigo-card {
+    border-left-color: var(--ink-secondary);
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 1.2rem;
+  }
+
+  .job-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .role {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--ink-primary);
+    font-weight: bold;
+  }
+
+  .company {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .tigo-card .company {
+    color: var(--ink-secondary);
+  }
+
+  .duration {
+    font-family: var(--font-mono);
+    color: var(--ink-secondary);
+    font-size: 0.85rem;
+    background-color: var(--bg-primary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    border: 1px solid var(--border-color);
+  }
+
+  .job-logros {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .job-logros li {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .job-logros li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: bold;
+  }
+
+  .tigo-card .job-logros li::before {
+    color: var(--ink-secondary);
+  }
+
+  .job-card:hover .job-logros li {
+    color: var(--ink-primary);
+  }
+
+  @media (max-width: 768px) {
+    .experience-section {
+      padding: 4rem 1.5rem;
+    }
+
+    .job-header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .job-card {
+      padding: 1.5rem;
+    }
+  }
+</style>

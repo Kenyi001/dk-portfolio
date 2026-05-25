@@ -1,0 +1,18 @@
+# Astro production build
+dist/
+
+# Astro internal cache and generated types
+.astro/
+
+# Dependencies
+node_modules/
+
+# Environmental variables
+.env
+.env.production
+
+# OS system files
+.DS_Store
+
+# Vercel deployment cache and artifacts
+.vercel

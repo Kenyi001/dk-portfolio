@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectsGrid from '../../components/ProjectsGrid.astro';
+
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+
+<BaseLayout title="Projects | Dax Kenji">
+  <main class="projects-page">
+    <div class="container">
+      <header class="projects-header">
+        <h1 class="page-title">// all_projects</h1>
+        <p class="subtitle">
+          Explora la lista de sistemas de inteligencia artificial y soluciones Web3 en las que he trabajado.
+        </p>
+      </header>
+    </div>
+    
+    <ProjectsGrid projects={sortedProjects} />
+  </main>
+</BaseLayout>
+
+<style>
+  .projects-page {
+    padding-top: 4rem;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .projects-header {
+    margin-bottom: 2rem;
+  }
+
+  .page-title {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--hash-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+    max-width: 800px;
+  }
+
+  @media (max-width: 768px) {
+    .projects-page {
+      padding-top: 2rem;
+    }
+  }
+</style>

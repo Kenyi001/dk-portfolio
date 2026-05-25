@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CommunityNodes from '../components/CommunityNodes.astro';
+import LearningPath from '../components/LearningPath.astro';
+---
+
+<BaseLayout title="Community | Dax Kenji" description="La participación activa de Dax Kenji en las comunidades locales y globales de desarrollo de software, Web3 e Inteligencia Artificial.">
+  <main class="community-page">
+    <div class="container">
+      <header class="community-header">
+        <h1 class="page-title">// community_engagement</h1>
+        <p class="subtitle">
+          Creo firmemente en el poder de las comunidades de desarrollo técnico. Participo activamente compartiendo conocimiento técnico sobre Inteligencia Artificial y tecnologías Web3 en Bolivia y Latam.
+        </p>
+      </header>
+    </div>
+    
+    <CommunityNodes />
+    <LearningPath />
+  </main>
+</BaseLayout>
+
+<style>
+  .community-page {
+    padding-top: 4rem;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .community-header {
+    margin-bottom: 4rem;
+  }
+
+  .page-title {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--hash-color);
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+    max-width: 800px;
+  }
+
+  @media (max-width: 768px) {
+    .community-page {
+      padding-top: 2rem;
+    }
+    
+    .community-header {
+      margin-bottom: 2rem;
+    }
+  }
+</style>

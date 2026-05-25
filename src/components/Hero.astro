@@ -1,0 +1,228 @@
+---
+---
+<section class="hero">
+  <div class="hero-bg-code">
+    <div class="code-line">[2026] INFO  RAG pipeline initialized · tokens_saved=847K</div>
+    <div class="code-line">[2026] OK    Redis cache connected · latency=2ms</div>
+    <div class="code-line">[2026] INFO  Smart contract deployed · network=stellar</div>
+    <div class="code-line">[2026] OK    LLM cost reduction active · savings=68%</div>
+  </div>
+
+  <div class="hero-content">
+    <span class="pre-title">// initializing · backend → fullstack · santa cruz, bo</span>
+    
+    <h1 class="title">
+      <span class="title-dax">DAX</span> <span class="title-kenji">KENJI</span>
+    </h1>
+
+    <div class="badge-role">▶ BACKEND & AI · CRECIENDO A FULLSTACK · SCZ, BO</div>
+
+    <p class="bio">
+      Backend engineer especializado en sistemas de IA — construyendo hacia fullstack. De Santa Cruz, Bolivia, en el cruce de producción bancaria y Web3.
+    </p>
+
+    <div class="clock-display">
+      BLOCK_TIME <span class="pulse-dot" id="clock-pulse">◉</span> <span id="clock">00:00:00</span> UTC-4  ·  SANTA CRUZ, BO
+    </div>
+
+    <div class="cta-group">
+      <a href="/contact" class="cta-button primary">→ CONECTAR_SISTEMA</a>
+      <a href="/projects" class="cta-button secondary">→ VER_PROYECTOS</a>
+    </div>
+
+    <div class="community-chips">
+      <span class="chip">[ ComunidadETH Bolivia ]</span>
+      <span class="chip">[ YAIS Lab ]</span>
+      <span class="chip">[ GDG Santa Cruz ]</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  function updateClock() {
+    const clockEl = document.getElementById('clock');
+    if (clockEl) {
+      clockEl.textContent = new Date().toLocaleTimeString('es-BO', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+        timeZone: 'America/La_Paz'
+      });
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 8rem 2rem 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .hero-bg-code {
+    position: absolute;
+    top: 5%;
+    right: -2%;
+    font-family: var(--font-mono);
+    color: var(--ink-primary);
+    opacity: 0.04;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    pointer-events: none;
+    user-select: none;
+    z-index: -1;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pre-title {
+    font-family: var(--font-mono);
+    color: var(--hash-color);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 9vw, 6.5rem);
+    line-height: 0.95;
+    margin-bottom: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+
+  .title-dax {
+    color: var(--ink-primary);
+  }
+
+  .title-kenji {
+    color: var(--accent);
+  }
+
+  .badge-role {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border: 1px solid var(--accent);
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.08em;
+    font-weight: bold;
+  }
+
+  .bio {
+    font-family: Georgia, serif;
+    font-size: 15px;
+    color: var(--ink-secondary);
+    max-width: 750px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .clock-display {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--ink-secondary);
+    margin-bottom: 3.5rem;
+    border: 1px solid var(--border-mid);
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .pulse-dot {
+    color: var(--accent);
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .cta-button {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 4px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button.primary {
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    border: 1px solid var(--accent);
+  }
+
+  .cta-button.primary:hover {
+    background-color: transparent;
+    color: var(--accent);
+  }
+
+  .cta-button.secondary {
+    background-color: transparent;
+    color: var(--ink-primary);
+    border: 1px solid var(--border-strong);
+  }
+
+  .cta-button.secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .community-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--ink-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 5rem 1.5rem 4rem;
+    }
+
+    .hero-bg-code {
+      display: none;
+    }
+
+    .cta-group {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .cta-button {
+      text-align: center;
+    }
+  }
+</style>

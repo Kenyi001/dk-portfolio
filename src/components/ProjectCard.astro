@@ -1,0 +1,198 @@
+---
+interface Props {
+  title: string;
+  event: string;
+  eventType: 'hackathon' | 'personal' | 'professional';
+  description: string;
+  role: string;
+  stack: string[];
+  slug: string;
+  award?: string;
+  hashId: string;
+  metrics?: string;
+}
+
+const { title, event, eventType, description, role, stack, slug, award, hashId, metrics } = Astro.props;
+
+// Convert eventType enum to print labels
+const typeLabels = {
+  hackathon: 'HACKATHON',
+  personal: 'PERSONAL',
+  professional: 'PRODUCCIÓN'
+};
+
+// Check if this card is for the Token Saver System to give it a custom highlight border
+const isTokenSaver = title === "Token Saver System" || slug === "token-saver" || slug === "ocr-pipeline";
+---
+
+<a href={`/projects/${slug}`} class={`project-card ${isTokenSaver ? 'highlighted' : ''}`}>
+  {award && <div class="award-badge">{award}</div>}
+  
+  <div class="card-top">
+    <span class="badge">{typeLabels[eventType]}</span>
+    <span class="hash">{hashId}</span>
+  </div>
+  
+  <div class="card-header">
+    <h3 class="title">{title}</h3>
+  </div>
+
+  <span class="role-line">ROL → {role}</span>
+
+  <p class="description">{description}</p>
+  
+  <div class="stack">
+    {stack.map((tech) => (
+      <span class="tech-tag">{tech}</span>
+    ))}
+  </div>
+
+  {metrics && (
+    <div class="metrics-row">
+      <span class="metrics-value">{metrics}</span>
+    </div>
+  )}
+  
+  <span class="card-arrow">↗</span>
+</a>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 2.5rem 2rem;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.3s ease;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .project-card.highlighted {
+    border-left: 3px solid var(--accent);
+  }
+
+  .project-card:hover {
+    background-color: var(--bg-secondary);
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .award-badge {
+    background-color: var(--accent);
+    color: #FFF;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: bold;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    align-self: flex-start;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: var(--accent-glow);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+
+  .hash {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--hash-color);
+  }
+
+  .card-header {
+    margin-bottom: 0.5rem;
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--ink-primary);
+    font-weight: 700;
+  }
+
+  .role-line {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+  }
+
+  .description {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-secondary);
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .project-card:hover .tech-tag {
+    color: var(--ink-primary);
+    border-color: var(--ink-secondary);
+  }
+
+  .metrics-row {
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--log-ok);
+    font-weight: 500;
+  }
+
+  .card-arrow {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    color: var(--ink-secondary);
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .project-card:hover .card-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+</style>

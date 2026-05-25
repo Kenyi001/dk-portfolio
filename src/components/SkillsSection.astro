@@ -1,0 +1,150 @@
+---
+---
+<section class="skills-section">
+  <div class="container">
+    <h2 class="section-title">// skills · tech_specs</h2>
+    
+    <div class="skills-grid">
+      <!-- Backend -->
+      <div class="skill-category">
+        <h3>Backend & APIs</h3>
+        <ul class="skill-list">
+          <li>Node.js / Express / NestJS</li>
+          <li>TypeScript / Javascript</li>
+          <li>C# (.NET 8) / ASP.NET Core</li>
+          <li>PostgreSQL / MongoDB / Redis</li>
+        </ul>
+      </div>
+
+      <!-- AI / ML -->
+      <div class="skill-category">
+        <h3>AI & Machine Learning</h3>
+        <ul class="skill-list">
+          <li>Inferencia LLM (OpenAI, Gemini)</li>
+          <li>Orquestación RAG (Pinecone / Chroma)</li>
+          <li>Compresión Semántica de Prompts</li>
+          <li>LangChain / LlamaIndex / Agents</li>
+        </ul>
+      </div>
+
+      <!-- Cloud / DevOps -->
+      <div class="skill-category">
+        <h3>Cloud & DevOps</h3>
+        <ul class="skill-list">
+          <li>GCP (Google Cloud Platform)</li>
+          <li>Docker / Contenedores</li>
+          <li>CI/CD (GitHub Actions)</li>
+          <li>Serverless Architecture</li>
+        </ul>
+      </div>
+
+      <!-- Frontend & Web3 -->
+      <div class="skill-category">
+        <h3>Frontend & Web3</h3>
+        <ul class="skill-list">
+          <li>Astro / React / Next.js</li>
+          <li>HTML5 / CSS3 / Vanilla JS</li>
+          <li>Solidity / Smart Contracts</li>
+          <li>Ethers.js / Web3 Integrations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills-section {
+    padding: 6rem 2rem;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--hash-color);
+    margin-bottom: 3rem;
+    font-weight: 500;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+  }
+
+  .skill-category {
+    background: var(--bg-primary);
+    padding: 2.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .skill-category:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-accent);
+  }
+
+  .skill-category h3 {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .skill-list li {
+    font-family: var(--font-body);
+    color: var(--ink-secondary);
+    font-size: 1.05rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    padding-left: 1.2rem;
+  }
+
+  .skill-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  .skill-category:hover .skill-list li {
+    color: var(--ink-primary);
+  }
+
+  .skill-list li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .skills-section {
+      padding: 4rem 1.5rem;
+    }
+    
+    .skills-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,187 @@
+---
+---
+<section class="learning-path">
+  <div class="container">
+    <h2 class="section-title">// growth_trajectory · donde estoy y hacia dónde voy</h2>
+    
+    <div class="grid">
+      <!-- Columna 1: Sólido en Producción -->
+      <div class="column solid">
+        <h3 class="column-title">[SÓLIDO EN PRODUCCIÓN]</h3>
+        <ul class="tech-list">
+          <li>Node.js</li>
+          <li>TypeScript</li>
+          <li>C# .NET 8</li>
+          <li>RAG + Redis</li>
+          <li>LLM Optimization</li>
+          <li>OCR Pipelines</li>
+          <li>Webhooks Async</li>
+          <li>Solidity</li>
+          <li>Web3</li>
+        </ul>
+      </div>
+
+      <!-- Columna 2: Expandiendo -->
+      <div class="column expanding">
+        <h3 class="column-title">
+          [EXPANDIENDO]
+          <span class="pulse-indicator"></span>
+        </h3>
+        <ul class="tech-list">
+          <li>React</li>
+          <li>Next.js</li>
+          <li>Astro</li>
+          <li>Fullstack Flows</li>
+          <li>CSS Avanzado</li>
+          <li>Testing E2E</li>
+          <li>UI/UX</li>
+          <li>Frontend Performance</li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Próximo Frontier -->
+      <div class="column frontier">
+        <h3 class="column-title">[PRÓXIMO FRONTIER]</h3>
+        <ul class="tech-list">
+          <li>Cloud Architecture</li>
+          <li>Kubernetes</li>
+          <li>DevOps / CI-CD</li>
+          <li>AWS Solutions</li>
+          <li>Infrastructure as Code</li>
+          <li>System Design @ Scale</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .learning-path {
+    padding: 6rem 2rem;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--hash-color);
+    margin-bottom: 3.5rem;
+    font-weight: 500;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .column {
+    background-color: var(--bg-secondary);
+    padding: 2.5rem 2rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-mid);
+    transition: all 0.3s ease;
+  }
+
+  .column:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+  }
+
+  /* Específicos de columna */
+  .column.solid {
+    border-left: 3px solid var(--accent);
+  }
+
+  .column.expanding {
+    border-left: 2px solid var(--hash-color);
+    position: relative;
+  }
+
+  .column.frontier {
+    border-left: 1px solid var(--border-subtle);
+  }
+
+  .column-title {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .column.solid .column-title {
+    color: var(--accent);
+  }
+
+  .column.expanding .column-title {
+    color: var(--hash-color);
+  }
+
+  .column.frontier .column-title {
+    color: var(--ink-secondary);
+  }
+
+  .pulse-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: var(--hash-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(75, 138, 110, 0.7);
+    animation: pulse-glow 1.5s infinite;
+  }
+
+  @keyframes pulse-glow {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(75, 138, 110, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 8px rgba(75, 138, 110, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(75, 138, 110, 0);
+    }
+  }
+
+  .tech-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .tech-list li {
+    font-family: var(--font-body);
+    color: var(--ink-primary);
+    font-size: 1.05rem;
+    position: relative;
+    padding-left: 1.2rem;
+  }
+
+  .tech-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--ink-secondary);
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 992px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

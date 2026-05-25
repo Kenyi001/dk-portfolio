@@ -1,0 +1,62 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Dax Kenji — Backend Engineer & AI Developer",
+  description = "Backend engineer especializado en sistemas de IA, construyendo hacia fullstack. Santa Cruz, Bolivia."
+} = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og.png" />
+  
+  <!-- Twitter Card Metadata -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@daxkenyi001" />
+  
+  <link rel="icon" href="/favicon.ico" />
+  
+  <!-- Google Fonts Preconnect & Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="/src/styles/global.css" />
+</head>
+<body>
+  <Nav />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+  <script>
+    console.log(`
+  ██████╗ ██╗  ██╗
+  ██╔══██╗██║ ██╔╝
+  ██║  ██║█████╔╝
+  ██║  ██║██╔═██╗
+  ██████╔╝██║  ██╗
+  ╚═════╝ ╚═╝  ╚═╝
+
+  hey dev 👋 estás inspeccionando el código.
+  hola. hablemos.
+  → daxkenyi001@gmail.com
+  → x.com/daxkenyi001
+    `);
+  </script>
+</body>
+</html>

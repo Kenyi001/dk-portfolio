@@ -1,0 +1,99 @@
+---
+---
+<div class="ticker-wrapper">
+  <div class="ticker">
+    <div class="ticker-content">
+      <span>ASTRO</span>
+      <span class="dot">•</span>
+      <span>REACT</span>
+      <span class="dot">•</span>
+      <span>NODE.JS</span>
+      <span class="dot">•</span>
+      <span>PYTHON</span>
+      <span class="dot">•</span>
+      <span>TENSORFLOW</span>
+      <span class="dot">•</span>
+      <span>SOLIDITY</span>
+      <span class="dot">•</span>
+      <span>VUE.JS</span>
+      <span class="dot">•</span>
+      <span>GRAPHQL</span>
+      <span class="dot">•</span>
+    </div>
+    <!-- Duplicado para el loop infinito -->
+    <div class="ticker-content">
+      <span>ASTRO</span>
+      <span class="dot">•</span>
+      <span>REACT</span>
+      <span class="dot">•</span>
+      <span>NODE.JS</span>
+      <span class="dot">•</span>
+      <span>PYTHON</span>
+      <span class="dot">•</span>
+      <span>TENSORFLOW</span>
+      <span class="dot">•</span>
+      <span>SOLIDITY</span>
+      <span class="dot">•</span>
+      <span>VUE.JS</span>
+      <span class="dot">•</span>
+      <span>GRAPHQL</span>
+      <span class="dot">•</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 0;
+  }
+
+  .ticker {
+    display: flex;
+    width: fit-content;
+    animation: ticker 25s linear infinite;
+    will-change: transform;
+  }
+
+  .ticker:hover {
+    animation-play-state: paused;
+  }
+
+  .ticker-content {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding-right: 2rem;
+  }
+
+  .ticker-content span {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--ink-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .ticker-content span:hover {
+    color: var(--accent);
+  }
+
+  .ticker-content .dot {
+    color: var(--accent-dim);
+  }
+
+  @keyframes ticker {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+</style>

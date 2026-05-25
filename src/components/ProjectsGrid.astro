@@ -1,0 +1,306 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+interface Props {
+  projects?: any[];
+}
+
+const { projects: propProjects } = Astro.props;
+const dbProjects = await getCollection('projects');
+let projects = propProjects || dbProjects;
+
+// Sort by date descending (more recent first)
+projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
+---
+<section id="projects" class="projects-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">// projects · selected_works</h2>
+      
+      <!-- Filter controls -->
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">[ TODOS ]</button>
+        <button class="filter-btn" data-filter="ai">[ AI SYSTEMS ]</button>
+        <button class="filter-btn" data-filter="web3">[ WEB3 ]</button>
+        <button class="filter-btn" data-filter="profesional">[ PROFESIONAL ]</button>
+      </div>
+    </div>
+
+    <div class="projects-grid" id="grid">
+      {projects.map(project => {
+        // Classify project into filters
+        const slug = project.id;
+        const isAi = slug === 'token-saver' || slug === 'ledgerlens' || slug === 'ai-voice-agent' || slug === 'ocr-pipeline' || slug === 'whatsapp-rag-bot';
+        const isWeb3 = slug === 'trustark' || slug === 'enaid';
+        const isProfesional = project.data.eventType === 'professional';
+        
+        const categoryClasses = [];
+        if (isAi) categoryClasses.push('cat-ai');
+        if (isWeb3) categoryClasses.push('cat-web3');
+        if (isProfesional) categoryClasses.push('cat-profesional');
+        
+        const dataCategories = [];
+        if (isAi) dataCategories.push('ai');
+        if (isWeb3) dataCategories.push('web3');
+        if (isProfesional) dataCategories.push('profesional');
+        
+        return (
+          <div class={`grid-item all ${categoryClasses.join(' ')}`} data-category={dataCategories.join(',')}>
+            <ProjectCard 
+              title={project.data.title}
+              event={project.data.event}
+              eventType={project.data.eventType}
+              description={project.data.description}
+              role={project.data.role}
+              stack={project.data.stack}
+              award={project.data.award}
+              slug={project.id}
+              hashId={project.data.hashId}
+              metrics={project.data.metrics}
+            />
+          </div>
+        );
+      })}
+
+      <!-- Current Build dashed card -->
+      <div class="grid-item all cat-ai cat-web3 final-build-card" data-category="ai,web3">
+        <div class="build-card-content">
+          <div class="card-top">
+            <span class="badge blinking">● EN CONSTRUCCIÓN</span>
+            <span class="hash">// pending_deploy</span>
+          </div>
+          <h3 class="build-title">// current_build</h3>
+          <p class="build-desc">
+            Diseñando una plataforma RAG unificada para indexación automática y orquestación multi-agente.
+          </p>
+          <div class="build-counter">
+            <span class="days-label">TIEMPO_INCURRIDO →</span>
+            <span class="days-value" id="days-count">00</span> días activos
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Filter logic
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const gridItems = document.querySelectorAll('.grid-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Toggle active state on buttons
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.getAttribute('data-filter');
+
+      gridItems.forEach(item => {
+        const categoryAttr = item.getAttribute('data-category') || '';
+        const categories = categoryAttr.split(',');
+        const isFinalCard = item.classList.contains('final-build-card');
+
+        // Reset item opacity/transition
+        (item as HTMLElement).style.opacity = '0';
+        (item as HTMLElement).style.transform = 'scale(0.95)';
+
+        setTimeout(() => {
+          if (filterValue === 'all' || categories.includes(filterValue) || isFinalCard) {
+            (item as HTMLElement).style.display = 'block';
+            setTimeout(() => {
+              (item as HTMLElement).style.opacity = '1';
+              (item as HTMLElement).style.transform = 'scale(1)';
+            }, 50);
+          } else {
+            (item as HTMLElement).style.display = 'none';
+          }
+        }, 200);
+      });
+    });
+  });
+
+  // Calculate days since 2026-01-01
+  const daysCountEl = document.getElementById('days-count');
+  if (daysCountEl) {
+    const startDate = new Date('2026-01-01T00:00:00-04:00');
+    const today = new Date();
+    const diffTime = Math.abs(today.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    daysCountEl.textContent = String(diffDays);
+  }
+</script>
+
+<style>
+  .projects-section {
+    padding: 6rem 2rem;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--hash-color);
+    font-weight: 500;
+  }
+
+  .filters {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .filter-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-mono);
+    color: var(--ink-secondary);
+    font-size: 0.95rem;
+    cursor: crosshair;
+    padding: 0.4rem 0.8rem;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    color: var(--accent);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .grid-item {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Dash build card styling */
+  .final-build-card {
+    border: 1px dashed var(--border-strong);
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 380px;
+  }
+
+  .build-card-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--hash-color);
+    background-color: rgba(75, 138, 110, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+
+  .badge.blinking {
+    animation: blink-anim 1.5s infinite;
+  }
+
+  @keyframes blink-anim {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hash {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-secondary);
+  }
+
+  .build-title {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--ink-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  .build-desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+
+  .build-counter {
+    margin-top: auto;
+    border-top: 1px dashed var(--border-mid);
+    padding-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-secondary);
+  }
+
+  .days-label {
+    color: var(--ink-secondary);
+  }
+
+  .days-value {
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  @media (max-width: 768px) {
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .filters {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      width: 100%;
+      padding-bottom: 0.5rem;
+      gap: 0.5rem;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-btn {
+      flex-shrink: 0;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

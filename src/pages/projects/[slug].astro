@@ -1,0 +1,301 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// Convert eventType enum to print labels
+const typeLabels = {
+  hackathon: 'HACKATHON',
+  personal: 'PERSONAL',
+  professional: 'PRODUCCIÓN'
+};
+---
+
+<BaseLayout title={`${entry.data.title} | Dax Kenji`} description={entry.data.description}>
+  <main class="project-detail">
+    <div class="container">
+      <header class="project-header">
+        <div class="meta-top">
+          <span class="badge">{typeLabels[entry.data.eventType]}</span>
+          <span class="hash">{entry.data.hashId}</span>
+        </div>
+        
+        <h1 class="title">{entry.data.title}</h1>
+        
+        <span class="role-line">ROL → {entry.data.role}</span>
+        
+        <p class="description">{entry.data.longDescription || entry.data.description}</p>
+        
+        <div class="meta-info">
+          <div class="stack">
+            {entry.data.stack.map(tech => (
+              <span class="tech-tag">{tech}</span>
+            ))}
+          </div>
+          
+          <div class="attributes">
+            <div class="attr-item">
+              <span class="attr-label">EVENTO / CONTEXTO:</span>
+              <span class="attr-val">{entry.data.event}</span>
+            </div>
+            {entry.data.award && (
+              <div class="attr-item">
+                <span class="attr-label">PREMIO / RECONOCIMIENTO:</span>
+                <span class="attr-val highlight">{entry.data.award}</span>
+              </div>
+            )}
+            {entry.data.metrics && (
+              <div class="attr-item">
+                <span class="attr-label">MÉTRICAS / IMPACTO:</span>
+                <span class="attr-val ok">{entry.data.metrics}</span>
+              </div>
+            )}
+            {entry.data.date && (
+              <div class="attr-item">
+                <span class="attr-label">FECHA:</span>
+                <span class="attr-val">{entry.data.date}</span>
+              </div>
+            )}
+          </div>
+          
+          <div class="links-group">
+            {entry.data.repoUrl && (
+              <a href={entry.data.repoUrl} target="_blank" rel="noopener noreferrer" class="link-btn">
+                → VER_CODIGO_FUENTE
+              </a>
+            )}
+            {entry.data.demoUrl && (
+              <a href={entry.data.demoUrl} target="_blank" rel="noopener noreferrer" class="link-btn primary">
+                → VER_DEMO_EN_VIVO
+              </a>
+            )}
+          </div>
+        </div>
+      </header>
+      
+      <article class="content-body">
+        <Content />
+      </article>
+      
+      <div class="back-link-wrapper">
+        <a href="/projects" class="back-link">← Volver a Proyectos</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .project-detail {
+    padding: 6rem 2rem;
+    min-height: 80vh;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .project-header {
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border-mid);
+  }
+
+  .meta-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    background: var(--accent-glow);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+
+  .hash {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--hash-color);
+  }
+
+  .title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--ink-primary);
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+
+  .role-line {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .description {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: var(--ink-primary);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .meta-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-primary);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-mid);
+    padding: 0.3rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .attributes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 1.5rem;
+  }
+
+  .attr-item {
+    display: flex;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .attr-label {
+    color: var(--ink-secondary);
+    width: 240px;
+    flex-shrink: 0;
+  }
+
+  .attr-val {
+    color: var(--ink-primary);
+  }
+
+  .attr-val.highlight {
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  .attr-val.ok {
+    color: var(--log-ok);
+    font-weight: bold;
+  }
+
+  .links-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .link-btn {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-strong);
+    color: var(--ink-primary);
+  }
+
+  .link-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .link-btn.primary {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg-primary);
+  }
+
+  .link-btn.primary:hover {
+    background-color: transparent;
+    color: var(--accent);
+  }
+
+  .content-body {
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    color: var(--ink-primary);
+    line-height: 1.8;
+  }
+
+  .content-body p {
+    margin-bottom: 1.5rem;
+  }
+
+  .back-link-wrapper {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-mid);
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    color: var(--ink-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .project-detail {
+      padding: 4rem 1.5rem;
+    }
+
+    .attr-item {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .attr-label {
+      width: auto;
+    }
+  }
+</style>

@@ -1,0 +1,151 @@
+---
+const nodes = [
+  {
+    name: "ComunidadETH Bolivia",
+    role: "Active Member & Web3 Builder",
+    description: "Ayudando a expandir el ecosistema Ethereum y blockchain en el país a través de eventos, educación técnica y mentorías.",
+    meta: "12+ meetups",
+    tags: ["Ethereum", "Solidity", "Web3 Dev"]
+  },
+  {
+    name: "YAIS Lab",
+    role: "AI Developer & Core Researcher",
+    description: "Investigación activa e implementación práctica de modelos de inteligencia artificial y flujos de ingeniería LLM avanzados.",
+    meta: "Hackathon 2025",
+    tags: ["LLM", "Prompt Compresion", "Agents"]
+  },
+  {
+    name: "GDG Santa Cruz",
+    role: "Co-Organizer & AI Tech Speaker",
+    description: "Co-organizando y compartiendo conocimiento técnico en desarrollo web, inteligencia artificial y mejores prácticas de ingeniería de software.",
+    meta: "Build with AI",
+    tags: ["Dev Community", "AI Integration", "GCP"]
+  }
+];
+---
+<section class="community-nodes">
+  <div class="container">
+    <h2 class="section-title">// community · active_nodes</h2>
+    
+    <div class="grid">
+      {nodes.map(node => (
+        <div class="node-card">
+          <div class="card-header">
+            <span class="meta-data">{node.meta}</span>
+            <h3 class="node-name">{node.name}</h3>
+          </div>
+          <span class="node-role">{node.role}</span>
+          <p class="node-desc">{node.description}</p>
+          <div class="node-tags">
+            {node.tags.map(tag => (
+              <span class="node-tag">#{tag}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .community-nodes {
+    padding: 6rem 2rem;
+    background-color: var(--bg-secondary);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--hash-color);
+    margin-bottom: 3.5rem;
+    font-weight: 500;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  .node-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-mid);
+    padding: 2.5rem 2rem;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .node-card:hover {
+    background-color: var(--bg-surface);
+    border-left: 3px solid var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 1rem;
+  }
+
+  .meta-data {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+
+  .node-name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    color: var(--ink-primary);
+    font-weight: 700;
+  }
+
+  .node-role {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+  }
+
+  .node-desc {
+    font-family: var(--font-body);
+    color: var(--ink-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: 2rem;
+  }
+
+  .node-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .node-tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--hash-color);
+  }
+
+  @media (max-width: 992px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>
