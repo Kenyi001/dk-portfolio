@@ -1,17 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <rect width="32" height="32" rx="4" fill="#1A1D24"/>
-  <text
-    x="2" y="24"
-    font-family="Arial Black, sans-serif"
-    font-weight="900"
-    font-size="22"
-    letter-spacing="-1"
-    fill="#E8E0D4">D</text>
-  <text
-    x="15" y="24"
-    font-family="Arial Black, sans-serif"
-    font-weight="900"
-    font-size="22"
-    letter-spacing="-1"
-    fill="#D4513A">K</text>
+  <!-- Fondo oscuro con bordes redondeados -->
+  <rect width="32" height="32" rx="5" fill="#1A1D24"/>
+
+  <!-- Letra D: rectángulo izquierdo + arco derecho -->
+  <path d="M4 7 L4 25 L10 25 Q18 25 18 16 Q18 7 10 7 Z" fill="#E8E0D4"/>
+  <path d="M7 10 L10 10 Q15 10 15 16 Q15 22 10 22 L7 22 Z" fill="#1A1D24"/>
+
+  <!-- Letra K: línea vertical + dos diagonales -->
+  <rect x="20" y="7" width="3" height="18" fill="#D4513A"/>
+  <polygon points="23,16 29,7 32,7 26,16 32,25 29,25" fill="#D4513A"/>
 </svg>
