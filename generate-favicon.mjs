@@ -1,41 +1,42 @@
 import sharp from 'sharp';
 import fs from 'fs';
 
-// DK monogram — Bold clásico
-// Proporciones derivadas del preview 64x64, escaladas al tamaño de cada render
+// DK monogram — Bold clásico con K de brazos anchos y muesca visible
 const svg = (size) => {
   const s = size;
-  const rx = Math.round(s * 0.125); // border radius ~4px en 32px
+  const rx = Math.round(s * 0.125);
 
-  // D geometry (left ~60% of canvas)
-  const dX1 = s * 0.078;   // left edge of stem
+  // D geometry
+  const dX  = s * 0.078;   // stem left
   const dY1 = s * 0.109;   // top
   const dY2 = s * 0.891;   // bottom
-  const dMidX = s * 0.328; // right bulge of D
-  const dMid  = s * 0.5;   // vertical midpoint
-  const dHoleX1 = s * 0.203; // hole left
-  const dHoleX2 = s * 0.438; // hole right bulge
-  const dHoleY1 = s * 0.234; // hole top
-  const dHoleY2 = s * 0.766; // hole bottom
+  const dBowlX = s * 0.594; // bowl right apex
+  const dMid   = s * 0.5;
+  const dHoleX1 = s * 0.203;
+  const dHoleX2 = s * 0.438;
+  const dHoleY1 = s * 0.234;
+  const dHoleY2 = s * 0.766;
 
-  // K geometry (right ~40% of canvas)
-  const kX = s * 0.641;    // stem left
-  const kW = s * 0.109;    // stem width
-  const kTipX = s * 0.938; // arm tip right
-  const kMidY = s * 0.5;   // center join
+  // K geometry
+  const kX    = s * 0.641;  // stem left
+  const kW    = s * 0.109;  // stem width
+  const kTipX = s * 0.938;  // arm tip X (right edge)
+  // Arms: upper ends at 39% height, lower starts at 61% height → clear notch
+  const kArmUpperEnd  = s * 0.391;  // upper arm bottom Y
+  const kArmLowerStart = s * 0.609; // lower arm top Y
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${s} ${s}" width="${s}" height="${s}">
   <rect width="${s}" height="${s}" rx="${rx}" fill="#1A1D24"/>
   <!-- D outer -->
-  <path d="M${dX1} ${dY1} L${dX1} ${dY2} L${dMidX} ${dY2} Q${s*0.594} ${dY2} ${s*0.594} ${dMid} Q${s*0.594} ${dY1} ${dMidX} ${dY1} Z" fill="#E8E0D4"/>
+  <path d="M${dX} ${dY1} L${dX} ${dY2} L${s*0.328} ${dY2} Q${dBowlX} ${dY2} ${dBowlX} ${dMid} Q${dBowlX} ${dY1} ${s*0.328} ${dY1} Z" fill="#E8E0D4"/>
   <!-- D inner cutout -->
-  <path d="M${dHoleX1} ${dHoleY1} L${dMidX} ${dHoleY1} Q${dHoleX2} ${dHoleY1} ${dHoleX2} ${dMid} Q${dHoleX2} ${dHoleY2} ${dMidX} ${dHoleY2} L${dHoleX1} ${dHoleY2} Z" fill="#1A1D24"/>
+  <path d="M${dHoleX1} ${dHoleY1} L${s*0.313} ${dHoleY1} Q${dHoleX2} ${dHoleY1} ${dHoleX2} ${dMid} Q${dHoleX2} ${dHoleY2} ${s*0.313} ${dHoleY2} L${dHoleX1} ${dHoleY2} Z" fill="#1A1D24"/>
   <!-- K stem -->
   <rect x="${kX}" y="${dY1}" width="${kW}" height="${dY2 - dY1}" fill="#D4513A"/>
-  <!-- K upper arm -->
-  <polygon points="${kX+kW},${dY1} ${kTipX},${dY1} ${kX+kW},${kMidY}" fill="#D4513A"/>
-  <!-- K lower arm -->
-  <polygon points="${kX+kW},${kMidY} ${kTipX},${dY2} ${kX+kW},${dY2}" fill="#D4513A"/>
+  <!-- K upper arm: gordo, llega hasta kArmUpperEnd en el tallo (no hasta el centro) -->
+  <polygon points="${kX+kW},${dY1} ${kTipX},${dY1} ${kX+kW},${kArmUpperEnd}" fill="#D4513A"/>
+  <!-- K lower arm: gordo, empieza en kArmLowerStart (deja muesca visible) -->
+  <polygon points="${kX+kW},${kArmLowerStart} ${kTipX},${dY2} ${kX+kW},${dY2}" fill="#D4513A"/>
 </svg>`;
 };
 
