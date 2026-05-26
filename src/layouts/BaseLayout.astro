@@ -1,6 +1,7 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import '../styles/global.css';
 
 interface Props {
   title?: string;
@@ -35,7 +36,7 @@ const {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" />
-  <link rel="stylesheet" href="/src/styles/global.css" />
+  <!-- global.css importado vía frontmatter para build correcto en producción -->
 </head>
 <body>
   <Nav />
