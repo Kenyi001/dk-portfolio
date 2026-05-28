@@ -1,31 +1,43 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/translations';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const switchPath = lang === 'es'
+  ? `/en${Astro.url.pathname === '/' ? '' : Astro.url.pathname}`
+  : Astro.url.pathname.replace(/^\/en/, '') || '/';
+
 const { pathname } = Astro.url;
 const isActive = (path: string) => {
-  if (path === '/' && pathname === '/') return true;
-  if (path !== '/' && pathname.startsWith(path)) return true;
+  const localizedPath = lang === 'es' ? path : `/en${path === '/' ? '' : path}`;
+  if (path === '/' && pathname === (lang === 'es' ? '/' : '/en')) return true;
+  if (path !== '/' && pathname.startsWith(localizedPath)) return true;
   return false;
 };
 ---
 <nav class="nav">
   <div class="nav-container">
     <div class="logo-group">
-      <a href="/" class="logo">
+      <a href={lang === 'es' ? '/' : '/en'} class="logo">
         <span class="logo-d">D</span><span class="logo-k">K</span>
       </a>
       <span class="handle">@daxkenyi001</span>
     </div>
     
     <div class="links">
-      <a href="/projects" class={`nav-link ${isActive('/projects') ? 'active' : ''}`}>Proyectos</a>
-      <a href="/about" class={`nav-link ${isActive('/about') ? 'active' : ''}`}>About</a>
-      <a href="/community" class={`nav-link ${isActive('/community') ? 'active' : ''}`}>Community</a>
-      <a href="/contact" class={`nav-link ${isActive('/contact') ? 'active' : ''}`}>Contacto</a>
+      <a href={lang === 'es' ? '/projects' : '/en/projects'} class={`nav-link ${isActive('/projects') ? 'active' : ''}`}>{t('nav.projects')}</a>
+      <a href={lang === 'es' ? '/about' : '/en/about'} class={`nav-link ${isActive('/about') ? 'active' : ''}`}>{t('nav.about')}</a>
+      <a href={lang === 'es' ? '/community' : '/en/community'} class={`nav-link ${isActive('/community') ? 'active' : ''}`}>{lang === 'es' ? 'Comunidad' : 'Community'}</a>
+      <a href={lang === 'es' ? '/contact' : '/en/contact'} class={`nav-link ${isActive('/contact') ? 'active' : ''}`}>{t('nav.contact')}</a>
     </div>
 
     <div class="status">
       <span class="status-dot">●</span>
-      <span class="status-text">DISPONIBLE</span>
+      <span class="status-text">{lang === 'es' ? 'DISPONIBLE' : 'AVAILABLE'}</span>
     </div>
+
+    <a href={switchPath} class="lang-switch" aria-label="Cambiar idioma">
+      {lang === 'es' ? 'EN' : 'ES'}
+    </a>
   </div>
 </nav>
 
@@ -139,5 +151,21 @@ const isActive = (path: string) => {
     .status {
       display: none;
     }
+  }
+
+  .lang-switch {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--ink-secondary);
+    border: 1px solid var(--border-color);
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .lang-switch:hover {
+    color: var(--accent);
+    border-color: var(--accent);
   }
 </style>

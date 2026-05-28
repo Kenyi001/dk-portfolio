@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SkillsSection from '../../components/SkillsSection.astro';
+import ExperienceSection from '../../components/ExperienceSection.astro';
+import CommunityNodes from '../../components/CommunityNodes.astro';
+---
+
+<BaseLayout title="About | Dax Kenji">
+  <main class="about-page">
+    <div class="container">
+      <header class="about-header">
+        <span class="tagline">// ABOUT ME · path_and_vision</span>
+        <h1 class="page-title">// about_me</h1>
+        <div class="bio-extended">
+          <p>
+            I am a Software Engineer focused on Backend development and Artificial Intelligence integrations. Experienced in data pipeline optimization and the deployment of intelligent systems in high-demand environments (such as the banking sector and Web3).
+          </p>
+          <p>
+            My technical approach merges solid systems architecture with an insatiable curiosity for learning emerging technologies. From designing middleware that slashes LLM costs to deploying smart contracts and decentralized on-chain flows, I constantly seek elegant solutions to complex business problems.
+          </p>
+        </div>
+      </header>
+    </div>
+    
+    <SkillsSection />
+    <ExperienceSection />
+    <CommunityNodes />
+    
+    <div class="contact-cta">
+      <div class="container text-center">
+        <h2>Ready to collaborate?</h2>
+        <p>Let's discuss your next AI system or Web3 development.</p>
+        <a href="/en/contact" class="cta-link">→ GO_TO_CONTACT</a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .about-page {
+    padding-top: 4rem;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .about-header {
+    margin-bottom: 6rem;
+  }
+
+  .tagline {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--hash-color);
+    margin-bottom: 3rem;
+  }
+
+  .bio-extended p {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: var(--ink-primary);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-cta {
+    padding: 6rem 2rem;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .contact-cta h2 {
+    font-family: var(--font-display);
+    font-size: 2.25rem;
+    color: var(--ink-primary);
+    margin-bottom: 1rem;
+  }
+
+  .contact-cta p {
+    font-family: var(--font-body);
+    color: var(--ink-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    color: var(--bg-primary);
+    background-color: var(--accent);
+    padding: 0.8rem 1.6rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--accent);
+  }
+
+  .cta-link:hover {
+    background-color: transparent;
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .about-page {
+      padding-top: 2rem;
+    }
+    
+    .about-header {
+      margin-bottom: 3rem;
+    }
+    
+    .bio-extended p {
+      font-size: 1.1rem;
+    }
+
+    .contact-cta {
+      padding: 4rem 1.5rem;
+    }
+  }
+</style>

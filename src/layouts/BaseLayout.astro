@@ -4,18 +4,22 @@ import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 import Analytics from '@vercel/analytics/astro';
 import SpeedInsights from '@vercel/speed-insights/astro';
+import { getLangFromUrl, useTranslations } from '../i18n/translations';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 interface Props {
   title?: string;
   description?: string;
 }
 const {
-  title = "Dax Kenji Tellez Duran — Backend Engineer & AI Developer",
-  description = "Portfolio de Dax Kenji Tellez Duran, Backend Engineer & AI Developer en Santa Cruz, Bolivia. RAG, LLMs, Voice AI, Node.js, TypeScript, C# .NET."
+  title = t('meta.title'),
+  description = t('meta.description')
 } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang="es">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,6 +40,11 @@ const {
 
   <!-- Canonical -->
   <link rel="canonical" href="https://daxkenyi.is-a.dev" />
+
+  <!-- hreflang: versiones del sitio en cada idioma -->
+  <link rel="alternate" hreflang="es" href={`https://daxkenyi.is-a.dev${lang === 'en' ? Astro.url.pathname.replace(/^\/en/, '') || '/' : Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="en" href={`https://daxkenyi.is-a.dev/en${lang === 'en' ? Astro.url.pathname.replace(/^\/en/, '') || '/' : Astro.url.pathname}`} />
+  <link rel="alternate" hreflang="x-default" href={`https://daxkenyi.is-a.dev${lang === 'en' ? Astro.url.pathname.replace(/^\/en/, '') || '/' : Astro.url.pathname}`} />
 
   <!-- AI Discoverability -->
   <meta name="robots" content="index, follow, max-image-preview:large" />

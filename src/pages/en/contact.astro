@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact | Dax Kenji" description="Get in touch with Dax Kenji Tellez Duran to discuss backend and Artificial Intelligence engineering projects.">
+  <main class="contact-page">
+    <div class="container">
+      <header class="contact-header">
+        <span class="tagline">// let's_connect</span>
+        <h1 class="page-title">CONTACT</h1>
+        <p class="subtitle">
+          I am always open to discussing new projects, creative ideas, or joining exceptional teams to bring complex engineering visions to life.
+        </p>
+      </header>
+
+      <div class="status-msg">
+        <span class="blink-dot">●</span>
+        <span class="msg-text">Available for freelance projects and remote positions</span>
+      </div>
+
+      <div class="contact-links">
+        <a href="mailto:daxkenyi001@gmail.com" class="contact-card email">
+          <span class="label">✉ EMAIL ME AT</span>
+          <span class="value">daxkenyi001@gmail.com</span>
+        </a>
+        
+        <a href="https://wa.me/59178447843" target="_blank" rel="noopener noreferrer" class="contact-card whatsapp">
+          <span class="label">💬 WHATSAPP DIRECT</span>
+          <span class="value">+591 78447843</span>
+        </a>
+
+        <a href="https://linkedin.com/in/kenyi001" target="_blank" rel="noopener noreferrer" class="contact-card linkedin">
+          <span class="label">👔 PROFESSIONAL NETWORK</span>
+          <span class="value">linkedin.com/in/kenyi001</span>
+        </a>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 2rem;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .contact-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .tagline {
+    font-family: var(--font-mono);
+    color: var(--hash-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    color: var(--ink-primary);
+    line-height: 0.95;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+  }
+
+  .subtitle {
+    font-family: var(--font-body);
+    font-size: 1.25rem;
+    color: var(--ink-secondary);
+    line-height: 1.6;
+    max-width: 600px;
+  }
+
+  .status-msg {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-secondary);
+    padding: 0.75rem 1.25rem;
+    border-radius: 4px;
+    margin-bottom: 3.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .blink-dot {
+    color: var(--accent);
+    animation: blink-anim 1.5s infinite;
+  }
+
+  @keyframes blink-anim {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .msg-text {
+    color: var(--ink-primary);
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .contact-card:hover {
+    transform: translateX(8px);
+    border-color: var(--accent);
+  }
+
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-card:hover .label {
+    color: var(--accent);
+  }
+
+  .value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--ink-primary);
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .contact-page {
+      padding: 4rem 1.5rem;
+    }
+    
+    .status-msg {
+      margin-bottom: 2.5rem;
+      font-size: 0.8rem;
+    }
+  }
+</style>

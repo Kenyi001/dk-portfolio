@@ -1,4 +1,7 @@
 ---
+import { getLangFromUrl, useTranslations } from '../i18n/translations';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 <section class="hero">
   <div class="hero-bg-code">
@@ -9,17 +12,17 @@
   </div>
 
   <div class="hero-content">
-    <span class="pre-title">// initializing · backend → fullstack · santa cruz, bo</span>
+    <span class="pre-title">{t('hero.pretitle')}</span>
     
     <h1 class="title">
       <span class="title-dax">DAX</span> <span class="title-kenji">KENJI</span>
       <span class="sr-only">Tellez Duran</span>
     </h1>
 
-    <div class="badge-role">▶ BACKEND & AI · CRECIENDO A FULLSTACK · SCZ, BO</div>
+    <div class="badge-role">{t('hero.badge')}</div>
 
     <p class="bio">
-      Backend engineer especializado en sistemas de IA — construyendo hacia fullstack. De Santa Cruz, Bolivia, en el cruce de producción bancaria y Web3.
+      {t('hero.bio')}
     </p>
 
     <div class="clock-display">
@@ -27,8 +30,8 @@
     </div>
 
     <div class="cta-group">
-      <a href="/contact" class="cta-button primary">→ CONECTAR_SISTEMA</a>
-      <a href="/projects" class="cta-button secondary">→ VER_PROYECTOS</a>
+      <a href={lang === 'es' ? '/contact' : '/en/contact'} class="cta-button primary">{t('hero.cta.connect')}</a>
+      <a href={lang === 'es' ? '/projects' : '/en/projects'} class="cta-button secondary">{t('hero.cta.projects')}</a>
     </div>
 
     <div class="community-chips">

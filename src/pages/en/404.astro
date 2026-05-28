@@ -1,0 +1,177 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="404: Not Found | Dax Kenji" description="Page not found. Dax Kenji Portfolio.">
+  <main class="error-page">
+    <div class="terminal-container">
+      <div class="terminal-header">
+        <span class="btn close"></span>
+        <span class="btn minimize"></span>
+        <span class="btn maximize"></span>
+        <span class="terminal-title">dk_kernel_panic.sh</span>
+      </div>
+      
+      <div class="terminal-body">
+        <div class="log-row error">
+          <span class="prompt">ERROR [404] -></span>
+          <span class="message">PAGE_NOT_FOUND_EXCEPTION</span>
+        </div>
+        <div class="log-row">
+          <span class="prompt">RESOURCE -></span>
+          <span class="message" id="current-url">C:\portfolio\pages\unknown</span>
+        </div>
+        <div class="log-row">
+          <span class="prompt">SOLUTION -></span>
+          <span class="message">The destination host is not responding or the file has been removed.</span>
+        </div>
+        <div class="log-row code-block">
+          <pre><code>
+  _  _    ___    _  _   
+ | || |  / _ \  | || |  
+ | || |_| | | |_| || |_ 
+ |__   _| |_| |_|__   _|
+    |_|  \___/     |_|  
+          </code></pre>
+        </div>
+        <div class="log-row command-line">
+          <span class="prompt">daxkenji@portfolio:~$</span>
+          <span class="command">cd <a href="/en" class="home-link">/home</a><span class="cursor">_</span></span>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  // Set current path in the console mock
+  const urlEl = document.getElementById('current-url');
+  if (urlEl) {
+    urlEl.textContent = `window.location.pathname = "${window.location.pathname}"`;
+  }
+</script>
+
+<style>
+  .error-page {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    background-color: var(--bg-primary);
+  }
+
+  .terminal-container {
+    width: 100%;
+    max-width: 640px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-mid);
+    border-radius: 6px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    background-color: var(--bg-surface);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-subtle);
+    position: relative;
+  }
+
+  .btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
+  .btn.close { background-color: var(--accent); }
+  .btn.minimize { background-color: #E6C229; }
+  .btn.maximize { background-color: var(--log-ok); }
+
+  .terminal-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-secondary);
+  }
+
+  .terminal-body {
+    padding: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+  }
+
+  .log-row {
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+  }
+
+  .log-row.error .message {
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  .prompt {
+    color: var(--hash-color);
+    margin-right: 0.75rem;
+  }
+
+  .message {
+    color: var(--ink-primary);
+  }
+
+  .code-block {
+    margin: 2rem 0;
+    color: var(--ink-secondary);
+    opacity: 0.7;
+  }
+
+  .code-block pre {
+    font-family: var(--font-mono);
+    line-height: 1.2;
+  }
+
+  .command-line {
+    margin-top: 2rem;
+  }
+
+  .command {
+    color: var(--ink-primary);
+  }
+
+  .home-link {
+    color: var(--accent);
+    text-decoration: underline;
+    font-weight: bold;
+    cursor: crosshair;
+  }
+
+  .home-link:hover {
+    color: var(--ink-primary);
+    background-color: var(--accent);
+  }
+
+  .cursor {
+    animation: blink 1s infinite;
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @media (max-width: 500px) {
+    .terminal-body {
+      padding: 1rem;
+      font-size: 0.85rem;
+    }
+  }
+</style>
