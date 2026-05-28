@@ -2,6 +2,8 @@
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 
 interface Props {
   title?: string;
@@ -34,6 +36,24 @@ const {
 
   <!-- Canonical -->
   <link rel="canonical" href="https://daxkenyi.is-a.dev" />
+
+  <!-- JSON-LD: datos estructurados para Google -->
+  <!-- Le dice a Google exactamente quién sos, qué hacés y cómo contactarte -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dax Kenji Tellez Duran",
+    "url": "https://daxkenyi.is-a.dev",
+    "jobTitle": "Backend Engineer & AI Developer",
+    "description": "Backend engineer especializado en sistemas de IA: RAG, LLMs, Voice AI. Santa Cruz, Bolivia.",
+    "email": "daxkenyi001@gmail.com",
+    "sameAs": [
+      "https://linkedin.com/in/kenyi001",
+      "https://github.com/Kenyi001"
+    ]
+  }
+  </script>
   
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4" />
@@ -53,6 +73,12 @@ const {
     <slot />
   </main>
   <Footer />
+
+  <!-- Vercel Analytics: cuenta visitas, páginas vistas, países, dispositivos -->
+  <Analytics />
+  <!-- Vercel Speed Insights: mide cuán rápido carga tu sitio para usuarios reales -->
+  <SpeedInsights />
+
   <script>
     console.log(`
   ██████╗ ██╗  ██╗
