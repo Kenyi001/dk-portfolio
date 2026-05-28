@@ -43,42 +43,42 @@ const {
 
   <!-- JSON-LD: datos estructurados para Google y agentes de IA -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Dax Kenji Tellez Duran",
-      "url": "https://daxkenyi.is-a.dev",
-      "jobTitle": "Backend Engineer & AI Developer",
-      "description": "Backend engineer especializado en sistemas de IA: RAG, LLMs, Voice AI. Santa Cruz, Bolivia.",
-      "email": "daxkenyi001@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Santa Cruz",
-        "addressCountry": "BO"
-      },
-      "sameAs": [
-        "https://linkedin.com/in/kenyi001",
-        "https://github.com/Kenyi001"
-      ],
-      "knowsAbout": [
-        "Node.js", "TypeScript", "Python", "C# .NET",
-        "RAG Systems", "LLM Optimization", "ElevenLabs",
-        "Docker", "GCP", "Azure", "AWS"
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Dax Kenji — Portfolio",
-      "url": "https://daxkenyi.is-a.dev",
-      "description": "Portfolio de Dax Kenji Tellez Duran, Backend Engineer & AI Developer.",
-      "author": {
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
         "@type": "Person",
-        "name": "Dax Kenji Tellez Duran"
+        "@id": "https://daxkenyi.is-a.dev/#person",
+        "name": "Dax Kenji Tellez Duran",
+        "url": "https://daxkenyi.is-a.dev",
+        "jobTitle": "Backend Engineer & AI Developer",
+        "description": "Backend engineer especializado en sistemas de IA: RAG, LLMs, Voice AI. Santa Cruz, Bolivia.",
+        "email": "daxkenyi001@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santa Cruz",
+          "addressCountry": "BO"
+        },
+        "sameAs": [
+          "https://linkedin.com/in/kenyi001",
+          "https://github.com/Kenyi001"
+        ],
+        "knowsAbout": [
+          "Node.js", "TypeScript", "Python", "C# .NET",
+          "RAG Systems", "LLM Optimization", "ElevenLabs",
+          "Docker", "GCP", "Azure", "AWS"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://daxkenyi.is-a.dev/#website",
+        "name": "Dax Kenji — Portfolio",
+        "url": "https://daxkenyi.is-a.dev",
+        "description": "Portfolio de Dax Kenji Tellez Duran, Backend Engineer & AI Developer.",
+        "author": { "@id": "https://daxkenyi.is-a.dev/#person" }
       }
-    }
-  ]
+    ]
+  }
   </script>
   
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4" />
