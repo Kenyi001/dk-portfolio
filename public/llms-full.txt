@@ -1,0 +1,51 @@
+# Dax Kenji Tellez Duran — Perfil Completo
+
+> Backend Engineer & AI Developer | Santa Cruz, Bolivia
+> daxkenyi001@gmail.com | https://daxkenyi.is-a.dev
+
+## Experiencia Laboral
+
+### Backend Developer — Hola S.R.L.
+Desarrollo de sistemas de IA, automatización de procesos e integraciones empresariales.
+Stack: Node.js, TypeScript, Python, integración con LLMs.
+
+### Proyectos — Tigo Bolivia
+Telecomunicaciones, infraestructura de datos, sistemas empresariales.
+
+## Skills Técnicos
+
+Backend: Node.js, TypeScript, C# .NET 8, Python
+IA/ML: RAG Systems, LLM Optimization, ElevenLabs Voice AI, OCR
+Cloud: Docker, GCP, Azure, AWS, Redis, CI/CD
+Frontend (aprendiendo): Next.js, Astro
+Web3: Verificación de identidad, contratos inteligentes
+
+## Proyectos Detallados
+
+### TrustArk
+URL: https://daxkenyi.is-a.dev/projects/trustark
+Sistema de verificación de identidad descentralizado usando Web3 e IA.
+Permite validar identidades sin exponer datos sensibles, usando contratos inteligentes
+y modelos de IA para detección de fraude.
+
+### ENAid
+URL: https://daxkenyi.is-a.dev/projects/enaid
+Agente de voz inteligente para atención al cliente construido con ElevenLabs.
+Maneja llamadas en lenguaje natural, integra con CRMs, reduce carga de soporte humano.
+
+### LedgerLens
+URL: https://daxkenyi.is-a.dev/projects/ledgerlens
+Sistema OCR + IA para extracción y clasificación automática de facturas y documentos contables.
+Reduce tiempo de procesamiento manual, integra con sistemas de contabilidad.
+
+### WhatsApp RAG Bot
+URL: https://daxkenyi.is-a.dev/projects/whatsapp-rag-bot
+Asistente conversacional via WhatsApp con memoria persistente y RAG (Retrieval Augmented Generation).
+El bot mantiene contexto entre sesiones y responde usando documentos/base de conocimiento propia.
+
+## Contacto y Redes
+
+Portfolio: https://daxkenyi.is-a.dev
+Email: daxkenyi001@gmail.com
+LinkedIn: https://linkedin.com/in/kenyi001
+GitHub: https://github.com/Kenyi001

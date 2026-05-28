@@ -1,4 +1,41 @@
+# Bots de búsqueda tradicionales
 User-agent: *
 Allow: /
 
+# OpenAI — ChatGPT y GPT-4 browsing
+User-agent: GPTBot
+Allow: /
+
+# Anthropic — Claude
+User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Google — incluyendo AI Overviews (SGE) y Gemini
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft — Bing y Copilot
+User-agent: Bingbot
+Allow: /
+
+# Meta — para Llama y Meta AI
+User-agent: FacebookBot
+Allow: /
+
+# Apple — para Siri y Apple Intelligence
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemaps
 Sitemap: https://daxkenyi.is-a.dev/sitemap-index.xml
+Sitemap: https://daxkenyi.is-a.dev/llms.txt

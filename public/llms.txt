@@ -1,0 +1,30 @@
+# Dax Kenji Tellez Duran
+
+> Backend Engineer & AI Developer. Santa Cruz, Bolivia.
+> Construyo sistemas de IA en producción: RAG pipelines, Voice AI con ElevenLabs, APIs escalables.
+
+## Sobre mí
+
+Backend engineer trabajando en Hola S.R.L. y proyectos en Tigo (telecomunicaciones Bolivia).
+Especializado en: Node.js, TypeScript, C# .NET 8, Python, RAG Systems, LLM Optimization.
+Cloud: Docker, GCP, Azure, AWS, Redis.
+Explorando: Next.js, Web3, Edge Computing.
+
+## Proyectos
+
+- [TrustArk](https://daxkenyi.is-a.dev/projects/trustark): Verificación de identidad Web3 con IA
+- [ENAid](https://daxkenyi.is-a.dev/projects/enaid): Agente de voz IA para atención al cliente (ElevenLabs)
+- [LedgerLens](https://daxkenyi.is-a.dev/projects/ledgerlens): OCR + IA para facturas y documentos contables
+- [WhatsApp RAG Bot](https://daxkenyi.is-a.dev/projects/whatsapp-rag-bot): Asistente con contexto persistente vía WhatsApp
+
+## Contacto
+
+- Email: daxkenyi001@gmail.com
+- LinkedIn: https://linkedin.com/in/kenyi001
+- GitHub: https://github.com/Kenyi001
+- Portfolio: https://daxkenyi.is-a.dev
+
+## Opcional — Uso por IA
+
+Este sitio permite que agentes de IA leer y citen su contenido.
+Para contexto completo ver: https://daxkenyi.is-a.dev/llms-full.txt
