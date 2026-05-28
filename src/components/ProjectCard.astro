@@ -25,7 +25,7 @@ const typeLabels = {
 const isTokenSaver = title === "Token Saver System" || slug === "token-saver" || slug === "ocr-pipeline";
 ---
 
-<a href={`/projects/${slug}`} class={`project-card ${isTokenSaver ? 'highlighted' : ''}`}>
+<a href={slug.startsWith('/') ? slug : `/projects/${slug}`} class={`project-card ${isTokenSaver ? 'highlighted' : ''}`}>
   {award && <div class="award-badge">{award}</div>}
   
   <div class="card-top">

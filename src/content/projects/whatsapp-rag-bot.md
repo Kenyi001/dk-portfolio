@@ -3,8 +3,11 @@ title: "WhatsApp RAG Bot"
 event: "Proyecto Personal"
 eventType: "personal"
 description: "Bot de WhatsApp con RAG que responde preguntas sobre documentación técnica. Integra Base de Conocimiento propia con búsqueda semántica."
+description_en: "WhatsApp bot with RAG that answers questions about technical documentation. Integrates a custom Knowledge Base with semantic search."
 longDescription: "Chatbot empresarial sobre WhatsApp Business API que utiliza Retrieval-Augmented Generation para responder preguntas sobre documentación interna. Los documentos se indexan con embeddings, se almacenan en vector DB y se recuperan semánticamente en cada consulta."
+longDescription_en: "Enterprise chatbot on WhatsApp Business API using Retrieval-Augmented Generation to answer questions about internal documentation. Documents are indexed with embeddings, stored in a vector DB, and semantically retrieved on each query."
 role: "Desarrollador Full Stack & Arquitecto IA"
+role_en: "Full Stack Developer & AI Architect"
 stack: ["WhatsApp Business API", "Node.js", "TypeScript", "OpenAI", "Pinecone", "RAG", "Redis"]
 date: "2025"
 featured: false

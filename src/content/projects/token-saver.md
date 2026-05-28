@@ -3,8 +3,11 @@ title: "Token Saver System"
 event: "Hola S.R.L. · BCP de Bolivia"
 eventType: "professional"
 description: "Sistema RAG + compresión de prompts + Redis cache para reducir costos LLM en producción bancaria."
+description_en: "RAG + prompt compression + Redis cache system to reduce LLM costs in banking production."
 longDescription: "Diseñé e implementé un sistema que combina RAG, algoritmos de compresión de prompts y Redis para reducir significativamente los costos de API y la latencia de LLMs en un entorno bancario de producción real."
+longDescription_en: "I designed and implemented a system combining RAG, prompt compression algorithms, and Redis to significantly reduce API costs and LLM latency in a real banking production environment."
 role: "Backend Lead & Arquitecto"
+role_en: "Backend Lead & Architect"
 stack: ["RAG", "Redis", "Node.js", "TypeScript", "LLM", "Prompt Engineering"]
 date: "2025-2026"
 featured: true
