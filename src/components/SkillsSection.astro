@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl } from '../i18n/translations';
+const lang = getLangFromUrl(Astro.url);
 ---
 <section class="skills-section">
   <div class="container">
@@ -20,9 +22,9 @@
       <div class="skill-category">
         <h3>AI & Machine Learning</h3>
         <ul class="skill-list">
-          <li>Inferencia LLM (OpenAI, Gemini)</li>
-          <li>Orquestación RAG (Pinecone / Chroma)</li>
-          <li>Compresión Semántica de Prompts</li>
+          <li>{lang === 'en' ? 'LLM Inference (OpenAI, Gemini)' : 'Inferencia LLM (OpenAI, Gemini)'}</li>
+          <li>{lang === 'en' ? 'RAG Orchestration (Pinecone / Chroma)' : 'Orquestación RAG (Pinecone / Chroma)'}</li>
+          <li>{lang === 'en' ? 'Semantic Prompt Compression' : 'Compresión Semántica de Prompts'}</li>
           <li>LangChain / LlamaIndex / Agents</li>
         </ul>
       </div>
@@ -32,7 +34,7 @@
         <h3>Cloud & DevOps</h3>
         <ul class="skill-list">
           <li>GCP (Google Cloud Platform)</li>
-          <li>Docker / Contenedores</li>
+          <li>{lang === 'en' ? 'Docker / Containers' : 'Docker / Contenedores'}</li>
           <li>CI/CD (GitHub Actions)</li>
           <li>Serverless Architecture</li>
         </ul>

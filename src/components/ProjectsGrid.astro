@@ -14,6 +14,14 @@ let projects = propProjects || dbProjects;
 // Detect current language
 const lang = getLangFromUrl(Astro.url);
 
+// Filter button labels by language
+const filterLabels = {
+  all:          lang === 'en' ? '[ ALL ]'          : '[ TODOS ]',
+  ai:           '[ AI SYSTEMS ]',
+  web3:         '[ WEB3 ]',
+  profesional:  lang === 'en' ? '[ PROFESSIONAL ]' : '[ PROFESIONAL ]',
+};
+
 // Sort by date descending (more recent first)
 projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 ---
@@ -24,10 +32,10 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
       
       <!-- Filter controls -->
       <div class="filters">
-        <button class="filter-btn active" data-filter="all">[ TODOS ]</button>
-        <button class="filter-btn" data-filter="ai">[ AI SYSTEMS ]</button>
-        <button class="filter-btn" data-filter="web3">[ WEB3 ]</button>
-        <button class="filter-btn" data-filter="profesional">[ PROFESIONAL ]</button>
+        <button class="filter-btn active" data-filter="all">{filterLabels.all}</button>
+        <button class="filter-btn" data-filter="ai">{filterLabels.ai}</button>
+        <button class="filter-btn" data-filter="web3">{filterLabels.web3}</button>
+        <button class="filter-btn" data-filter="profesional">{filterLabels.profesional}</button>
       </div>
     </div>
 
@@ -77,16 +85,18 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
       <div class="grid-item all cat-ai cat-web3 final-build-card" data-category="ai,web3">
         <div class="build-card-content">
           <div class="card-top">
-            <span class="badge blinking">● EN CONSTRUCCIÓN</span>
+            <span class="badge blinking">● {lang === 'en' ? 'IN PROGRESS' : 'EN CONSTRUCCIÓN'}</span>
             <span class="hash">// pending_deploy</span>
           </div>
           <h3 class="build-title">// current_build</h3>
           <p class="build-desc">
-            Diseñando una plataforma RAG unificada para indexación automática y orquestación multi-agente.
+            {lang === 'en'
+              ? 'Designing a unified RAG platform for automatic indexing and multi-agent orchestration.'
+              : 'Diseñando una plataforma RAG unificada para indexación automática y orquestación multi-agente.'}
           </p>
           <div class="build-counter">
-            <span class="days-label">TIEMPO_INCURRIDO →</span>
-            <span class="days-value" id="days-count">00</span> días activos
+            <span class="days-label">{lang === 'en' ? 'TIME_ELAPSED →' : 'TIEMPO_INCURRIDO →'}</span>
+            <span class="days-value" id="days-count">00</span> {lang === 'en' ? 'active days' : 'días activos'}
           </div>
         </div>
       </div>

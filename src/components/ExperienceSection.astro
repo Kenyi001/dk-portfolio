@@ -1,4 +1,6 @@
 ---
+import { getLangFromUrl } from '../i18n/translations';
+const lang = getLangFromUrl(Astro.url);
 ---
 <section class="experience-section">
   <div class="container">
@@ -10,16 +12,31 @@
       <div class="job-card hola-card">
         <div class="job-header">
           <div class="job-title-group">
-            <h3 class="role">Analista Técnico — Equipo de IA</h3>
+            <h3 class="role">
+              {lang === 'en' ? 'Technical Analyst — AI Team' : 'Analista Técnico — Equipo de IA'}
+            </h3>
             <span class="company">Hola S.R.L. · BCP de Bolivia S.A.</span>
           </div>
-          <span class="duration">Ago 2025 — Abr 2026</span>
+          <span class="duration">
+            {lang === 'en' ? 'Aug 2025 — Apr 2026' : 'Ago 2025 — Abr 2026'}
+          </span>
         </div>
         <ul class="job-logros">
-          <li>Servicios backend Node.js para backoffice con IA integrada.</li>
-          <li>Sistema RAG + compresión de prompts + Redis → reducción drástica de costos de API.</li>
-          <li>Pipelines asíncronos con Webhooks para el procesamiento seguro de inferencias pesadas.</li>
-          <li>OCR automatizado + restauración avanzada de imágenes (watermark removal).</li>
+          {lang === 'en' ? (
+            <>
+              <li>Node.js backend services for AI-integrated backoffice.</li>
+              <li>RAG system + prompt compression + Redis → drastic reduction in API costs.</li>
+              <li>Async pipelines with Webhooks for secure heavy inference processing.</li>
+              <li>Automated OCR + advanced image restoration (watermark removal).</li>
+            </>
+          ) : (
+            <>
+              <li>Servicios backend Node.js para backoffice con IA integrada.</li>
+              <li>Sistema RAG + compresión de prompts + Redis → reducción drástica de costos de API.</li>
+              <li>Pipelines asíncronos con Webhooks para el procesamiento seguro de inferencias pesadas.</li>
+              <li>OCR automatizado + restauración avanzada de imágenes (watermark removal).</li>
+            </>
+          )}
         </ul>
       </div>
 
@@ -27,15 +44,27 @@
       <div class="job-card tigo-card">
         <div class="job-header">
           <div class="job-title-group">
-            <h3 class="role">Pasantía — Analista de Datos & QA</h3>
+            <h3 class="role">
+              {lang === 'en' ? 'Internship — Data Analyst & QA' : 'Pasantía — Analista de Datos & QA'}
+            </h3>
             <span class="company">Tigo Bolivia · Tigo Money</span>
           </div>
           <span class="duration">Jun 2023 — Jun 2024</span>
         </div>
         <ul class="job-logros">
-          <li>Automatización con Python → scraping y limpieza automática de datos con un ahorro de 5h/semana.</li>
-          <li>Dashboards Tableau/Power BI para KPIs → mejora de la visibilidad operativa en un 30%.</li>
-          <li>QA sobre pasarela de pagos + optimización de procesos ETL.</li>
+          {lang === 'en' ? (
+            <>
+              <li>Python automation → scraping and automatic data cleaning saving 5h/week.</li>
+              <li>Tableau/Power BI dashboards for KPIs → 30% improvement in operational visibility.</li>
+              <li>QA on payment gateway + ETL process optimization.</li>
+            </>
+          ) : (
+            <>
+              <li>Automatización con Python → scraping y limpieza automática de datos con un ahorro de 5h/semana.</li>
+              <li>Dashboards Tableau/Power BI para KPIs → mejora de la visibilidad operativa en un 30%.</li>
+              <li>QA sobre pasarela de pagos + optimización de procesos ETL.</li>
+            </>
+          )}
         </ul>
       </div>
 

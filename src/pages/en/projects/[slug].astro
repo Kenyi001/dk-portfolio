@@ -21,7 +21,7 @@ const typeLabels = {
 };
 ---
 
-<BaseLayout title={`${entry.data.title} | Dax Kenji`} description={entry.data.description}>
+<BaseLayout title={`${entry.data.title_en || entry.data.title} | Dax Kenji`} description={entry.data.description_en || entry.data.description}>
   <main class="project-detail">
     <div class="container">
       <header class="project-header">
@@ -30,11 +30,11 @@ const typeLabels = {
           <span class="hash">{entry.data.hashId}</span>
         </div>
         
-        <h1 class="title">{entry.data.title}</h1>
+        <h1 class="title">{entry.data.title_en || entry.data.title}</h1>
         
-        <span class="role-line">ROLE → {entry.data.role}</span>
+        <span class="role-line">ROLE → {entry.data.role_en || entry.data.role}</span>
         
-        <p class="description">{entry.data.longDescription || entry.data.description}</p>
+        <p class="description">{entry.data.longDescription_en || entry.data.longDescription || entry.data.description_en || entry.data.description}</p>
         
         <div class="meta-info">
           <div class="stack">
