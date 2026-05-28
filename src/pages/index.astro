@@ -13,6 +13,25 @@ import ExperienceSection from '../components/ExperienceSection.astro';
   title="Dax Kenji Tellez Duran — Backend Engineer & AI Developer"
   description="Portfolio de Dax Kenji Tellez Duran, Backend Engineer & AI Developer en Santa Cruz, Bolivia. RAG, LLMs, Voice AI, Node.js, TypeScript, C# .NET."
 >
+  <!-- Detección automática de idioma del browser -->
+  <!-- Solo redirige si el usuario NO eligió un idioma manualmente antes -->
+  <script>
+    (function() {
+      // Si el usuario ya eligió idioma manualmente, respetarlo
+      const chosen = sessionStorage.getItem('lang-chosen');
+      if (chosen) return;
+
+      // Detectar idioma del browser (ej: "en-US", "es-419", "en")
+      const browserLang = (navigator.language || navigator.languages?.[0] || 'es').toLowerCase();
+      const isEnglish = browserLang.startsWith('en');
+
+      // Solo redirigir si el browser es inglés y estamos en la raíz española
+      if (isEnglish && window.location.pathname === '/') {
+        window.location.replace('/en/');
+      }
+    })();
+  </script>
+
   <Hero />
   <Ticker />
   <ProjectsGrid />

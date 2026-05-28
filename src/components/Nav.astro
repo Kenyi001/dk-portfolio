@@ -35,7 +35,9 @@ const isActive = (path: string) => {
       <span class="status-text">{lang === 'es' ? 'DISPONIBLE' : 'AVAILABLE'}</span>
     </div>
 
-    <a href={switchPath} class="lang-switch" aria-label="Cambiar idioma">
+    <!-- Al hacer clic manual, guardar la elección para no ser redirigido automáticamente -->
+    <a href={switchPath} class="lang-switch" aria-label="Cambiar idioma"
+       onclick="sessionStorage.setItem('lang-chosen','1')">
       {lang === 'es' ? 'EN' : 'ES'}
     </a>
   </div>
