@@ -1,13 +1,19 @@
 ---
+import { getLangFromUrl } from '../i18n/translations';
+const lang = getLangFromUrl(Astro.url);
 ---
 <section class="learning-path">
   <div class="container">
-    <h2 class="section-title">// growth_trajectory · donde estoy y hacia dónde voy</h2>
-    
+    <h2 class="section-title">
+      {lang === 'en'
+        ? '// growth_trajectory · where I am and where I\'m going'
+        : '// growth_trajectory · donde estoy y hacia dónde voy'}
+    </h2>
+
     <div class="grid">
       <!-- Columna 1: Sólido en Producción -->
       <div class="column solid">
-        <h3 class="column-title">[SÓLIDO EN PRODUCCIÓN]</h3>
+        <h3 class="column-title">{lang === 'en' ? '[SOLID IN PRODUCTION]' : '[SÓLIDO EN PRODUCCIÓN]'}</h3>
         <ul class="tech-list">
           <li>Node.js</li>
           <li>TypeScript</li>
@@ -24,7 +30,7 @@
       <!-- Columna 2: Expandiendo -->
       <div class="column expanding">
         <h3 class="column-title">
-          [EXPANDIENDO]
+          {lang === 'en' ? '[EXPANDING]' : '[EXPANDIENDO]'}
           <span class="pulse-indicator"></span>
         </h3>
         <ul class="tech-list">
@@ -32,7 +38,7 @@
           <li>Next.js</li>
           <li>Astro</li>
           <li>Fullstack Flows</li>
-          <li>CSS Avanzado</li>
+          <li>{lang === 'en' ? 'Advanced CSS' : 'CSS Avanzado'}</li>
           <li>Testing E2E</li>
           <li>UI/UX</li>
           <li>Frontend Performance</li>
@@ -41,7 +47,7 @@
 
       <!-- Columna 3: Próximo Frontier -->
       <div class="column frontier">
-        <h3 class="column-title">[PRÓXIMO FRONTIER]</h3>
+        <h3 class="column-title">{lang === 'en' ? '[NEXT FRONTIER]' : '[PRÓXIMO FRONTIER]'}</h3>
         <ul class="tech-list">
           <li>Cloud Architecture</li>
           <li>Kubernetes</li>

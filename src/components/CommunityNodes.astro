@@ -1,9 +1,13 @@
 ---
+import { getLangFromUrl } from '../i18n/translations';
+const lang = getLangFromUrl(Astro.url);
+
 const nodes = [
   {
     name: "ComunidadETH Bolivia",
     role: "Active Member & Web3 Builder",
     description: "Ayudando a expandir el ecosistema Ethereum y blockchain en el país a través de eventos, educación técnica y mentorías.",
+    description_en: "Helping expand the Ethereum and blockchain ecosystem in Bolivia through events, technical education, and mentorship.",
     meta: "12+ meetups",
     tags: ["Ethereum", "Solidity", "Web3 Dev"]
   },
@@ -11,13 +15,15 @@ const nodes = [
     name: "YAIS Lab",
     role: "AI Developer & Core Researcher",
     description: "Investigación activa e implementación práctica de modelos de inteligencia artificial y flujos de ingeniería LLM avanzados.",
+    description_en: "Active research and practical implementation of AI models and advanced LLM engineering workflows.",
     meta: "Hackathon 2025",
-    tags: ["LLM", "Prompt Compresion", "Agents"]
+    tags: ["LLM", "Prompt Compression", "Agents"]
   },
   {
     name: "GDG Santa Cruz",
     role: "Co-Organizer & AI Tech Speaker",
     description: "Co-organizando y compartiendo conocimiento técnico en desarrollo web, inteligencia artificial y mejores prácticas de ingeniería de software.",
+    description_en: "Co-organizing and sharing technical knowledge in web development, AI, and software engineering best practices.",
     meta: "Build with AI",
     tags: ["Dev Community", "AI Integration", "GCP"]
   }
@@ -35,7 +41,7 @@ const nodes = [
             <h3 class="node-name">{node.name}</h3>
           </div>
           <span class="node-role">{node.role}</span>
-          <p class="node-desc">{node.description}</p>
+          <p class="node-desc">{lang === 'en' && node.description_en ? node.description_en : node.description}</p>
           <div class="node-tags">
             {node.tags.map(tag => (
               <span class="node-tag">#{tag}</span>

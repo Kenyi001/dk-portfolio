@@ -13,6 +13,7 @@ date: "2025"
 featured: true
 hashId: "v7f3...9a2c"
 metrics: "Latencia de respuesta <1s en producción"
+metrics_en: "<1s response latency in production"
 ---
 
 ## Problema

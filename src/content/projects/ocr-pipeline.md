@@ -14,6 +14,7 @@ date: "2025-2026"
 featured: true
 hashId: "p9k1...7m3b"
 metrics: "Reducción 80% tiempo de digitalización manual"
+metrics_en: "80% reduction in manual digitization time"
 ---
 
 ## Contexto

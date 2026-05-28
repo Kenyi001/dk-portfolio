@@ -13,6 +13,7 @@ date: "2025-2026"
 featured: true
 hashId: "0f8b...d47c"
 metrics: "↓ costos API · ↑ velocidad inferencia · ✓ producción BCP Bolivia"
+metrics_en: "↓ API costs · ↑ inference speed · ✓ BCP Bolivia production"
 ---
 
 El Token Saver System se diseñó y construyó para resolver el principal obstáculo en la adopción empresarial de modelos de lenguaje en producción: los costos recurrentes de API por tokens y la latencia de respuesta en sistemas críticos.

@@ -10,15 +10,16 @@ interface Props {
   award?: string;
   hashId: string;
   metrics?: string;
+  lang?: string;
 }
 
-const { title, event, eventType, description, role, stack, slug, award, hashId, metrics } = Astro.props;
+const { title, event, eventType, description, role, stack, slug, award, hashId, metrics, lang = 'es' } = Astro.props;
 
 // Convert eventType enum to print labels
 const typeLabels = {
   hackathon: 'HACKATHON',
   personal: 'PERSONAL',
-  professional: 'PRODUCCIÓN'
+  professional: lang === 'en' ? 'PRODUCTION' : 'PRODUCCIÓN'
 };
 
 // Check if this card is for the Token Saver System to give it a custom highlight border
@@ -37,7 +38,7 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     <h3 class="title">{title}</h3>
   </div>
 
-  <span class="role-line">ROL → {role}</span>
+  <span class="role-line">{lang === 'en' ? 'ROLE' : 'ROL'} → {role}</span>
 
   <p class="description">{description}</p>
   

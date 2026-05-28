@@ -61,6 +61,7 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
         const title = lang === 'en' && project.data.title_en ? project.data.title_en : project.data.title;
         const description = lang === 'en' && project.data.description_en ? project.data.description_en : project.data.description;
         const role = lang === 'en' && project.data.role_en ? project.data.role_en : project.data.role;
+        const metrics = lang === 'en' && project.data.metrics_en ? project.data.metrics_en : project.data.metrics;
         const projectSlug = lang === 'en' ? `/en/projects/${project.id}` : `/projects/${project.id}`;
 
         return (
@@ -75,7 +76,8 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
               stack={project.data.stack}
               award={project.data.award}
               hashId={project.data.hashId}
-              metrics={project.data.metrics}
+              metrics={metrics}
+              lang={lang}
             />
           </div>
         );
