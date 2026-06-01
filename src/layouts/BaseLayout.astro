@@ -103,6 +103,7 @@ const {
   <!-- global.css importado vía frontmatter para build correcto en producción -->
 </head>
 <body>
+  <canvas id="bg-grid" aria-hidden="true"></canvas>
   <Nav />
   <main>
     <slot />
@@ -115,19 +116,82 @@ const {
   <SpeedInsights />
 
   <script>
-    console.log(`
-  ██████╗ ██╗  ██╗
-  ██╔══██╗██║ ██╔╝
-  ██║  ██║█████╔╝
-  ██║  ██║██╔═██╗
-  ██████╔╝██║  ██╗
-  ╚═════╝ ╚═╝  ╚═╝
+    /* ─── console easter egg ─── */
+    console.log(
+      '%c  ██████╗ ██╗  ██╗\n  ██╔══██╗██║ ██╔╝\n  ██║  ██║█████╔╝ \n  ██║  ██║██╔═██╗ \n  ██████╔╝██║  ██╗\n  ╚═════╝ ╚═╝  ╚═╝',
+      'color:#D4513A;font-family:monospace;'
+    );
+    console.log('%c> inspeccionando el código. hola.\n→ daxkenyi001@gmail.com', 'color:#4B8A6E;font-family:monospace;');
 
-  hey dev 👋 estás inspeccionando el código.
-  hola. hablemos.
-  → daxkenyi001@gmail.com
-  → x.com/daxkenyi001
-    `);
+    /* ─── fondo reactivo al mouse ─── */
+    (function () {
+      if (window.matchMedia('(hover: none)').matches) return; // skip touch
+
+      const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById('bg-grid'));
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      const SPACING = 40;   // distancia entre puntos
+      const REACH   = 155;  // radio de influencia del cursor
+      const LERP    = 0.09; // suavizado del seguimiento
+
+      let tw = -9999, th = -9999; // posición target del mouse
+      let mx = -9999, my = -9999; // posición suavizada
+      let raf = null;
+
+      function resize() {
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      function draw() {
+        // Lerp hacia el mouse real
+        mx += (tw - mx) * LERP;
+        my += (th - my) * LERP;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Glow suave radial centrado en el cursor
+        const g = ctx.createRadialGradient(mx, my, 0, mx, my, 480);
+        g.addColorStop(0,   'rgba(212,81,58,0.055)');
+        g.addColorStop(0.5, 'rgba(212,81,58,0.018)');
+        g.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Grid de puntos
+        const cols = Math.ceil(canvas.width  / SPACING) + 1;
+        const rows = Math.ceil(canvas.height / SPACING) + 1;
+
+        for (let i = 0; i < cols; i++) {
+          for (let j = 0; j < rows; j++) {
+            const x = i * SPACING;
+            const y = j * SPACING;
+            const d = Math.hypot(x - mx, y - my);
+            const t = Math.max(0, 1 - d / REACH);
+
+            ctx.beginPath();
+            ctx.arc(x, y, t > 0 ? 1 + t * 2 : 1, 0, Math.PI * 2);
+            ctx.fillStyle = t > 0.04
+              ? `rgba(212,81,58,${+(0.07 + t * 0.38).toFixed(2)})`
+              : 'rgba(232,224,212,0.05)';
+            ctx.fill();
+          }
+        }
+
+        raf = requestAnimationFrame(draw);
+      }
+
+      document.addEventListener('mousemove', e => { tw = e.clientX; th = e.clientY; });
+      window.addEventListener('resize', resize, { passive: true });
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) { cancelAnimationFrame(raf); raf = null; }
+        else if (!raf) draw();
+      });
+
+      resize();
+      draw();
+    })();
   </script>
 </body>
 </html>

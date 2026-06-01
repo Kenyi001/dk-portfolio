@@ -98,19 +98,41 @@ const isActive = (path: string) => {
   .nav-link {
     font-family: var(--font-mono);
     font-size: 0.9rem;
-    color: var(--ink-primary);
+    color: var(--ink-secondary);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 500;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
+    padding: 0.4rem 0.2rem;
     text-decoration: none;
-    transition: all 120ms ease;
+    position: relative;
+    transition: color 150ms ease;
   }
 
-  .nav-link:hover, .nav-link.active {
-    background-color: var(--accent);
-    color: #FFF;
+  /* Underline que crece desde la izquierda */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 200ms ease;
+  }
+
+  .nav-link:hover {
+    color: var(--ink-primary);
+  }
+
+  .nav-link.active {
+    color: var(--accent);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
   }
 
   .status {

@@ -21,15 +21,33 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: var(--bg-primary); }
 
 body {
-  background: var(--bg-primary);
+  background: transparent;
   color: var(--ink-primary);
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
   cursor: crosshair;
+}
+
+/* Background canvas — dot grid reactivo al mouse */
+#bg-grid {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* El contenido queda por encima del canvas */
+body > nav,
+body > main,
+body > footer {
+  position: relative;
+  z-index: 1;
 }
 
 ::selection {
