@@ -57,12 +57,44 @@ const lang = getLangFromUrl(Astro.url);
               <li>Python automation → scraping and automatic data cleaning saving 5h/week.</li>
               <li>Tableau/Power BI dashboards for KPIs → 30% improvement in operational visibility.</li>
               <li>QA on payment gateway + ETL process optimization.</li>
+              <li>Scrum implementation → faster delivery cycles and progress visibility.</li>
             </>
           ) : (
             <>
               <li>Automatización con Python → scraping y limpieza automática de datos con un ahorro de 5h/semana.</li>
               <li>Dashboards Tableau/Power BI para KPIs → mejora de la visibilidad operativa en un 30%.</li>
               <li>QA sobre pasarela de pagos + optimización de procesos ETL.</li>
+              <li>Implementación de Scrum → ciclos de entrega más rápidos y mejor visibilidad del progreso.</li>
+            </>
+          )}
+        </ul>
+      </div>
+
+      <!-- UTEPSA TIC -->
+      <div class="job-card utepsa-card">
+        <div class="job-header">
+          <div class="job-title-group">
+            <h3 class="role">
+              {lang === 'en' ? 'IT Support Technician' : 'Auxiliar de Soporte TIC'}
+            </h3>
+            <span class="company">UTEPSA · Centro Tecnológico Educativo</span>
+          </div>
+          <span class="duration">
+            {lang === 'en' ? 'Jan 2021 — Mar 2022' : 'Ene 2021 — Mar 2022'}
+          </span>
+        </div>
+        <ul class="job-logros">
+          {lang === 'en' ? (
+            <>
+              <li>Hardware/software diagnosis and repair on lab equipment.</li>
+              <li>Institutional email support + LMS (Moodle) — 30+ daily requests from students and staff.</li>
+              <li>Process documentation and user guides → reduced repeat support tickets.</li>
+            </>
+          ) : (
+            <>
+              <li>Diagnóstico y corrección de fallas en equipos de laboratorio (hardware y software).</li>
+              <li>Soporte de correo institucional + plataforma LMS (Moodle) — 30+ solicitudes diarias.</li>
+              <li>Documentación de procesos y guías de usuario → reducción de reconsultas.</li>
             </>
           )}
         </ul>
@@ -118,6 +150,10 @@ const lang = getLangFromUrl(Astro.url);
   
   .tigo-card {
     border-left-color: var(--ink-secondary);
+  }
+
+  .utepsa-card {
+    border-left-color: var(--border-mid);
   }
 
   .job-header {
