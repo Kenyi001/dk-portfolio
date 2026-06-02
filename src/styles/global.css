@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap');
 
 :root {
-  --bg-primary:    #0D1017;
-  --bg-secondary:  #13161C;
-  --bg-surface:    #1A1D24;
-  --bg-surface-2:  #22262F;
+  /* Secciones semi-transparentes para que el canvas se vea en toda la página */
+  --bg-primary:    rgba(13, 16, 23,  0.80);
+  --bg-secondary:  rgba(19, 22, 28,  0.72);
+  --bg-surface:    rgba(26, 29, 36,  0.96); /* cards: casi sólido, legible */
+  --bg-surface-2:  rgba(34, 38, 47,  0.96);
   --ink-primary:   #E8E0D4;
   --ink-secondary: #6B7280;
   --ink-dim:       #2A3040;

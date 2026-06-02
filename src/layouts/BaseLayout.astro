@@ -138,21 +138,27 @@ const {
       update();
     })();
 
-    /* ─── fondo reactivo al mouse ─── */
+    /* ─── fondo reactivo al mouse — dual glow + color transition ─── */
     (function () {
-      if (window.matchMedia('(hover: none)').matches) return; // skip touch
+      if (window.matchMedia('(hover: none)').matches) return;
 
       const canvas = /** @type {HTMLCanvasElement} */ (document.getElementById('bg-grid'));
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
 
-      const SPACING = 40;   // distancia entre puntos
-      const REACH   = 155;  // radio de influencia del cursor
-      const LERP    = 0.09; // suavizado del seguimiento
+      const SPACING = 38;   // densidad del grid
+      const REACH   = 200;  // radio de influencia del cursor (ampliado)
+      const LERP    = 0.07; // seguimiento suave/natural
 
-      let tw = -9999, th = -9999; // posición target del mouse
-      let mx = -9999, my = -9999; // posición suavizada
+      // Colores del sistema de diseño
+      const ACC = [212, 81,  58 ];  // --accent rojo
+      const HSH = [75,  138, 110];  // --hash-color verde
+
+      let tw = -9999, th = -9999;
+      let mx = -9999, my = -9999;
       let raf = null;
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
 
       function resize() {
         canvas.width  = window.innerWidth;
@@ -160,21 +166,28 @@ const {
       }
 
       function draw() {
-        // Lerp hacia el mouse real
         mx += (tw - mx) * LERP;
         my += (th - my) * LERP;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Glow suave radial centrado en el cursor
-        const g = ctx.createRadialGradient(mx, my, 0, mx, my, 480);
-        g.addColorStop(0,   'rgba(212,81,58,0.055)');
-        g.addColorStop(0.5, 'rgba(212,81,58,0.018)');
-        g.addColorStop(1,   'rgba(0,0,0,0)');
-        ctx.fillStyle = g;
+        // Capa 1: halo verde grande y difuso — da profundidad de ambiente
+        const g1 = ctx.createRadialGradient(mx, my, 0, mx, my, 620);
+        g1.addColorStop(0,   `rgba(${HSH},0.04)`);
+        g1.addColorStop(0.45,`rgba(${HSH},0.015)`);
+        g1.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.fillStyle = g1;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Grid de puntos
+        // Capa 2: foco rojo-acento concentrado en el cursor
+        const g2 = ctx.createRadialGradient(mx, my, 0, mx, my, 280);
+        g2.addColorStop(0,   `rgba(${ACC},0.09)`);
+        g2.addColorStop(0.55,`rgba(${ACC},0.025)`);
+        g2.addColorStop(1,   'rgba(0,0,0,0)');
+        ctx.fillStyle = g2;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Grid de puntos con transición de color por distancia
         const cols = Math.ceil(canvas.width  / SPACING) + 1;
         const rows = Math.ceil(canvas.height / SPACING) + 1;
 
@@ -185,11 +198,32 @@ const {
             const d = Math.hypot(x - mx, y - my);
             const t = Math.max(0, 1 - d / REACH);
 
+            let r, g, b, a, radius;
+
+            if (t > 0.55) {
+              // Muy cerca — acento rojo puro
+              const p = (t - 0.55) / 0.45;
+              r = lerp(HSH[0], ACC[0], p);
+              g = lerp(HSH[1], ACC[1], p);
+              b = lerp(HSH[2], ACC[2], p);
+              a = 0.15 + t * 0.42;
+              radius = 1 + t * 2.5;
+            } else if (t > 0.05) {
+              // Distancia media — verde hash
+              const p = (t - 0.05) / 0.5;
+              r = HSH[0]; g = HSH[1]; b = HSH[2];
+              a = 0.07 + p * 0.15;
+              radius = 1 + t * 1.5;
+            } else {
+              // Lejos — dots base visibles en todo el fondo
+              r = 232; g = 224; b = 212;
+              a = 0.10;  // opacidad aumentada para que se vea en secciones semi-transparentes
+              radius = 1;
+            }
+
             ctx.beginPath();
-            ctx.arc(x, y, t > 0 ? 1 + t * 2 : 1, 0, Math.PI * 2);
-            ctx.fillStyle = t > 0.04
-              ? `rgba(212,81,58,${+(0.07 + t * 0.38).toFixed(2)})`
-              : 'rgba(232,224,212,0.05)';
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},${+a.toFixed(2)})`;
             ctx.fill();
           }
         }
