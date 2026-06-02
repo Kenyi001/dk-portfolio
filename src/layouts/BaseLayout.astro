@@ -103,6 +103,7 @@ const {
   <!-- global.css importado vía frontmatter para build correcto en producción -->
 </head>
 <body>
+  <div id="scroll-bar" aria-hidden="true"></div>
   <canvas id="bg-grid" aria-hidden="true"></canvas>
   <Nav />
   <main>
@@ -122,6 +123,18 @@ const {
       'color:#D4513A;font-family:monospace;'
     );
     console.log('%c> inspeccionando el código. hola.\n→ daxkenyi001@gmail.com', 'color:#4B8A6E;font-family:monospace;');
+
+    /* ─── scroll progress bar ─── */
+    (function () {
+      const bar = document.getElementById('scroll-bar');
+      if (!bar) return;
+      function update() {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
 
     /* ─── fondo reactivo al mouse ─── */
     (function () {
