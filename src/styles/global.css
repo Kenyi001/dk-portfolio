@@ -23,7 +23,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; background: var(--bg-primary); }
+html { scroll-behavior: smooth; background: #0D1017; } /* siempre sólido — var(--bg-primary) es rgba y filtraría el blanco del browser */
 
 body {
   background: transparent;
