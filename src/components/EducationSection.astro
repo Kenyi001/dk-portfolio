@@ -19,14 +19,14 @@ const lang = getLangFromUrl(Astro.url);
           </span>
         </div>
         <span class="status-badge">
-          {lang === 'en' ? '● ONGOING' : '● EN CURSO'}
+          {lang === 'en' ? '✓ GRADUATED' : '✓ GRADUADO'}
         </span>
       </div>
 
       <div class="edu-meta">
         <span class="meta-item">
           <span class="meta-label">{lang === 'en' ? 'PERIOD:' : 'PERÍODO:'}</span>
-          <span class="meta-val">{lang === 'en' ? 'Feb 2020 — present' : 'Feb 2020 — actualidad'}</span>
+          <span class="meta-val">Feb 2020 — 2026</span>
         </span>
         <span class="meta-item">
           <span class="meta-label">{lang === 'en' ? 'LOCATION:' : 'UBICACIÓN:'}</span>
@@ -105,12 +105,6 @@ const lang = getLangFromUrl(Astro.url);
     border-radius: 2px;
     white-space: nowrap;
     font-weight: bold;
-    animation: blink-edu 2s infinite;
-  }
-
-  @keyframes blink-edu {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.5; }
   }
 
   .edu-meta {
