@@ -221,10 +221,26 @@ const {
               radius = 1;
             }
 
-            ctx.beginPath();
-            ctx.arc(x, y, radius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${Math.round(r)},${Math.round(g)},${Math.round(b)},${+a.toFixed(2)})`;
-            ctx.fill();
+            const cr = Math.round(r), cg = Math.round(g), cb = Math.round(b);
+            const ca = +a.toFixed(2);
+
+            if (t > 0.05) {
+              // Dots activos — glow difuminado con shadowBlur
+              ctx.save();
+              ctx.shadowColor = `rgba(${cr},${cg},${cb},${+(a * 0.7).toFixed(2)})`;
+              ctx.shadowBlur   = 4 + t * 14; // más cerca = más difuso/brillante
+              ctx.beginPath();
+              ctx.arc(x, y, Math.max(0.5, radius * 0.55), 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(${cr},${cg},${cb},${+(a * 0.85).toFixed(2)})`;
+              ctx.fill();
+              ctx.restore();
+            } else {
+              // Dots base — puntitos simples sin blur (performance)
+              ctx.beginPath();
+              ctx.arc(x, y, 0.8, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(${cr},${cg},${cb},${ca})`;
+              ctx.fill();
+            }
           }
         }
 
