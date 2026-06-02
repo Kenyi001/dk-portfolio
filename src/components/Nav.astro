@@ -14,7 +14,7 @@ const isActive = (path: string) => {
   return false;
 };
 ---
-<nav class="nav">
+<nav class="nav" id="main-nav">
   <div class="nav-container">
     <div class="logo-group">
       <a href={lang === 'es' ? '/' : '/en'} class="logo">
@@ -22,26 +22,62 @@ const isActive = (path: string) => {
       </a>
       <span class="handle">@daxkenyi001</span>
     </div>
-    
-    <div class="links">
-      <a href={lang === 'es' ? '/projects' : '/en/projects'} class={`nav-link ${isActive('/projects') ? 'active' : ''}`}>{t('nav.projects')}</a>
-      <a href={lang === 'es' ? '/about' : '/en/about'} class={`nav-link ${isActive('/about') ? 'active' : ''}`}>{t('nav.about')}</a>
-      <a href={lang === 'es' ? '/community' : '/en/community'} class={`nav-link ${isActive('/community') ? 'active' : ''}`}>{lang === 'es' ? 'Comunidad' : 'Community'}</a>
-      <a href={lang === 'es' ? '/contact' : '/en/contact'} class={`nav-link ${isActive('/contact') ? 'active' : ''}`}>{t('nav.contact')}</a>
+
+    <!-- Desktop links -->
+    <div class="links" id="nav-links" role="menubar">
+      <a href={lang === 'es' ? '/projects' : '/en/projects'} class={`nav-link ${isActive('/projects') ? 'active' : ''}`} role="menuitem">{t('nav.projects')}</a>
+      <a href={lang === 'es' ? '/about' : '/en/about'} class={`nav-link ${isActive('/about') ? 'active' : ''}`} role="menuitem">{t('nav.about')}</a>
+      <a href={lang === 'es' ? '/community' : '/en/community'} class={`nav-link ${isActive('/community') ? 'active' : ''}`} role="menuitem">{lang === 'es' ? 'Comunidad' : 'Community'}</a>
+      <a href={lang === 'es' ? '/contact' : '/en/contact'} class={`nav-link ${isActive('/contact') ? 'active' : ''}`} role="menuitem">{t('nav.contact')}</a>
     </div>
 
-    <div class="status">
-      <span class="status-dot">●</span>
-      <span class="status-text">{lang === 'es' ? 'DISPONIBLE' : 'AVAILABLE'}</span>
-    </div>
+    <div class="nav-right">
+      <div class="status">
+        <span class="status-dot">●</span>
+        <span class="status-text">{lang === 'es' ? 'DISPONIBLE' : 'AVAILABLE'}</span>
+      </div>
 
-    <!-- Al hacer clic manual, guardar la elección para no ser redirigido automáticamente -->
-    <a href={switchPath} class="lang-switch" aria-label="Cambiar idioma"
-       onclick="sessionStorage.setItem('lang-chosen','1')">
-      {lang === 'es' ? 'EN' : 'ES'}
-    </a>
+      <a href={switchPath} class="lang-switch" aria-label="Cambiar idioma"
+         onclick="sessionStorage.setItem('lang-chosen','1')">
+        {lang === 'es' ? 'EN' : 'ES'}
+      </a>
+
+      <!-- Hamburger — solo visible en mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href={lang === 'es' ? '/projects' : '/en/projects'} class={`mobile-link ${isActive('/projects') ? 'active' : ''}`}>{t('nav.projects')}</a>
+    <a href={lang === 'es' ? '/about' : '/en/about'} class={`mobile-link ${isActive('/about') ? 'active' : ''}`}>{t('nav.about')}</a>
+    <a href={lang === 'es' ? '/community' : '/en/community'} class={`mobile-link ${isActive('/community') ? 'active' : ''}`}>{lang === 'es' ? 'Comunidad' : 'Community'}</a>
+    <a href={lang === 'es' ? '/contact' : '/en/contact'} class={`mobile-link ${isActive('/contact') ? 'active' : ''}`}>{t('nav.contact')}</a>
   </div>
 </nav>
+
+<script>
+  const btn  = document.getElementById('hamburger');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      menu.setAttribute('aria-hidden', String(!open));
+      btn.classList.toggle('is-open', open);
+    });
+    // Cerrar al hacer clic en un link
+    menu.querySelectorAll('.mobile-link').forEach(a =>
+      a.addEventListener('click', () => {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.classList.remove('is-open');
+      })
+    );
+  }
+</script>
 
 <style>
   .nav {
@@ -155,26 +191,10 @@ const isActive = (path: string) => {
     50% { opacity: 0.3; }
   }
 
-  @media (max-width: 768px) {
-    .nav-container {
-      padding: 1rem;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .handle {
-      display: none;
-    }
-
-    .links {
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .status {
-      display: none;
-    }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
   .lang-switch {
@@ -184,12 +204,82 @@ const isActive = (path: string) => {
     color: var(--ink-secondary);
     border: 1px solid var(--border-color);
     padding: 4px 10px;
-    border-radius: 4px;
+    border-radius: 2px;
     text-decoration: none;
     transition: color 0.2s, border-color 0.2s;
   }
   .lang-switch:hover {
     color: var(--accent);
     border-color: var(--accent);
+  }
+
+  /* ─── Hamburger ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: crosshair;
+    width: 28px;
+    height: 28px;
+  }
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--ink-secondary);
+    transition: transform 200ms ease, opacity 200ms ease, background 200ms ease;
+    transform-origin: center;
+  }
+  .hamburger:hover span { background: var(--accent); }
+
+  /* X cuando está abierto */
+  .hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.is-open span:nth-child(2) { opacity: 0; }
+  .hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* ─── Mobile drawer ─── */
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--border-subtle);
+    background: rgba(13,16,23,0.97);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 250ms ease, padding 250ms ease;
+  }
+  .mobile-menu.open {
+    max-height: 320px;
+    padding: 0.75rem 0 1rem;
+  }
+  .mobile-link {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--ink-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.85rem 2rem;
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: color 150ms, border-color 150ms;
+  }
+  .mobile-link:hover,
+  .mobile-link.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 768px) {
+    .nav-container { padding: 1rem 1.5rem; }
+    .handle        { display: none; }
+    .links         { display: none; }
+    .status        { display: none; }
+    .hamburger     { display: flex; }
+    .mobile-menu   { display: flex; }
   }
 </style>
