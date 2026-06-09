@@ -10,12 +10,21 @@ role: "Smart Contract Builder"
 role_en: "Smart Contract Builder"
 stack: ["Cardano", "Plutus", "Haskell", "TypeScript", "React"]
 award: "Cardano Latam Track Winner"
+repoUrl: "https://github.com/Odig0/Enaid"
 date: "2024"
 featured: true
 hashId: "e7c2...8b4a"
 metrics: "1er Lugar en Cardano Track"
 ---
 
-Enaid es un sistema de identidad soberana (SSI) y reputación descentralizada diseñado para empoderar a los profesionales de la era Web3. Aprovechando la seguridad e inmutabilidad de la cadena de bloques Cardano, Enaid permite a los usuarios poseer y verificar sus credenciales académicas y laborales de forma autónoma.
+## Problema
+Las credenciales académicas y laborales son falsificables y su verificación depende de intermediarios centralizados — universidades, ex-empleadores, plataformas de terceros. En mercados globales de talento técnico, eso hace lenta la contratación y fácil la falsificación de perfiles.
 
-A través de contratos inteligentes escritos en Plutus, los usuarios acumulan logros que se convierten en un puntaje de reputación on-chain transparente. Esto elimina la dependencia de intermediarios centralizados y previene la falsificación de perfiles profesionales en mercados globales de talento técnico.
+## Solución
+Sistema de identidad soberana (SSI) sobre Cardano: el usuario posee sus credenciales en su propia wallet y acumula logros verificables que se convierten en un puntaje de reputación on-chain, transparente y a prueba de manipulación. Cualquier tercero puede verificar el historial directamente en la cadena, sin intermediarios.
+
+## Mi rol
+Smart contracts en Plutus para la emisión de credenciales y la lógica del score de reputación, construido en equipo de 3 durante el hackathon.
+
+## Resultado
+**1er lugar en el track de Cardano — DoraHacks Latam 2024.** Primer contacto serio con Plutus y el modelo eUTXO viniendo del ecosistema Node.js: obliga a pensar la validación de contratos de forma radicalmente distinta a Solidity.

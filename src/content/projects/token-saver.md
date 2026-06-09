@@ -12,10 +12,22 @@ stack: ["RAG", "Redis", "Node.js", "TypeScript", "LLM", "Prompt Engineering"]
 date: "2025-2026"
 featured: true
 hashId: "0f8b...d47c"
-metrics: "↓ costos API · ↑ velocidad inferencia · ✓ producción BCP Bolivia"
-metrics_en: "↓ API costs · ↑ inference speed · ✓ BCP Bolivia production"
+metrics: "✓ En producción en BCP Bolivia · ↓ costos API · cache hits en milisegundos"
+metrics_en: "✓ In production at BCP Bolivia · ↓ API costs · cache hits in milliseconds"
 ---
 
-El Token Saver System se diseñó y construyó para resolver el principal obstáculo en la adopción empresarial de modelos de lenguaje en producción: los costos recurrentes de API por tokens y la latencia de respuesta en sistemas críticos.
+## Problema
+El principal obstáculo para adoptar LLMs en producción empresarial: los costos recurrentes de API por tokens y la latencia de respuesta en sistemas críticos. Cada consulta de los canales bancarios arrastraba contexto redundante que inflaba la factura sin mejorar las respuestas.
 
-El sistema se colocó como una capa middleware inteligente y optimizada entre los canales bancarios y los proveedores de LLM. Implementé técnicas avanzadas de Retrieval-Augmented Generation (RAG) combinadas con un innovador algoritmo heurístico de compresión semántica de prompts, logrando recortar el contexto de entrada redundante sin degradar el rendimiento del modelo. Adicionalmente, una capa de caché de alto rendimiento optimizada con Redis almacena respuestas de consultas frecuentes, reduciendo la latencia de extremo a extremo a niveles inferiores a 5ms para un porcentaje considerable de los flujos del Banco de Crédito de Bolivia (BCP).
+## Solución
+Capa middleware entre los canales bancarios y los proveedores de LLM, con tres mecanismos combinados:
+
+- **RAG** para inyectar solo el contexto relevante a cada consulta, en lugar de contexto completo
+- **Compresión semántica de prompts** con un algoritmo heurístico que recorta entrada redundante sin degradar el rendimiento del modelo
+- **Caché Redis** que sirve las consultas frecuentes sin tocar el LLM — los cache hits responden en milisegundos
+
+## Mi rol
+Backend Lead & Arquitecto: diseño de la arquitectura del middleware y su implementación en Node.js/TypeScript.
+
+## Resultado
+**En producción en el Banco de Crédito de Bolivia (BCP).** Reducción significativa de costos de API y de latencia en los flujos frecuentes. Aprendizaje clave: comprimir prompts sin degradar respuestas no es un problema de algoritmos solamente — exige evaluación continua contra casos reales del banco.
