@@ -1,0 +1,250 @@
+<div class="dk3d-wrap" aria-hidden="true">
+  <canvas id="dk3d"></canvas>
+</div>
+
+<script>
+  const cv = document.getElementById('dk3d') as HTMLCanvasElement | null;
+  if (cv) initDK3D(cv);
+
+  function initDK3D(cv: HTMLCanvasElement) {
+    const ctx = cv.getContext('2d');
+    if (!ctx) return;
+
+    const rootStyle = getComputedStyle(document.documentElement);
+    const INK = rootStyle.getPropertyValue('--ink-primary').trim() || '#E8E0D4';
+    const ACCENT = rootStyle.getPropertyValue('--accent').trim() || '#D4513A';
+    const OUTLINE = '#0D1017';
+    const TONES: Record<string, { cap: string; wallL: string; wallD: string }> = {
+      D: { cap: INK, wallL: '#B5AEA2', wallD: '#7E786E' },
+      K: { cap: ACCENT, wallL: '#A8402C', wallD: '#6E2418' },
+    };
+
+    const DOUT = [[0,0],[0,4],[1.5,4],[2.4,3.1],[2.4,0.9],[1.5,0]];
+    const DIN = [[0.7,0.7],[0.7,3.3],[1.3,3.3],[1.7,2.9],[1.7,1.1],[1.3,0.7]];
+    const KPOLY = [[0,0],[0,4],[0.8,4],[0.8,2.7],[1.9,4],[2.9,4],[1.55,2.0],[2.9,0],[1.9,0],[0.8,1.35],[0.8,0]];
+    const S = 0.6, DOFF = -3.2, KOFF = 0.35, DEPTH = 0.34;
+    const LETTERS: Array<[number[][], number[][] | null, number, string]> = [
+      [DOUT, DIN, DOFF, 'D'],
+      [KPOLY, null, KOFF, 'K'],
+    ];
+
+    type Face = { pts: number[][]; hole: number[][] | null; type: string; letter: string; z: number };
+
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let scale = 100;
+    let rot = -1.15, rotTarget = 0.35, vel = 0, tickClock = 0;
+    let tiltX = 0, tiltY = 0, tgtTX = 0, tgtTY = 0;
+    let explode = 0, explodeTarget = 0;
+    let dragging = false, hasDragged = false, lastX = 0, lastY = 0, dragX = 0, dragY = 0;
+    let running = false, rafId = 0;
+
+    function fit(): boolean {
+      const r = cv.getBoundingClientRect();
+      if (!r.width) return false;
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      cv.width = Math.round(r.width * dpr);
+      cv.height = Math.round(r.height * dpr);
+      scale = cv.width * 0.155;
+      return true;
+    }
+
+    function P2(p: number[], offX: number) {
+      return [(p[0] + offX) * S, -(p[1] - 2) * S];
+    }
+
+    function project(x: number, y: number, z: number, ayy: number, axx: number) {
+      let c = Math.cos(ayy), s = Math.sin(ayy);
+      const x1 = x * c - z * s, z1 = x * s + z * c;
+      c = Math.cos(axx); s = Math.sin(axx);
+      const y1 = y * c - z1 * s, z2 = y * s + z1 * c;
+      const k = 4.5 / (4.5 + z2);
+      return [cv.width / 2 + x1 * k * scale, cv.height / 2 + y1 * k * scale, z2];
+    }
+
+    function ringWalls(poly: number[][], offX: number, z0: number, z1: number, letter: string) {
+      const out: Array<{ pts: number[][]; type: string; letter: string }> = [];
+      for (let i = 0; i < poly.length; i++) {
+        const a = P2(poly[i], offX), b = P2(poly[(i + 1) % poly.length], offX);
+        const horiz = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
+        out.push({
+          pts: [[a[0], a[1], z0], [b[0], b[1], z0], [b[0], b[1], z1], [a[0], a[1], z1]],
+          type: horiz ? 'wallL' : 'wallD',
+          letter,
+        });
+      }
+      return out;
+    }
+
+    function buildSlab(z0: number, z1: number) {
+      const faces: Array<{ pts: number[][]; hole?: number[][] | null; type: string; letter: string }> = [];
+      for (const [outer, hole, offX, letter] of LETTERS) {
+        for (const zc of [z1, z0]) {
+          faces.push({
+            pts: outer.map((p) => { const q = P2(p, offX); return [q[0], q[1], zc]; }),
+            hole: hole ? hole.map((p) => { const q = P2(p, offX); return [q[0], q[1], zc]; }) : null,
+            type: 'cap',
+            letter,
+          });
+        }
+        faces.push(...ringWalls(outer, offX, z0, z1, letter));
+        if (hole) faces.push(...ringWalls(hole, offX, z0, z1, letter));
+      }
+      return faces;
+    }
+
+    function buildFaces() {
+      const g = explode * 0.5;
+      if (g < 0.005) return buildSlab(-DEPTH, DEPTH);
+      const th = (DEPTH * 2) / 3;
+      const faces = [];
+      for (const c of [-(th + g), 0, th + g]) faces.push(...buildSlab(c - th / 2, c + th / 2));
+      return faces;
+    }
+
+    function trace(pts: number[][]) {
+      ctx!.moveTo(pts[0][0], pts[0][1]);
+      for (let i = 1; i < pts.length; i++) ctx!.lineTo(pts[i][0], pts[i][1]);
+      ctx!.closePath();
+    }
+
+    function hatch(pts: number[][]) {
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      for (const p of pts) {
+        x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]);
+        x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]);
+      }
+      ctx!.save();
+      ctx!.beginPath(); trace(pts); ctx!.clip();
+      ctx!.strokeStyle = 'rgba(13,16,23,0.5)';
+      ctx!.lineWidth = 1.4;
+      ctx!.beginPath();
+      for (let d = x0 - (y1 - y0); d < x1; d += 9) {
+        ctx!.moveTo(d, y1); ctx!.lineTo(d + (y1 - y0), y0);
+      }
+      ctx!.stroke();
+      ctx!.restore();
+    }
+
+    function draw(ayy: number, axx: number) {
+      ctx!.clearRect(0, 0, cv.width, cv.height);
+      const faces: Face[] = buildFaces()
+        .map((f) => {
+          const pts = f.pts.map((p) => project(p[0], p[1], p[2], ayy, axx));
+          const hole = f.hole ? f.hole.map((p) => project(p[0], p[1], p[2], ayy, axx)) : null;
+          return { ...f, pts, hole, z: pts.reduce((a, p) => a + p[2], 0) / pts.length };
+        })
+        .sort((a, b) => b.z - a.z);
+
+      for (const f of faces) {
+        const tone = TONES[f.letter];
+        ctx!.beginPath(); trace(f.pts); if (f.hole) trace(f.hole);
+        ctx!.fillStyle = f.type === 'cap' ? tone.cap : (tone as any)[f.type];
+        ctx!.fill('evenodd');
+        if (f.type === 'wallD') hatch(f.pts);
+        ctx!.strokeStyle = OUTLINE;
+        ctx!.lineWidth = 2.2;
+        ctx!.beginPath(); trace(f.pts); if (f.hole) trace(f.hole);
+        ctx!.stroke();
+      }
+
+      if (!hasDragged && !reduceMotion) {
+        ctx!.fillStyle = 'rgba(232,224,212,0.4)';
+        ctx!.font = `${Math.round(cv.width * 0.028)}px "JetBrains Mono", monospace`;
+        ctx!.textAlign = 'center';
+        ctx!.fillText('[ DRAG_TO_ROTATE ]', cv.width / 2, cv.height - cv.width * 0.04);
+        ctx!.textAlign = 'left';
+      }
+    }
+
+    function frame() {
+      if (!running) return;
+      tickClock += 16;
+      if (tickClock > 6500) { tickClock = 0; rotTarget += Math.PI * 2; }
+      vel += (rotTarget - rot) * 0.016;
+      vel *= 0.86;
+      rot += vel;
+      tiltX += (tgtTX - tiltX) * 0.07;
+      tiltY += (tgtTY - tiltY) * 0.07;
+      explode += (explodeTarget - explode) * 0.08;
+      draw(rot + tiltY + dragY, 0.16 + tiltX + dragX);
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (running || reduceMotion) return;
+      if (!fit()) return;
+      running = true;
+      rafId = requestAnimationFrame(frame);
+    }
+
+    function stop() {
+      running = false;
+      cancelAnimationFrame(rafId);
+    }
+
+    if (reduceMotion) {
+      if (fit()) draw(0.35, 0.16);
+    } else {
+      const io = new IntersectionObserver(
+        (entries) => { entries[0].isIntersecting ? start() : stop(); },
+        { threshold: 0.05 }
+      );
+      io.observe(cv);
+
+      addEventListener('resize', () => { if (fit() && !running) draw(rot, 0.16); }, { passive: true });
+
+      addEventListener('scroll', () => {
+        explodeTarget = Math.min(1, Math.max(0, (scrollY - 60) / 480));
+      }, { passive: true });
+
+      addEventListener('pointermove', (e) => {
+        const r = cv.getBoundingClientRect();
+        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+        tgtTY = Math.max(-0.22, Math.min(0.22, ((e.clientX - cx) / innerWidth) * 0.5));
+        tgtTX = Math.max(-0.16, Math.min(0.16, ((e.clientY - cy) / innerHeight) * 0.4));
+        if (!dragging) return;
+        dragY += (e.clientX - lastX) * 0.008;
+        dragX += (e.clientY - lastY) * 0.008;
+        lastX = e.clientX; lastY = e.clientY;
+      }, { passive: true });
+
+      cv.addEventListener('pointerdown', (e) => {
+        dragging = true; hasDragged = true;
+        lastX = e.clientX; lastY = e.clientY;
+        cv.style.cursor = 'grabbing';
+        cv.setPointerCapture(e.pointerId);
+      });
+      addEventListener('pointerup', () => {
+        dragging = false;
+        cv.style.cursor = 'grab';
+      });
+    }
+  }
+</script>
+
+<style>
+  .dk3d-wrap {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 400px;
+    height: 440px;
+    z-index: 2;
+  }
+
+  canvas {
+    width: 100%;
+    height: 100%;
+    cursor: grab;
+    touch-action: none;
+  }
+
+  @media (min-width: 1200px) {
+    .dk3d-wrap {
+      display: block;
+    }
+  }
+</style>
