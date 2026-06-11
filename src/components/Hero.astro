@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/translations';
+import DK3D from './DK3D.astro';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
@@ -10,6 +11,8 @@ const t = useTranslations(lang);
     <div class="code-line">[2026] INFO  Smart contract deployed · network=stellar</div>
     <div class="code-line">[2026] OK    Prompt compression active · mode=token_saver</div>
   </div>
+
+  <DK3D />
 
   <div class="hero-content">
     <span class="pre-title">{t('hero.pretitle')}</span>
@@ -88,6 +91,8 @@ const t = useTranslations(lang);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    position: relative;
+    z-index: 1;
   }
 
   .pre-title {
