@@ -195,16 +195,7 @@
       addEventListener('resize', () => { if (fit() && !running) draw(rot, 0.16); }, { passive: true });
 
       addEventListener('scroll', () => {
-        const pin = document.querySelector('.hero-pin');
-        if (pin) {
-          const pinH = (pin as HTMLElement).offsetHeight;
-          const scrollable = pinH - innerHeight;
-          explodeTarget = scrollable > 0
-            ? Math.min(1, Math.max(0, scrollY / scrollable))
-            : 0;
-        } else {
-          explodeTarget = Math.min(1, Math.max(0, (scrollY - 60) / 480));
-        }
+        explodeTarget = Math.min(1, Math.max(0, (scrollY - 60) / 480));
       }, { passive: true });
 
       addEventListener('pointermove', (e) => {
