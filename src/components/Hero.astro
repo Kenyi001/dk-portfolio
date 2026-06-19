@@ -8,21 +8,21 @@ const t = useTranslations(lang);
 <section class="hero">
   <!-- Fondo con palabras técnicas que hacen parallax al scrollear -->
   <div class="hero-bg" aria-hidden="true">
-    <span class="bg-word" style="left:64%;top:6%;font-size:5.5rem"   data-speed="0.13">RAG</span>
-    <span class="bg-word" style="left:4%;top:68%;font-size:7rem"     data-speed="0.19">LLM</span>
-    <span class="bg-word" style="left:72%;top:58%;font-size:2.4rem"  data-speed="0.26">Node.js</span>
-    <span class="bg-word" style="left:38%;top:88%;font-size:1.9rem"  data-speed="0.32">TypeScript</span>
-    <span class="bg-word" style="left:80%;top:32%;font-size:3.8rem"  data-speed="0.09">Web3</span>
-    <span class="bg-word" style="left:10%;top:84%;font-size:2.4rem"  data-speed="0.23">Redis</span>
-    <span class="bg-word" style="left:46%;top:8%;font-size:1.9rem"   data-speed="0.16">C# .NET</span>
-    <span class="bg-word" style="left:83%;top:76%;font-size:2.9rem"  data-speed="0.21">OCR</span>
-    <span class="bg-word" style="left:1%;top:44%;font-size:1.9rem"   data-speed="0.29">Cardano</span>
-    <span class="bg-word" style="left:57%;top:50%;font-size:2.3rem"  data-speed="0.11">Docker</span>
-    <span class="bg-word" style="left:25%;top:92%;font-size:3rem"    data-speed="0.37">GCP</span>
-    <span class="bg-word" style="left:70%;top:18%;font-size:1.7rem"  data-speed="0.17">Stellar</span>
-    <span class="bg-word" style="left:50%;top:73%;font-size:2rem"    data-speed="0.14">Python</span>
-    <span class="bg-word" style="left:88%;top:50%;font-size:1.6rem"  data-speed="0.28">Solidity</span>
-    <span class="bg-word" style="left:18%;top:12%;font-size:2.2rem"  data-speed="0.20">Webhooks</span>
+    <span class="bg-word" style="left:64%;top:6%;font-size:1.9rem"   data-speed="0.13">RAG</span>
+    <span class="bg-word" style="left:72%;top:68%;font-size:2.4rem"  data-speed="0.19">LLM</span>
+    <span class="bg-word" style="left:72%;top:58%;font-size:1.0rem"  data-speed="0.26">Node.js</span>
+    <span class="bg-word" style="left:38%;top:88%;font-size:0.85rem" data-speed="0.32">TypeScript</span>
+    <span class="bg-word" style="left:80%;top:32%;font-size:1.4rem"  data-speed="0.09">Web3</span>
+    <span class="bg-word" style="left:10%;top:84%;font-size:1.0rem"  data-speed="0.23">Redis</span>
+    <span class="bg-word" style="left:46%;top:8%;font-size:0.85rem"  data-speed="0.16">C# .NET</span>
+    <span class="bg-word" style="left:83%;top:76%;font-size:1.1rem"  data-speed="0.21">OCR</span>
+    <span class="bg-word" style="left:1%;top:44%;font-size:0.85rem"  data-speed="0.29">Cardano</span>
+    <span class="bg-word" style="left:57%;top:50%;font-size:1.0rem"  data-speed="0.11">Docker</span>
+    <span class="bg-word" style="left:25%;top:92%;font-size:1.2rem"  data-speed="0.37">GCP</span>
+    <span class="bg-word" style="left:70%;top:18%;font-size:0.85rem" data-speed="0.17">Stellar</span>
+    <span class="bg-word" style="left:50%;top:73%;font-size:0.9rem"  data-speed="0.14">Python</span>
+    <span class="bg-word" style="left:88%;top:50%;font-size:0.8rem"  data-speed="0.28">Solidity</span>
+    <span class="bg-word" style="left:18%;top:12%;font-size:0.95rem" data-speed="0.20">Webhooks</span>
   </div>
 
   <DK3D />
@@ -31,8 +31,10 @@ const t = useTranslations(lang);
     <span class="pre-title">{t('hero.pretitle')}</span>
 
     <h1 class="title">
-      <span class="title-dax">DAX</span> <span class="title-kenji">KENJI</span>
-      <span class="sr-only">Tellez Duran</span>
+      <span class="title-name-line">
+        <span class="title-dax">DAX</span> <span class="title-kenji">KENJI</span>
+      </span>
+      <span class="title-surname">Tellez Duran</span>
     </h1>
 
     <div class="badge-role">{t('hero.badge')}</div>
@@ -46,6 +48,8 @@ const t = useTranslations(lang);
       <a href={lang === 'es' ? '/projects' : '/en/projects'} class="cta-button secondary">{t('hero.cta.projects')}</a>
     </div>
   </div>
+
+  <div class="hero-rule" aria-hidden="true"></div>
 </section>
 
 <script>
@@ -97,7 +101,7 @@ const t = useTranslations(lang);
     position: absolute;
     font-family: var(--font-mono);
     color: var(--hash-color);
-    opacity: 0.07;
+    opacity: 0.05;
     white-space: nowrap;
     font-weight: 500;
     will-change: transform;
@@ -132,8 +136,24 @@ const t = useTranslations(lang);
     letter-spacing: -0.03em;
   }
 
+  .title-name-line {
+    display: block;
+  }
+
   .title-dax   { color: var(--ink-primary); }
   .title-kenji { color: var(--accent); }
+
+  .title-surname {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+    font-weight: 400;
+    color: var(--ink-secondary);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 0.75rem;
+    opacity: 0.65;
+  }
 
   .badge-role {
     font-family: var(--font-mono);
@@ -200,6 +220,36 @@ const t = useTranslations(lang);
     color: var(--accent);
   }
 
+  /* ── Línea divisoria base del hero ── */
+  .hero-rule {
+    position: absolute;
+    bottom: 3rem;
+    left: 2rem;
+    right: 2rem;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      var(--border-strong) 30%,
+      var(--border-subtle) 70%,
+      transparent 100%
+    );
+  }
+
+  /* ── 2K y pantallas anchas ── */
+  @media (min-width: 1600px) {
+    .title {
+      font-size: 8rem;
+    }
+    .title-surname {
+      font-size: 1.2rem;
+    }
+    .pre-title  { font-size: 1.15rem; }
+    .bio        { font-size: 1.15rem; }
+    .badge-role { font-size: 1rem; }
+  }
+
+  /* ── Mobile ── */
   @media (max-width: 768px) {
     .hero {
       padding: 5rem 1.5rem 4rem;
@@ -215,10 +265,12 @@ const t = useTranslations(lang);
     .cta-button {
       text-align: center;
     }
-    /* Menos palabras y más chicas en mobile */
     .bg-word {
-      opacity: 0.035;
-      font-size: 1.4rem !important;
+      opacity: 0.025;
+      font-size: 0.75rem !important;
+    }
+    .hero-rule {
+      bottom: 1.5rem;
     }
   }
 </style>
