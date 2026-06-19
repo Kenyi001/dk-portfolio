@@ -12,14 +12,13 @@ stack: ["Stellar", "NFT", "Smart Contracts", "React", "Node.js"]
 award: "DoraHacks Stellar Latam"
 date: "2024"
 featured: true
-hashId: "a3f2...9c1d"
 ---
 
 ## Problema
 Los certificados educativos digitales son trivialmente falsificables: un PDF con firma escaneada no le prueba nada a un reclutador, y la verificación manual contra la institución emisora toma días.
 
 ## Solución
-Plataforma de aprendizaje donde cada certificado es un NFT en la red Stellar, emitido directamente por la institución educativa a la wallet del estudiante. Cualquier tercero — reclutador o institución — verifica la autenticidad de forma instantánea on-chain, sin verificación manual ni intermediarios.
+Plataforma de aprendizaje donde cada certificado es un NFT en la red Stellar, emitido directamente por la institución educativa a la wallet del estudiante. Cualquier tercero (un reclutador o una institución) verifica la autenticidad de forma instantánea on-chain, sin verificación manual ni intermediarios.
 
 ## Mi rol
 Backend Lead: API de emisión de certificados, integración con la red Stellar y lógica de verificación on-chain.

@@ -13,12 +13,11 @@ award: "Cardano Latam Track Winner"
 repoUrl: "https://github.com/Odig0/Enaid"
 date: "2024"
 featured: true
-hashId: "e7c2...8b4a"
 metrics: "1er Lugar en Cardano Track"
 ---
 
 ## Problema
-Las credenciales académicas y laborales son falsificables y su verificación depende de intermediarios centralizados — universidades, ex-empleadores, plataformas de terceros. En mercados globales de talento técnico, eso hace lenta la contratación y fácil la falsificación de perfiles.
+Las credenciales académicas y laborales son falsificables y su verificación depende de intermediarios centralizados: universidades, ex-empleadores o plataformas de terceros. En mercados globales de talento técnico, eso hace lenta la contratación y fácil la falsificación de perfiles.
 
 ## Solución
 Sistema de identidad soberana (SSI) sobre Cardano: el usuario posee sus credenciales en su propia wallet y acumula logros verificables que se convierten en un puntaje de reputación on-chain, transparente y a prueba de manipulación. Cualquier tercero puede verificar el historial directamente en la cadena, sin intermediarios.

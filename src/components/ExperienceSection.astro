@@ -2,9 +2,9 @@
 import { getLangFromUrl } from '../i18n/translations';
 const lang = getLangFromUrl(Astro.url);
 ---
-<section class="experience-section">
+<section class="experience-section" data-reveal>
   <div class="container">
-    <h2 class="section-title">// experience · labor_logs</h2>
+    <h2 class="section-title">{lang === 'en' ? '// experience' : '// experiencia'}</h2>
     
     <div class="experience-list">
       
@@ -25,14 +25,14 @@ const lang = getLangFromUrl(Astro.url);
           {lang === 'en' ? (
             <>
               <li>Node.js backend services for AI-integrated backoffice.</li>
-              <li>RAG system + prompt compression + Redis → drastic reduction in API costs.</li>
+              <li>RAG system + prompt compression + Redis to cut LLM API costs.</li>
               <li>Async pipelines with Webhooks for secure heavy inference processing.</li>
               <li>Automated OCR + advanced image restoration (watermark removal).</li>
             </>
           ) : (
             <>
               <li>Servicios backend Node.js para backoffice con IA integrada.</li>
-              <li>Sistema RAG + compresión de prompts + Redis → reducción drástica de costos de API.</li>
+              <li>Sistema RAG + compresión de prompts + Redis para bajar el costo de API de los LLM.</li>
               <li>Pipelines asíncronos con Webhooks para el procesamiento seguro de inferencias pesadas.</li>
               <li>OCR automatizado + restauración avanzada de imágenes (watermark removal).</li>
             </>

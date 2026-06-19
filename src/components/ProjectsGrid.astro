@@ -25,10 +25,10 @@ const filterLabels = {
 // Sort by date descending (more recent first)
 projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 ---
-<section id="projects" class="projects-section">
+<section id="projects" class="projects-section" data-reveal>
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">// projects · selected_works</h2>
+      <h2 class="section-title">{lang === 'en' ? '// projects' : '// proyectos'}</h2>
       
       <!-- Filter controls -->
       <div class="filters">
@@ -75,7 +75,6 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
               slug={projectSlug}
               stack={project.data.stack}
               award={project.data.award}
-              hashId={project.data.hashId}
               metrics={metrics}
               repoUrl={project.data.repoUrl}
               demoUrl={project.data.demoUrl}
@@ -99,8 +98,8 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
               : 'Diseñando una plataforma RAG unificada para indexación automática y orquestación multi-agente.'}
           </p>
           <div class="build-counter">
-            <span class="days-label">{lang === 'en' ? 'TIME_ELAPSED →' : 'TIEMPO_INCURRIDO →'}</span>
-            <span class="days-value" id="days-count">00</span> {lang === 'en' ? 'active days' : 'días activos'}
+            <span class="days-label">{lang === 'en' ? 'STATUS →' : 'ESTADO →'}</span>
+            <span class="days-value">{lang === 'en' ? 'in progress' : 'en progreso'}</span>
           </div>
         </div>
       </div>
@@ -144,16 +143,6 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
       });
     });
   });
-
-  // Calculate days since 2026-01-01
-  const daysCountEl = document.getElementById('days-count');
-  if (daysCountEl) {
-    const startDate = new Date('2026-01-01T00:00:00-04:00');
-    const today = new Date();
-    const diffTime = Math.abs(today.getTime() - startDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    daysCountEl.textContent = String(diffDays);
-  }
 </script>
 
 <style>

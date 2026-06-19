@@ -8,14 +8,13 @@ interface Props {
   stack: string[];
   slug: string;
   award?: string;
-  hashId: string;
   metrics?: string;
   repoUrl?: string;
   demoUrl?: string;
   lang?: string;
 }
 
-const { title, event, eventType, description, role, stack, slug, award, hashId, metrics, repoUrl, demoUrl, lang = 'es' } = Astro.props;
+const { title, event, eventType, description, role, stack, slug, award, metrics, repoUrl, demoUrl, lang = 'es' } = Astro.props;
 
 // Convert eventType enum to print labels
 const typeLabels = {
@@ -33,7 +32,7 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
   
   <div class="card-top">
     <span class="badge">{typeLabels[eventType]}</span>
-    <span class="hash">{hashId}</span>
+    <span class="event-name">{event}</span>
   </div>
   
   <div class="card-header">
@@ -124,10 +123,11 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     letter-spacing: 0.05em;
   }
 
-  .hash {
+  .event-name {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--hash-color);
+    font-size: 0.78rem;
+    color: var(--ink-secondary);
+    text-align: right;
   }
 
   .card-header {

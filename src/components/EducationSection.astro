@@ -2,9 +2,9 @@
 import { getLangFromUrl } from '../i18n/translations';
 const lang = getLangFromUrl(Astro.url);
 ---
-<section class="education-section">
+<section class="education-section" data-reveal>
   <div class="container">
-    <h2 class="section-title">// education · academic_log</h2>
+    <h2 class="section-title">{lang === 'en' ? '// education' : '// educación'}</h2>
 
     <div class="edu-card">
       <div class="edu-header">

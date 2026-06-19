@@ -2,12 +2,12 @@
 import { getLangFromUrl } from '../i18n/translations';
 const lang = getLangFromUrl(Astro.url);
 ---
-<section class="learning-path">
+<section class="learning-path" data-reveal>
   <div class="container">
     <h2 class="section-title">
       {lang === 'en'
-        ? '// growth_trajectory · where I am and where I\'m going'
-        : '// growth_trajectory · donde estoy y hacia dónde voy'}
+        ? '// trajectory: where I am and where I\'m going'
+        : '// trayectoria: dónde estoy y hacia dónde voy'}
     </h2>
 
     <div class="grid">

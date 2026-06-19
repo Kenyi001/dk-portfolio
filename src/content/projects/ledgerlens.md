@@ -13,7 +13,6 @@ repoUrl: "https://github.com/Kenyi001/ledgerlens"
 demoUrl: "https://ledgerlens-backend.vercel.app"
 date: "2026"
 featured: true
-hashId: "c91d...5e30"
 ---
 
 ## Problema

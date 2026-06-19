@@ -11,7 +11,6 @@ role_en: "Full Stack Developer & AI Architect"
 stack: ["WhatsApp Business API", "Node.js", "TypeScript", "OpenAI", "Pinecone", "RAG", "Redis"]
 date: "2025"
 featured: false
-hashId: "w4r8...5n6d"
 metrics: "< 2s tiempo de respuesta con contexto de 50+ documentos"
 metrics_en: "< 2s response time with context from 50+ documents"
 ---

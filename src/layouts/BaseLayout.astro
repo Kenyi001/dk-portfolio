@@ -126,6 +126,24 @@ const {
     );
     console.log('%c> inspeccionando el código. hola.\n→ daxkenyi001@gmail.com', 'color:#4B8A6E;font-family:monospace;');
 
+    /* ─── scroll reveal ─── */
+    (function () {
+      const els = document.querySelectorAll('[data-reveal]');
+      if (!els.length) return;
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in-view');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
+      );
+      els.forEach(el => io.observe(el));
+    })();
+
     /* ─── scroll progress bar ─── */
     (function () {
       const bar = document.getElementById('scroll-bar');

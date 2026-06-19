@@ -20,7 +20,6 @@ const projects = defineCollection({
     demoUrl: z.string().url().optional(),
     date: z.string(),
     featured: z.boolean().default(false),
-    hashId: z.string(),
     metrics: z.string().optional(),
     metrics_en: z.string().optional(),
     image: z.string().optional(),
