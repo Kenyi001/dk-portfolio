@@ -12,6 +12,7 @@ role_en: "Full Stack Developer"
 stack: ["React 18", "Node.js", "Express", "PostgreSQL", "Vite", "Tailwind CSS v4", "JWT", "Recharts", "Neon", "Vercel"]
 repoUrl: "https://github.com/Kenyi001/erp-barber"
 demoUrl: "https://erp-barber.vercel.app"
+image: "/projects/barber-erp-login.png"
 date: "2025"
 featured: true
 metrics: "81 tests de integración · 6 módulos · 3 roles · deploy en Vercel"

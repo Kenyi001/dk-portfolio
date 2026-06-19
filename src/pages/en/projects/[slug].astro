@@ -83,10 +83,22 @@ const typeLabels = {
         </div>
       </header>
       
+      {entry.data.image && (
+        <div class="project-screenshot">
+          <img
+            src={entry.data.image}
+            alt={`Screenshot of ${entry.data.title_en || entry.data.title}`}
+            class="screenshot-img"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
+
       <article class="content-body">
         <Content />
       </article>
-      
+
       <div class="back-link-wrapper">
         <a href="/en/projects" class="back-link">← Back to Projects</a>
       </div>
@@ -254,6 +266,25 @@ const typeLabels = {
   .link-btn.primary:hover {
     background-color: transparent;
     color: var(--accent);
+  }
+
+  .project-screenshot {
+    margin-bottom: 3rem;
+    border: 1px solid var(--border-mid);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .screenshot-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+
+  .screenshot-img:hover {
+    opacity: 1;
   }
 
   .content-body {
