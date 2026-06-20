@@ -1,25 +1,26 @@
 ---
-title: "WhatsApp RAG Bot"
+title: "WhatsApp Automation"
+title_en: "WhatsApp Automation"
 event: "Proyecto Personal"
 eventType: "personal"
-description: "Bot de WhatsApp con RAG que responde preguntas sobre documentación técnica. Integra Base de Conocimiento propia con búsqueda semántica."
-description_en: "WhatsApp bot with RAG that answers questions about technical documentation. Integrates a custom Knowledge Base with semantic search."
-longDescription: "Chatbot empresarial sobre WhatsApp Business API que utiliza Retrieval-Augmented Generation para responder preguntas sobre documentación interna. Los documentos se indexan con embeddings, se almacenan en vector DB y se recuperan semánticamente en cada consulta."
-longDescription_en: "Enterprise chatbot on WhatsApp Business API using Retrieval-Augmented Generation to answer questions about internal documentation. Documents are indexed with embeddings, stored in a vector DB, and semantically retrieved on each query."
-role: "Desarrollador Full Stack & Arquitecto IA"
-role_en: "Full Stack Developer & AI Architect"
-stack: ["WhatsApp Business API", "Node.js", "TypeScript", "OpenAI", "Pinecone", "RAG", "Redis"]
+description: "Herramienta Python para envío masivo de mensajes a lista de proveedores vía WhatsApp sin API oficial de Meta. Automatiza notificaciones y promociones."
+description_en: "Python tool for bulk WhatsApp messaging to a supplier list without Meta's official API. Automates notifications and promotions."
+longDescription: "Script Python que automatiza el envío de mensajes de WhatsApp a una lista de proveedores para notificaciones y promociones. No usa la API oficial de Meta — funciona vía automatización web de WhatsApp. Permite enviar mensajes personalizados en masa desde una lista de contactos."
+longDescription_en: "Python script that automates WhatsApp message sending to a supplier list for notifications and promotions. Does not use Meta's official API — works via WhatsApp web automation. Enables bulk personalized messaging from a contact list."
+role: "Desarrollador — Automatización Python"
+role_en: "Python Automation Developer"
+stack: ["Python", "WhatsApp Web", "Automatización"]
 date: "2025"
 featured: false
-metrics: "< 2s tiempo de respuesta con contexto de 50+ documentos"
-metrics_en: "< 2s response time with context from 50+ documents"
 ---
 
-## Arquitectura RAG
-- **Ingesta**: documentos PDF/DOCX → chunks → embeddings → Pinecone
-- **Query**: mensaje usuario → embedding → similarity search → contexto
-- **Generación**: contexto + query → GPT-4 → respuesta natural
-- **Caché**: Redis para queries frecuentes → latencia 100ms
+## Qué hace
+Automatiza el envío de mensajes de WhatsApp a una lista de destinatarios (proveedores) sin necesitar la API oficial de Meta ni una cuenta Business verificada.
 
-## Integración WhatsApp
-Webhook Node.js que recibe mensajes, los procesa y responde vía WhatsApp Business API con soporte para texto, listas y botones interactivos.
+## Flujo
+1. Lista de contactos en CSV o texto plano
+2. Plantilla de mensaje con campos personalizables (nombre, monto, fecha, etc.)
+3. Script Python que envía los mensajes de forma secuencial con intervalos para no levantar bloqueos
+
+## Caso de uso
+Notificaciones y promociones masivas a proveedores: recordatorios de pago, anuncios de catálogo, confirmaciones de pedido.

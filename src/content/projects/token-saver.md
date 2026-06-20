@@ -2,31 +2,34 @@
 title: "Token Saver System"
 event: "Hola S.R.L. · BCP de Bolivia"
 eventType: "professional"
-description: "Sistema RAG + compresión de prompts + Redis cache para reducir costos LLM en producción bancaria."
-description_en: "RAG + prompt compression + Redis cache system to reduce LLM costs in banking production."
-longDescription: "Diseñé e implementé un sistema que combina RAG, algoritmos de compresión de prompts y Redis para reducir los costos de API y la latencia de LLMs en un entorno bancario de producción real."
-longDescription_en: "I designed and implemented a system combining RAG, prompt compression algorithms, and Redis to significantly reduce API costs and LLM latency in a real banking production environment."
-role: "Backend Lead & Arquitecto"
-role_en: "Backend Lead & Architect"
-stack: ["RAG", "Redis", "Node.js", "TypeScript", "LLM", "Prompt Engineering"]
+description: "Chat widget embebible con crawler + RAG para consultar información de páginas web sin consumir tokens innecesarios. Plugin inyectable via script en cualquier página."
+description_en: "Embeddable chat widget with web crawler + RAG to query page content without unnecessary token usage. Script-injectable plugin for any web page."
+longDescription: "Plugin de chat desarrollado en C# .NET que se inyecta en cualquier página web mediante un script tag. Al activarse, hace crawling del contenido visible de la página, aplica RAG sobre esa información y permite al usuario consultar el contenido mediante chat sin enviar contexto redundante al LLM. Diseñado para reducir el consumo de tokens en flujos de consulta sobre contenido web del banco."
+longDescription_en: "Chat plugin built in C# .NET that injects into any web page via a script tag. When activated, it crawls the visible page content, applies RAG on that information, and lets users query it via chat without sending redundant context to the LLM. Designed to reduce token consumption in bank web content query flows."
+role: "Backend Developer — Plugin IA"
+role_en: "Backend Developer — AI Plugin"
+stack: ["C# .NET", "ASP.NET Core", "RAG", "Web Crawler", "LLM"]
 date: "2025-2026"
 featured: true
-metrics: "✓ En producción en BCP Bolivia · ↓ costos API · cache hits en milisegundos"
-metrics_en: "✓ In production at BCP Bolivia · ↓ API costs · cache hits in milliseconds"
+metrics: "✓ En producción en BCP Bolivia · consumo de tokens optimizado via crawler + RAG"
+metrics_en: "✓ In production at BCP Bolivia · token consumption optimized via crawler + RAG"
 ---
 
-## Problema
-El principal obstáculo para adoptar LLMs en producción empresarial: los costos recurrentes de API por tokens y la latencia de respuesta en sistemas críticos. Cada consulta de los canales bancarios arrastraba contexto redundante que inflaba la factura sin mejorar las respuestas.
+## Qué es
+Un widget de chat que se agrega a cualquier página web con una sola línea:
+```html
+<script src="token-saver.js"></script>
+```
+El widget aparece como un botón flotante. Al abrirlo, el sistema ya tiene el contenido de la página procesado y listo para responder.
 
-## Solución
-Capa middleware entre los canales bancarios y los proveedores de LLM, con tres mecanismos combinados:
+## Flujo
+1. **Inyección**: el script se carga en la página del banco
+2. **Crawling**: extrae el contenido visible de la página (textos, secciones, datos)
+3. **RAG**: indexa el contenido y recupera solo los fragmentos relevantes a cada pregunta
+4. **Chat**: el usuario pregunta → el LLM recibe solo el contexto relevante → respuesta precisa sin tokens de más
 
-- **RAG** para inyectar solo el contexto relevante a cada consulta, en lugar de contexto completo
-- **Compresión semántica de prompts** con un algoritmo heurístico que recorta entrada redundante sin degradar el rendimiento del modelo
-- **Caché Redis** que sirve las consultas frecuentes sin tocar el LLM — los cache hits responden en milisegundos
+## Por qué importa
+Sin este sistema, cada consulta enviaba el contexto completo de la página al LLM — caro e ineficiente. Con crawler + RAG, el modelo recibe solo lo que necesita para responder.
 
 ## Mi rol
-Backend Lead & Arquitecto: diseño de la arquitectura del middleware y su implementación en Node.js/TypeScript.
-
-## Resultado
-**En producción en el Banco de Crédito de Bolivia (BCP).** Reducción significativa de costos de API y de latencia en los flujos frecuentes. Aprendizaje clave: comprimir prompts sin degradar respuestas no es un problema de algoritmos solamente — exige evaluación continua contra casos reales del banco.
+Diseño e implementación del plugin completo en C# .NET: el crawler, la capa de RAG y la interfaz de chat embebible.
