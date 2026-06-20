@@ -9,11 +9,9 @@ longDescription_en: "Enaid allows users to manage their identity and professiona
 role: "Smart Contract Builder"
 role_en: "Smart Contract Builder"
 stack: ["Cardano", "Plutus", "Haskell", "TypeScript", "React"]
-award: "Cardano Latam Track Winner"
 repoUrl: "https://github.com/Odig0/Enaid"
 date: "2024"
 featured: true
-metrics: "1er Lugar en Cardano Track"
 ---
 
 ## Problema
@@ -26,4 +24,4 @@ Sistema de identidad soberana (SSI) sobre Cardano: el usuario posee sus credenci
 Smart contracts en Plutus para la emisión de credenciales y la lógica del score de reputación, construido en equipo de 3 durante el hackathon.
 
 ## Resultado
-**1er lugar en el track de Cardano — DoraHacks Latam 2024.** Primer contacto serio con Plutus y el modelo eUTXO viniendo del ecosistema Node.js: obliga a pensar la validación de contratos de forma radicalmente distinta a Solidity.
+Construido en equipo de 3 durante el DoraHacks Latam 2024. Primer contacto serio con Plutus y el modelo eUTXO viniendo del ecosistema Node.js: obliga a pensar la validación de contratos de forma radicalmente distinta a Solidity.

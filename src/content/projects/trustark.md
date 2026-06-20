@@ -9,8 +9,7 @@ longDescription_en: "TrustArk solves the problem of unverifiable educational cre
 role: "Builder & Backend Lead"
 role_en: "Builder & Backend Lead"
 stack: ["Stellar", "NFT", "Smart Contracts", "React", "Node.js"]
-award: "DoraHacks Stellar Latam"
-date: "2024"
+date: "2025"
 featured: true
 ---
 
@@ -24,4 +23,4 @@ Plataforma de aprendizaje donde cada certificado es un NFT en la red Stellar, em
 Backend Lead: API de emisión de certificados, integración con la red Stellar y lógica de verificación on-chain.
 
 ## Resultado
-**Premiado en DoraHacks Stellar Latam 2024.** Stellar resultó ideal para emisión masiva de assets: costos de transacción casi nulos comparados con EVM, a cambio de un modelo de contratos más restringido.
+Construido para el DoraHacks Stellar Latam 2025. Stellar resultó ideal para emisión masiva de assets: costos de transacción casi nulos comparados con EVM, a cambio de un modelo de contratos más restringido.
