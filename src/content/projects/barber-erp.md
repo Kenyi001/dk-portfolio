@@ -18,16 +18,14 @@ metrics: "81 tests de integración · 6 módulos · 3 roles · deploy en Vercel"
 metrics_en: "81 integration tests · 6 modules · 3 roles · deployed on Vercel"
 ---
 
-## Módulos
-- **POS** — registro de venta en 3 clics: barbero → servicios/productos → confirmación encargado
-- **Caja chica** — apertura de sesión, ingresos/egresos con comprobante, arqueo, historial inmutable
-- **Inventario** — alertas de stock mínimo, descuento automático al confirmar ventas
-- **Comisiones** — % configurable por barbero, vista personal `/mi-día`, gráficas por período
-- **Reportes** — ventas por período, ranking de barberos, productos más vendidos, export CSV
-- **Booking público** — `/book` sin login, Google OAuth, protección de solapamiento con `EXCLUDE` en PostgreSQL
+## Problema
+Una barbería chica funciona a punta de papel y WhatsApp: las ventas no quedan registradas, la caja se cuadra de memoria, las citas se agendan por teléfono y nadie sabe con certeza qué barbero genera más ni cuánto se le debe en comisiones. Sin datos, cada decisión es un cálculo a ojo.
 
-## Decisiones técnicas
-- JWT sin sesiones — validación de rol en cada endpoint, sin estado en servidor
-- Historial de caja inmutable — ningún movimiento se puede borrar ni editar (auditoría)
-- Tests contra DB real — no mocks, para evitar divergencia entre test y producción
-- Express exportado como serverless function — mismo código local y Vercel
+## Solución
+Un sistema operativo completo para el día a día de la barbería. El barbero registra una venta en tres clics y un encargado la confirma antes de que afecte la caja; la caja chica lleva un historial inmutable que se arquea al cierre; el inventario descuenta stock solo y avisa cuando algo baja del mínimo; cada barbero ve sus propios cortes y su comisión estimada; y los clientes reservan desde una página pública sin necesidad de cuenta, con la disponibilidad protegida a nivel de base de datos para que no se crucen dos citas en el mismo horario.
+
+## Mi rol
+Full stack, de punta a punta: el frontend en React, la API en Node.js + Express y el modelo de datos en PostgreSQL. Tomé las decisiones de arquitectura que sostienen el sistema —autenticación JWT sin estado con validación de rol en cada endpoint, un historial de caja que ningún rol puede borrar ni editar por auditoría, y el mismo código de Express corriendo local y como función serverless en Vercel.
+
+## Resultado
+Desplegado en Vercel sobre PostgreSQL serverless, con 81 tests de integración que corren contra una base de datos real en vez de mocks, para que lo que pasa en las pruebas sea lo que pasa en producción. El aprendizaje: en un negocio real, la confianza en los números importa más que las features —por eso la caja es inmutable y los tests no mienten.
