@@ -17,29 +17,13 @@ metrics_en: "3-cloud evaluation (AWS · Azure · GCP) · precision comparison ta
 ---
 
 ## Problema
-El flujo de prueba de vida del banco fallaba con frecuencia: los documentos de identidad llegaban con marcas de agua corporativas y baja resolución. El motor de face matching devolvía "no match" aunque la persona era la misma, generando rechazos incorrectos en solicitudes bancarias reales.
+En el flujo de solicitud de procesos del banco, el cliente sube una foto de su documento para validar su identidad por prueba de vida. Pero las imágenes llegaban con marcas de agua corporativas y baja resolución, y el motor de face matching devolvía "no match" aunque la persona frente a la cámara era la misma del documento. Eso se traducía en rechazos incorrectos sobre solicitudes reales.
 
-## Mi aporte
+## Solución
+Una capa de mejora de imagen que limpia la foto antes de compararla: con IA de visión de GCP se remueven las marcas de agua y se recupera nitidez, de modo que el comparador de rostros trabaje sobre una imagen utilizable. En paralelo, contenedores con iDlive validan que el documento subido no esté falsificado ni alterado digitalmente. Y para extraer los datos del documento, evalué tres servicios cloud de OCR buscando el más preciso para este caso bancario concreto.
 
-### Mejora de imagen
-Pipeline en Python + OpenCV + GCP Vision AI para limpiar imágenes antes del matching:
-- Detección y remoción de watermarks
-- Mejora de contraste y resolución
-- Normalización antes de pasar al comparador de rostros
+## Mi rol
+Backend en el equipo de IA. Construí el pipeline de mejora de imagen, integré iDlive sobre Podman para la verificación de autenticidad, y levanté la comparativa de OCR: en AWS consumí el servicio ya existente, mientras que en Azure y GCP creé y configuré los servicios desde cero para medirlos en igualdad de condiciones.
 
-### Verificación de autenticidad
-Integración de contenedores Podman con iDlive Document para validar que los documentos subidos no fueran falsificados o alterados digitalmente.
-
-### Evaluación comparativa de OCR
-Evaluación de tres proveedores cloud para extraer texto de documentos bancarios:
-
-| Cloud | Mi rol | Servicios usados |
-|-------|--------|-----------------|
-| AWS | Llamé al servicio existente | Rekognition / Textract |
-| Azure | Creé y configuré los servicios | Cognitive Services / Form Recognizer |
-| GCP | Creé y configuré los servicios | Vision AI / Document AI |
-
-Resultado: tabla comparativa de precisión, velocidad y costo para el caso de uso específico del banco.
-
-## Estado
-Entregado en fase de testing. La tarea asignada fue completada — la decisión de continuar o desplegar a producción quedó en manos del equipo del banco.
+## Resultado
+Entregué una tabla comparativa de precisión, velocidad y costo entre AWS, Azure y GCP para el caso de uso del banco. La tarea asignada quedó cerrada por mi parte en fase de testing; la decisión de llevarlo a producción quedó en manos del banco. El aprendizaje clave: el cuello de botella del face matching no era el modelo, sino la calidad de la imagen de entrada.

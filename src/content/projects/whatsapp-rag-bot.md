@@ -14,13 +14,14 @@ date: "2025"
 featured: false
 ---
 
-## Qué hace
-Automatiza el envío de mensajes de WhatsApp a una lista de destinatarios (proveedores) sin necesitar la API oficial de Meta ni una cuenta Business verificada.
+## Problema
+Avisar a una lista de proveedores por WhatsApp —promociones, recordatorios, notificaciones— de forma manual es lento y repetitivo. Y la API oficial de Meta exige una cuenta Business verificada y un proceso de aprobación que no siempre se justifica para un envío interno.
 
-## Flujo
-1. Lista de contactos en CSV o texto plano
-2. Plantilla de mensaje con campos personalizables (nombre, monto, fecha, etc.)
-3. Script Python que envía los mensajes de forma secuencial con intervalos para no levantar bloqueos
+## Solución
+Una herramienta en Python que toma una lista de contactos y una plantilla de mensaje, y envía todo de forma automática y secuencial vía WhatsApp, sin depender de la API oficial de Meta. Cada mensaje se personaliza con los datos del destinatario y los envíos se espacian para operar de forma estable.
 
-## Caso de uso
-Notificaciones y promociones masivas a proveedores: recordatorios de pago, anuncios de catálogo, confirmaciones de pedido.
+## Mi rol
+Desarrollé el script de automatización de punta a punta: lectura de la lista de destinatarios, armado del mensaje personalizado y el envío automatizado.
+
+## Resultado
+Una utilidad práctica para envíos masivos a proveedores —catálogos, recordatorios de pago, confirmaciones— sin montar infraestructura ni pagar por una integración oficial.
