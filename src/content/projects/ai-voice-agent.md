@@ -16,13 +16,13 @@ metrics_en: "<1s response latency in production"
 ---
 
 ## Problema
-Las soluciones tradicionales de IVR son rígidas y frustran a los usuarios con menús pregrabados. Se necesitaba un agente que entendiera lenguaje natural.
+Los sistemas IVR tradicionales responden con menús pregrabados y árboles de opciones rígidos. Un usuario que llama con una pregunta específica tiene que navegar 3-4 niveles antes de hablar con alguien, y si su caso no encaja en ninguna opción, el sistema no sabe qué hacer.
 
-## Solución Técnica
-- **ElevenLabs Conversational AI** para voz natural bidireccional
-- **Pipeline RAG** con embeddings locales para base de conocimiento
-- **Redis** como caché de contexto de conversación
-- **Twilio** como capa de telefonía SIP
+## Solución
+Agente de voz que entiende lenguaje natural: el usuario habla, ElevenLabs convierte la voz a texto, GPT-4 clasifica la intención y consulta una base de conocimiento vía RAG, y ElevenLabs vuelve a sintetizar la respuesta en audio en menos de un segundo. Twilio maneja la capa telefónica SIP. Redis cachea el contexto de la conversación para que el agente recuerde lo que se dijo antes en la misma llamada.
+
+## Mi rol
+Arquitectura y desarrollo completo: pipeline de audio (Twilio → ElevenLabs → GPT-4 → RAG → ElevenLabs), integración de Redis para contexto de sesión y despliegue del servidor Node.js/TypeScript.
 
 ## Resultado
-Agente completamente funcional con capacidad de manejar consultas de soporte técnico de primer nivel sin intervención humana.
+Agente funcional capaz de manejar consultas de soporte de primer nivel sin intervención humana, con latencia de respuesta por debajo de 1 segundo.
