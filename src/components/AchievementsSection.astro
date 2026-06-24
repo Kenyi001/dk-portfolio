@@ -1,0 +1,179 @@
+---
+import { getLangFromUrl } from '../i18n/translations';
+const lang = getLangFromUrl(Astro.url);
+---
+<section class="achievements-section" data-reveal>
+  <div class="container">
+    <h2 class="section-title">{lang === 'en' ? '// achievements' : '// logros'}</h2>
+
+    <div class="achievements-list">
+
+      <div class="ach-item">
+        <div class="ach-year">2026</div>
+        <div class="ach-body">
+          <div class="ach-header">
+            <h3 class="ach-title">DEV3PACK Hackathon</h3>
+            <span class="ach-badge highlight">
+              {lang === 'en' ? '#89 Worldwide · #4 Bolivia' : '#89 Mundial · #4 Bolivia'}
+            </span>
+          </div>
+          <p class="ach-desc">
+            {lang === 'en'
+              ? 'Ranked in the global top 100 out of 3,500+ teams across 40+ countries. Built SuchaTech in 48h — Solana + ElevenLabs voice AI.'
+              : 'Top 100 mundial entre más de 3.500 equipos de 40+ países. Construí SuchaTech en 48h — Solana + IA de voz con ElevenLabs.'}
+          </p>
+        </div>
+      </div>
+
+      <div class="ach-item">
+        <div class="ach-year">2025</div>
+        <div class="ach-body">
+          <div class="ach-header">
+            <h3 class="ach-title">DoraHacks Stellar Latam</h3>
+            <span class="ach-badge">
+              {lang === 'en' ? 'Hackathon Builder' : 'Builder en Hackathon'}
+            </span>
+          </div>
+          <p class="ach-desc">
+            {lang === 'en'
+              ? 'Built TrustArk — on-chain NFT certification for educational credentials on Stellar. Backend Lead.'
+              : 'Construí TrustArk — certificación NFT on-chain para credenciales educativas en Stellar. Backend Lead.'}
+          </p>
+        </div>
+      </div>
+
+      <div class="ach-item">
+        <div class="ach-year">2024</div>
+        <div class="ach-body">
+          <div class="ach-header">
+            <h3 class="ach-title">DoraHacks Cardano Latam</h3>
+            <span class="ach-badge">
+              {lang === 'en' ? 'Hackathon Builder' : 'Builder en Hackathon'}
+            </span>
+          </div>
+          <p class="ach-desc">
+            {lang === 'en'
+              ? 'Built Enaid — sovereign digital identity with on-chain reputation on Cardano. Smart contracts in Plutus/Haskell, team of 3.'
+              : 'Construí Enaid — identidad digital soberana con reputación on-chain en Cardano. Contratos en Plutus/Haskell, equipo de 3.'}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .achievements-section {
+    padding: 4rem 2rem;
+    background-color: var(--bg-primary);
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--hash-color);
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+  }
+
+  .achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-left: 2px solid var(--border-color);
+    margin-left: 1.5rem;
+  }
+
+  .ach-item {
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    padding: 0 0 2.5rem 2rem;
+  }
+
+  .ach-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0.4rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-strong);
+    border: 2px solid var(--bg-primary);
+  }
+
+  .ach-item:first-child::before {
+    background: var(--accent);
+  }
+
+  .ach-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .ach-year {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-secondary);
+    letter-spacing: 0.08em;
+    padding-top: 0.3rem;
+    min-width: 2.5rem;
+  }
+
+  .ach-body {
+    flex: 1;
+  }
+
+  .ach-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  .ach-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--ink-primary);
+    font-weight: 700;
+  }
+
+  .ach-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-secondary);
+    border: 1px solid var(--border-color);
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .ach-badge.highlight {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+
+  .ach-desc {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--ink-secondary);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 768px) {
+    .achievements-section { padding: 3rem 1.5rem; }
+    .achievements-list    { margin-left: 0.75rem; }
+    .ach-item             { gap: 1rem; padding-left: 1.25rem; }
+    .ach-year             { font-size: 0.75rem; }
+  }
+</style>

@@ -41,6 +41,23 @@ const t = useTranslations(lang);
 
     <p class="bio">{t('hero.bio')}</p>
 
+    <div class="hero-stats" aria-label="Highlights">
+      <div class="stat-item">
+        <span class="stat-num">2</span>
+        <span class="stat-label">{t('hero.stats.prod')}</span>
+      </div>
+      <span class="stat-sep" aria-hidden="true">/</span>
+      <div class="stat-item">
+        <span class="stat-num">#89</span>
+        <span class="stat-label">{t('hero.stats.rank')}</span>
+      </div>
+      <span class="stat-sep" aria-hidden="true">/</span>
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <span class="stat-label">{t('hero.stats.hackathons')}</span>
+      </div>
+    </div>
+
     <div class="location-line">Santa Cruz, Bolivia · UTC-4</div>
 
     <div class="cta-group">
@@ -175,6 +192,48 @@ const t = useTranslations(lang);
     max-width: 560px;
     line-height: 1.7;
     margin-bottom: 2rem;
+  }
+
+  /* ── Stats row ── */
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+    padding: 0.9rem 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--ink-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .stat-sep {
+    font-family: var(--font-mono);
+    color: var(--border-strong);
+    font-size: 1.1rem;
+    opacity: 0.4;
+    align-self: center;
   }
 
   .location-line {
