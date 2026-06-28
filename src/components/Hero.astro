@@ -6,23 +6,13 @@ const t = useTranslations(lang);
 ---
 
 <section class="hero">
-  <!-- Fondo con palabras técnicas que hacen parallax al scrollear -->
   <div class="hero-bg" aria-hidden="true">
-    <span class="bg-word" style="left:64%;top:6%;font-size:1.9rem"   data-speed="0.13">RAG</span>
-    <span class="bg-word" style="left:72%;top:68%;font-size:2.4rem"  data-speed="0.19">LLM</span>
-    <span class="bg-word" style="left:72%;top:58%;font-size:1.0rem"  data-speed="0.26">Node.js</span>
-    <span class="bg-word" style="left:38%;top:88%;font-size:0.85rem" data-speed="0.32">TypeScript</span>
-    <span class="bg-word" style="left:80%;top:32%;font-size:1.4rem"  data-speed="0.09">Web3</span>
-    <span class="bg-word" style="left:10%;top:84%;font-size:1.0rem"  data-speed="0.23">Redis</span>
-    <span class="bg-word" style="left:46%;top:8%;font-size:0.85rem"  data-speed="0.16">C# .NET</span>
-    <span class="bg-word" style="left:83%;top:76%;font-size:1.1rem"  data-speed="0.21">OCR</span>
-    <span class="bg-word" style="left:1%;top:44%;font-size:0.85rem"  data-speed="0.29">Cardano</span>
-    <span class="bg-word" style="left:57%;top:50%;font-size:1.0rem"  data-speed="0.11">Docker</span>
-    <span class="bg-word" style="left:25%;top:92%;font-size:1.2rem"  data-speed="0.37">GCP</span>
-    <span class="bg-word" style="left:70%;top:18%;font-size:0.85rem" data-speed="0.17">Stellar</span>
-    <span class="bg-word" style="left:50%;top:73%;font-size:0.9rem"  data-speed="0.14">Python</span>
-    <span class="bg-word" style="left:88%;top:50%;font-size:0.8rem"  data-speed="0.28">Solidity</span>
-    <span class="bg-word" style="left:18%;top:12%;font-size:0.95rem" data-speed="0.20">Webhooks</span>
+    <span class="bg-word" style="left:60%;top:8%;font-size:1.1rem" data-speed="0.12">RAG</span>
+    <span class="bg-word" style="left:76%;top:66%;font-size:1.3rem" data-speed="0.18">OCR</span>
+    <span class="bg-word" style="left:18%;top:80%;font-size:0.9rem" data-speed="0.22">Redis</span>
+    <span class="bg-word" style="left:74%;top:28%;font-size:1rem" data-speed="0.10">C# .NET</span>
+    <span class="bg-word" style="left:42%;top:88%;font-size:0.85rem" data-speed="0.28">TypeScript</span>
+    <span class="bg-word" style="left:9%;top:22%;font-size:0.8rem" data-speed="0.20">Webhooks</span>
   </div>
 
   <DK3D />
@@ -31,10 +21,21 @@ const t = useTranslations(lang);
     <span class="pre-title">{t('hero.pretitle')}</span>
 
     <h1 class="title">
-      <span class="title-name-line">
-        <span class="title-dax">DAX</span> <span class="title-kenji">KENJI</span>
-      </span>
-      <span class="title-surname">Tellez Duran</span>
+      {lang === 'en' ? (
+        <>
+          <span class="title-line">Building AI</span>
+          <span class="title-line">backend systems</span>
+          <span class="title-line">that survive</span>
+          <span class="title-line">production.</span>
+        </>
+      ) : (
+        <>
+          <span class="title-line">Construyendo</span>
+          <span class="title-line">backend con IA</span>
+          <span class="title-line">listo para</span>
+          <span class="title-line">producción.</span>
+        </>
+      )}
     </h1>
 
     <div class="badge-role">{t('hero.badge')}</div>
@@ -46,23 +47,37 @@ const t = useTranslations(lang);
         <span class="stat-num">2</span>
         <span class="stat-label">{t('hero.stats.prod')}</span>
       </div>
-      <span class="stat-sep" aria-hidden="true">/</span>
       <div class="stat-item">
         <span class="stat-num">#89</span>
         <span class="stat-label">{t('hero.stats.rank')}</span>
       </div>
-      <span class="stat-sep" aria-hidden="true">/</span>
       <div class="stat-item">
-        <span class="stat-num">4</span>
+        <span class="stat-num">80%</span>
+        <span class="stat-label">{lang === 'en' ? 'token cost reduction' : 'reducción de tokens'}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">4+</span>
         <span class="stat-label">{t('hero.stats.hackathons')}</span>
       </div>
     </div>
 
-    <div class="location-line">Santa Cruz, Bolivia · UTC-4</div>
+    <div class="signal-row">
+      <span>Node.js</span>
+      <span>TypeScript</span>
+      <span>C# .NET 8</span>
+      <span>GCP / Azure / AWS</span>
+    </div>
 
     <div class="cta-group">
       <a href={lang === 'es' ? '/contact' : '/en/contact'} class="cta-button primary">{t('hero.cta.connect')}</a>
       <a href={lang === 'es' ? '/projects' : '/en/projects'} class="cta-button secondary">{t('hero.cta.projects')}</a>
+    </div>
+
+    <div class="profile-links" aria-label="Professional links">
+      <a href="mailto:daxkenyi001@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/kenyi001/?locale=es" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/Kenyi001" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="/cv/CV_Dax_Kenji_AI_Backend_ES.pdf">CV</a>
     </div>
   </div>
 
@@ -94,11 +109,11 @@ const t = useTranslations(lang);
 <style>
   .hero {
     position: relative;
-    min-height: 100vh;
-    min-height: 100svh;
+    min-height: calc(100vh - 76px);
+    min-height: calc(100svh - 76px);
     max-width: 1200px;
     margin: 0 auto;
-    padding: 7rem 2rem 5rem;
+    padding: 7.5rem 2rem 5.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -118,7 +133,7 @@ const t = useTranslations(lang);
     position: absolute;
     font-family: var(--font-mono);
     color: var(--hash-color);
-    opacity: 0.05;
+    opacity: 0.075;
     white-space: nowrap;
     font-weight: 500;
     will-change: transform;
@@ -133,91 +148,83 @@ const t = useTranslations(lang);
     align-items: flex-start;
     position: relative;
     z-index: 1;
-    max-width: 560px;
+    max-width: 710px;
   }
 
   .pre-title {
     font-family: var(--font-mono);
-    color: var(--hash-color);
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    letter-spacing: 0.05em;
+    color: var(--accent-2);
+    font-size: 0.82rem;
+    margin-bottom: 1.4rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   .title {
     font-family: var(--font-display);
-    font-size: clamp(3.5rem, 9vw, 6.5rem);
-    line-height: 0.95;
-    margin-bottom: 2rem;
-    font-weight: 900;
-    letter-spacing: -0.03em;
+    font-size: 4.9rem;
+    line-height: 0.94;
+    margin-bottom: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    max-width: 920px;
   }
 
-  .title-name-line {
+  .title-line {
     display: block;
-  }
-
-  .title-dax   { color: var(--ink-primary); }
-  .title-kenji { color: var(--accent); }
-
-  .title-surname {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: clamp(0.85rem, 1.6vw, 1.1rem);
-    font-weight: 400;
-    color: var(--ink-secondary);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-top: 0.75rem;
-    opacity: 0.65;
   }
 
   .badge-role {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     color: var(--accent);
-    background: var(--accent-glow);
-    border: 1px solid var(--accent);
-    padding: 0.4rem 1rem;
-    border-radius: 4px;
-    margin-bottom: 2.5rem;
-    letter-spacing: 0.08em;
-    font-weight: bold;
+    background: rgba(236, 115, 87, 0.10);
+    border: 1px solid rgba(236, 115, 87, 0.28);
+    padding: 0.48rem 0.8rem;
+    border-radius: 999px;
+    margin-bottom: 1.7rem;
+    letter-spacing: 0.02em;
+    font-weight: 500;
+    line-height: 1.35;
+    max-width: 100%;
   }
 
   .bio {
     font-family: var(--font-body);
-    font-size: 1.05rem;
+    font-size: 1.2rem;
     color: var(--ink-secondary);
-    max-width: 560px;
-    line-height: 1.7;
-    margin-bottom: 2rem;
+    max-width: 690px;
+    line-height: 1.75;
+    margin-bottom: 2.2rem;
   }
 
-  /* ── Stats row ── */
   .hero-stats {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 1.75rem;
-    padding: 0.9rem 0;
-    border-top: 1px solid var(--border-subtle);
-    border-bottom: 1px solid var(--border-subtle);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(120px, 1fr));
+    gap: 0.9rem;
+    margin-bottom: 1.4rem;
+    width: min(100%, 760px);
   }
 
   .stat-item {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.35rem;
+    min-height: 104px;
+    padding: 1.1rem;
+    background: rgba(245, 241, 234, 0.045);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    justify-content: space-between;
   }
 
   .stat-num {
     font-family: var(--font-display);
-    font-size: 1.6rem;
-    font-weight: 900;
+    font-size: 1.75rem;
+    font-weight: 700;
     color: var(--accent);
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 
   .stat-label {
@@ -225,58 +232,80 @@ const t = useTranslations(lang);
     font-size: 0.68rem;
     color: var(--ink-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
+    line-height: 1.35;
   }
 
-  .stat-sep {
-    font-family: var(--font-mono);
-    color: var(--border-strong);
-    font-size: 1.1rem;
-    opacity: 0.4;
-    align-self: center;
+  .signal-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin-bottom: 2.4rem;
   }
 
-  .location-line {
+  .signal-row span {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.78rem;
     color: var(--ink-secondary);
-    margin-bottom: 3rem;
-    letter-spacing: 0.03em;
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    padding: 0.38rem 0.7rem;
+    background: rgba(8, 10, 15, 0.42);
   }
 
   .cta-group {
     display: flex;
-    gap: 1.5rem;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.4rem;
   }
 
   .cta-button {
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    padding: 0.8rem 1.6rem;
-    border-radius: 4px;
-    font-weight: bold;
-    letter-spacing: 0.05em;
+    font-family: var(--font-body);
+    font-size: 0.98rem;
+    padding: 0.82rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    letter-spacing: 0;
     transition: all 0.3s ease;
     text-decoration: none;
   }
 
   .cta-button.primary {
     background-color: var(--accent);
-    color: var(--bg-primary);
-    border: 1px solid var(--accent);
+    color: #130B08;
+    border: 1px solid rgba(236, 115, 87, 0.84);
+    box-shadow: 0 18px 50px rgba(236, 115, 87, 0.16);
   }
   .cta-button.primary:hover {
-    background-color: transparent;
-    color: var(--accent);
+    transform: translateY(-2px);
   }
   .cta-button.secondary {
-    background-color: transparent;
+    background-color: rgba(245, 241, 234, 0.045);
     color: var(--ink-primary);
-    border: 1px solid var(--border-strong);
+    border: 1px solid var(--border-mid);
   }
   .cta-button.secondary:hover {
     border-color: var(--accent);
     color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .profile-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+  }
+
+  .profile-links a {
+    color: var(--ink-muted);
+    text-decoration: none;
+  }
+
+  .profile-links a:hover {
+    color: var(--accent-2);
   }
 
   /* ── Línea divisoria base del hero ── */
@@ -289,7 +318,7 @@ const t = useTranslations(lang);
     background: linear-gradient(
       to right,
       transparent 0%,
-      var(--border-strong) 30%,
+      var(--border-strong) 24%,
       var(--border-subtle) 70%,
       transparent 100%
     );
@@ -298,7 +327,7 @@ const t = useTranslations(lang);
   /* ── 2K y pantallas anchas ── */
   @media (min-width: 1600px) {
     .title {
-      font-size: 8rem;
+      font-size: 5.6rem;
     }
     .title-surname {
       font-size: 1.2rem;
@@ -311,18 +340,43 @@ const t = useTranslations(lang);
   /* ── Mobile ── */
   @media (max-width: 768px) {
     .hero {
-      padding: 5rem 1.5rem 4rem;
+      padding: 4.5rem 1.5rem 4rem;
       align-items: flex-start;
+      width: 100%;
+      max-width: 100vw;
     }
     .hero-content {
+      width: 100%;
+      max-width: min(calc(100vw - 3rem), 342px);
+    }
+    .title {
+      font-size: 2.35rem;
+      line-height: 0.98;
       max-width: 100%;
     }
+    .badge-role {
+      white-space: normal;
+      width: 100%;
+    }
+    .bio,
+    .signal-row,
+    .cta-group,
+    .profile-links {
+      max-width: 100%;
+    }
+    .hero-stats {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .stat-item {
+      min-height: 96px;
+      padding: 0.95rem;
+    }
     .cta-group {
-      flex-direction: column;
       width: 100%;
     }
     .cta-button {
       text-align: center;
+      flex: 1 1 170px;
     }
     .bg-word {
       opacity: 0.025;
@@ -332,4 +386,5 @@ const t = useTranslations(lang);
       bottom: 1.5rem;
     }
   }
+
 </style>

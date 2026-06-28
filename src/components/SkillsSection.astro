@@ -4,7 +4,13 @@ const lang = getLangFromUrl(Astro.url);
 ---
 <section class="skills-section" data-reveal>
   <div class="container">
-    <h2 class="section-title">// stack</h2>
+    <span class="eyebrow">{lang === 'en' ? 'Core stack' : 'Stack principal'}</span>
+    <h2 class="section-title">{lang === 'en' ? 'Backend depth with applied AI judgment' : 'Profundidad backend con criterio de IA aplicada'}</h2>
+    <p class="section-subtitle">
+      {lang === 'en'
+        ? 'The tools I use to move from prototype to maintainable production systems.'
+        : 'Herramientas que uso para pasar de prototipo a sistemas mantenibles en producción.'}
+    </p>
     
     <div class="skills-grid">
       <!-- Backend -->
@@ -56,10 +62,10 @@ const lang = getLangFromUrl(Astro.url);
 
 <style>
   .skills-section {
-    padding: 6rem 2rem;
+    padding: 6.5rem 2rem;
     background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
   .container {
@@ -68,39 +74,49 @@ const lang = getLangFromUrl(Astro.url);
   }
 
   .section-title {
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    color: var(--hash-color);
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--ink-primary);
+    margin: 0.75rem 0 1rem;
+    font-weight: 700;
+    line-height: 1.05;
+    max-width: 720px;
+  }
+
+  .section-subtitle {
+    color: var(--ink-secondary);
     margin-bottom: 3rem;
-    font-weight: 500;
+    max-width: 650px;
+    line-height: 1.7;
   }
 
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
+    gap: 1rem;
   }
 
   .skill-category {
-    background: var(--bg-primary);
-    padding: 2.5rem;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
+    background: rgba(8, 10, 15, 0.42);
+    padding: 1.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
 
   .skill-category:hover {
     transform: translateY(-4px);
     border-color: var(--border-accent);
+    box-shadow: var(--shadow-soft);
   }
 
   .skill-category h3 {
     font-family: var(--font-mono);
     color: var(--accent);
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 1rem;
+    margin-bottom: 1.3rem;
+    text-transform: none;
+    letter-spacing: 0;
   }
 
   .skill-list {
@@ -115,9 +131,9 @@ const lang = getLangFromUrl(Astro.url);
   .skill-list li {
     font-family: var(--font-body);
     color: var(--ink-secondary);
-    font-size: 1.05rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border-color);
+    font-size: 0.98rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid var(--border-subtle);
     position: relative;
     padding-left: 1.2rem;
   }
@@ -147,6 +163,10 @@ const lang = getLangFromUrl(Astro.url);
     .skills-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2.15rem;
     }
   }
 </style>

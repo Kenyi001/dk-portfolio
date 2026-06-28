@@ -16,10 +16,10 @@ const lang = getLangFromUrl(Astro.url);
 
 // Filter button labels by language
 const filterLabels = {
-  all:          lang === 'en' ? '[ ALL ]'          : '[ TODOS ]',
-  ai:           '[ AI SYSTEMS ]',
-  web3:         '[ WEB3 ]',
-  profesional:  lang === 'en' ? '[ PROFESSIONAL ]' : '[ PROFESIONAL ]',
+  all:          lang === 'en' ? 'All work' : 'Todo',
+  ai:           lang === 'en' ? 'AI systems' : 'Sistemas IA',
+  web3:         'Web3',
+  profesional:  lang === 'en' ? 'Production' : 'Producción',
 };
 
 // Sort by date descending (more recent first)
@@ -28,7 +28,15 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 <section id="projects" class="projects-section" data-reveal>
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">{lang === 'en' ? '// projects' : '// proyectos'}</h2>
+      <div>
+        <span class="eyebrow">{lang === 'en' ? 'Selected proof' : 'Evidencia seleccionada'}</span>
+        <h2 class="section-title">{lang === 'en' ? 'Production-minded AI and backend work' : 'IA y backend con mentalidad de producción'}</h2>
+        <p class="section-subtitle">
+          {lang === 'en'
+            ? 'Curated projects with clear systems thinking: banking AI, RAG, OCR, on-chain analytics and shipped web products.'
+            : 'Proyectos curados con pensamiento de sistemas: IA bancaria, RAG, OCR, analítica on-chain y productos web desplegados.'}
+        </p>
+      </div>
       
       <!-- Filter controls -->
       <div class="filters">
@@ -91,14 +99,14 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
             <span class="badge blinking">● {lang === 'en' ? 'IN PROGRESS' : 'EN CONSTRUCCIÓN'}</span>
             <span class="hash">// pending_deploy</span>
           </div>
-          <h3 class="build-title">// current_build</h3>
+          <h3 class="build-title">{lang === 'en' ? 'Current focus' : 'Foco actual'}</h3>
           <p class="build-desc">
             {lang === 'en'
               ? 'Designing a unified RAG platform for automatic indexing and multi-agent orchestration.'
               : 'Diseñando una plataforma RAG unificada para indexación automática y orquestación multi-agente.'}
           </p>
           <div class="build-counter">
-            <span class="days-label">{lang === 'en' ? 'STATUS →' : 'ESTADO →'}</span>
+            <span class="days-label">{lang === 'en' ? 'STATUS' : 'ESTADO'}</span>
             <span class="days-value">{lang === 'en' ? 'in progress' : 'en progreso'}</span>
           </div>
         </div>
@@ -147,55 +155,73 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
 <style>
   .projects-section {
-    padding: 6rem 2rem;
+    padding: 6.5rem 0;
     background-color: var(--bg-primary);
   }
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 2rem;
   }
 
   .section-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3.5rem;
+    align-items: end;
+    margin-bottom: 3rem;
     flex-wrap: wrap;
     gap: 1.5rem;
   }
 
   .section-title {
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    color: var(--hash-color);
-    font-weight: 500;
+    font-family: var(--font-display);
+    font-size: 3.1rem;
+    color: var(--ink-primary);
+    font-weight: 700;
+    line-height: 1.02;
+    max-width: 760px;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-subtitle {
+    color: var(--ink-secondary);
+    max-width: 700px;
+    font-size: 1.03rem;
+    line-height: 1.7;
   }
 
   .filters {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 0.35rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    background: rgba(245, 241, 234, 0.04);
   }
 
   .filter-btn {
-    background: none;
+    background: transparent;
     border: none;
     font-family: var(--font-mono);
     color: var(--ink-secondary);
-    font-size: 0.95rem;
-    cursor: crosshair;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
     transition: all 0.2s ease;
   }
 
   .filter-btn:hover, .filter-btn.active {
-    color: var(--accent);
+    color: var(--ink-primary);
+    background: rgba(236, 115, 87, 0.12);
   }
 
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    gap: 2.5rem;
+    gap: 1.2rem;
   }
 
   .grid-item {
@@ -206,10 +232,10 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
   /* Dash build card styling */
   .final-build-card {
-    border: 1px dashed var(--border-strong);
-    background-color: transparent;
-    border-radius: 4px;
-    padding: 2.5rem 2rem;
+    border: 1px solid rgba(125, 211, 176, 0.22);
+    background-color: rgba(125, 211, 176, 0.06);
+    border-radius: 8px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -232,10 +258,10 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
   .badge {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--hash-color);
+    color: var(--accent-2);
     background-color: rgba(75, 138, 110, 0.1);
     padding: 0.2rem 0.5rem;
-    border-radius: 2px;
+    border-radius: 999px;
     font-weight: bold;
     letter-spacing: 0.05em;
   }
@@ -257,7 +283,7 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
   .build-title {
     font-family: var(--font-mono);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--ink-primary);
     margin-bottom: 1.5rem;
   }
@@ -273,7 +299,7 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
   .build-counter {
     margin-top: auto;
-    border-top: 1px dashed var(--border-mid);
+    border-top: 1px solid var(--border-subtle);
     padding-top: 1rem;
     font-family: var(--font-mono);
     font-size: 0.85rem;
@@ -285,7 +311,7 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
   }
 
   .days-value {
-    color: var(--accent);
+    color: var(--accent-2);
     font-weight: bold;
   }
 
@@ -314,6 +340,10 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
     .projects-grid {
       grid-template-columns: 1fr;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
     }
   }
 </style>

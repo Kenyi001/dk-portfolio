@@ -11,14 +11,14 @@ import CommunityNodes from '../components/CommunityNodes.astro';
   <main class="about-page">
     <div class="container">
       <header class="about-header">
-        <span class="tagline">// SOBRE MÍ · trayectoria_y_vision</span>
-        <h1 class="page-title">// about_me</h1>
+        <span class="tagline">Sobre mí</span>
+        <h1 class="page-title">AI Backend Engineer con base en producción real.</h1>
         <div class="bio-extended">
           <p>
-            Ingeniero de sistemas en Santa Cruz, Bolivia. Construyo sistemas de IA y APIs en Node.js, TypeScript y C#, con foco en cosas que corren en producción real y no solo en demos.
+            Ingeniero de sistemas en Santa Cruz, Bolivia. Construyo sistemas backend con IA en Node.js, TypeScript y C#, con foco en productos que funcionan en producción real y son claros para equipos técnicos y de negocio.
           </p>
           <p>
-            Mi trabajo más reciente: middleware LLM para el Banco de Crédito de Bolivia, con RAG, compresión de prompts y caché Redis para recortar costos de inferencia en producción. En paralelo construyo Web3: contratos en Cardano y Stellar, y participé en la DEV3PACK 2026 donde quedé #89 entre más de 3.500 equipos a nivel mundial.
+            Mi trabajo más reciente incluye sistemas RAG, OCR, Redis, Webhooks y evaluación cloud para flujos bancarios. En paralelo construyo proyectos Web3 y productos SaaS, con experiencia en hackathons internacionales y ranking #89 mundial en DEV3PACK.
           </p>
         </div>
       </header>
@@ -32,9 +32,9 @@ import CommunityNodes from '../components/CommunityNodes.astro';
     
     <div class="contact-cta">
       <div class="container text-center">
-        <h2>¿Tenés un proyecto?</h2>
-        <p>Si necesitás backend sólido o sistemas de IA que funcionen en prod, escribime.</p>
-        <a href="/contact" class="cta-link">→ IR_A_CONTACTO</a>
+        <h2>¿Buscás un perfil AI Backend?</h2>
+        <p>Estoy abierto a equipos remotos internacionales y oportunidades presenciales seleccionadas en Bolivia.</p>
+        <a href="/contact" class="cta-link">Contactar</a>
       </div>
     </div>
   </main>
@@ -62,7 +62,7 @@ import CommunityNodes from '../components/CommunityNodes.astro';
 
   .tagline {
     font-family: var(--font-mono);
-    color: var(--accent);
+    color: var(--accent-2);
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -71,9 +71,10 @@ import CommunityNodes from '../components/CommunityNodes.astro';
   }
 
   .page-title {
-    font-family: var(--font-mono);
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--hash-color);
+    font-family: var(--font-display);
+    font-size: 4.6rem;
+    color: var(--ink-primary);
+    line-height: 1;
     margin-bottom: 3rem;
   }
 
@@ -88,7 +89,7 @@ import CommunityNodes from '../components/CommunityNodes.astro';
   .contact-cta {
     padding: 6rem 2rem;
     background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-subtle);
   }
 
   .contact-cta h2 {
@@ -111,7 +112,7 @@ import CommunityNodes from '../components/CommunityNodes.astro';
     color: var(--bg-primary);
     background-color: var(--accent);
     padding: 0.8rem 1.6rem;
-    border-radius: 4px;
+    border-radius: 999px;
     font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -134,6 +135,10 @@ import CommunityNodes from '../components/CommunityNodes.astro';
     
     .bio-extended p {
       font-size: 1.1rem;
+    }
+
+    .page-title {
+      font-size: 2.9rem;
     }
 
     .contact-cta {

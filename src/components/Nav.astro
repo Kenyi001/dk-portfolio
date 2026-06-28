@@ -34,7 +34,7 @@ const isActive = (path: string) => {
     <div class="nav-right">
       <div class="status">
         <span class="status-dot">●</span>
-        <span class="status-text">{lang === 'es' ? 'DISPONIBLE' : 'AVAILABLE'}</span>
+        <span class="status-text">{lang === 'es' ? 'Abierto a roles' : 'Open to roles'}</span>
       </div>
 
       <a href={switchPath} class="lang-switch" aria-label="Cambiar idioma"
@@ -84,15 +84,15 @@ const isActive = (path: string) => {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(26, 29, 36, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
+    background: rgba(8, 10, 15, 0.78);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border-subtle);
   }
 
   .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1.2rem 2rem;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -106,7 +106,7 @@ const isActive = (path: string) => {
 
   .logo {
     font-family: var(--font-display);
-    font-size: 1.75rem;
+    font-size: 1.45rem;
     font-weight: 900;
     letter-spacing: -0.05em;
     text-decoration: none;
@@ -122,21 +122,21 @@ const isActive = (path: string) => {
 
   .handle {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--ink-secondary);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
   }
 
   .links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.1rem;
   }
 
   .nav-link {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.78rem;
     color: var(--ink-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    text-transform: none;
+    letter-spacing: 0;
     font-weight: 500;
     padding: 0.4rem 0.2rem;
     text-decoration: none;
@@ -176,14 +176,18 @@ const isActive = (path: string) => {
     align-items: center;
     gap: 0.5rem;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.74rem;
     color: var(--log-ok);
-    font-weight: bold;
-    letter-spacing: 0.05em;
+    font-weight: 500;
+    letter-spacing: 0;
+    border: 1px solid rgba(120, 211, 158, 0.22);
+    background: rgba(120, 211, 158, 0.08);
+    border-radius: 999px;
+    padding: 0.32rem 0.6rem;
   }
 
   .status-dot {
-    animation: blink 1.5s infinite;
+    font-size: 0.55rem;
   }
 
   @keyframes blink {
@@ -202,9 +206,9 @@ const isActive = (path: string) => {
     font-size: 0.75rem;
     font-weight: 500;
     color: var(--ink-secondary);
-    border: 1px solid var(--border-color);
-    padding: 4px 10px;
-    border-radius: 2px;
+    border: 1px solid var(--border-subtle);
+    padding: 5px 10px;
+    border-radius: 999px;
     text-decoration: none;
     transition: color 0.2s, border-color 0.2s;
   }
@@ -222,7 +226,7 @@ const isActive = (path: string) => {
     background: none;
     border: none;
     padding: 4px;
-    cursor: crosshair;
+    cursor: pointer;
     width: 28px;
     height: 28px;
   }
@@ -246,7 +250,7 @@ const isActive = (path: string) => {
     display: none;
     flex-direction: column;
     border-top: 1px solid var(--border-subtle);
-    background: rgba(13,16,23,0.97);
+    background: rgba(8,10,15,0.98);
     padding: 0;
     max-height: 0;
     overflow: hidden;

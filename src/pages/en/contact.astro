@@ -6,37 +6,37 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <main class="contact-page">
     <div class="container">
       <header class="contact-header">
-        <span class="tagline">// let's_connect</span>
-        <h1 class="page-title">CONTACT</h1>
+        <span class="tagline">Professional contact</span>
+        <h1 class="page-title">Let’s talk about production AI.</h1>
         <p class="subtitle">
-          Open to freelance projects, technical collaboration, or just talking backend and AI. Drop me a line.
+          Open to AI Backend Engineer roles, international remote teams and selected on-site opportunities in Bolivia.
         </p>
       </header>
 
       <div class="status-msg">
         <span class="blink-dot">●</span>
-        <span class="msg-text">Available for freelance projects and remote positions</span>
+        <span class="msg-text">Available for technical interviews and product-minded engineering teams</span>
       </div>
 
       <div class="contact-links">
         <a href="mailto:daxkenyi001@gmail.com" class="contact-card email">
-          <span class="label">→ EMAIL</span>
+          <span class="label">EMAIL</span>
           <span class="value">daxkenyi001@gmail.com</span>
         </a>
-        
-        <a href="https://wa.me/59178447843" target="_blank" rel="noopener noreferrer" class="contact-card whatsapp">
-          <span class="label">→ WHATSAPP</span>
-          <span class="value">+591 78447843</span>
-        </a>
 
-        <a href="https://linkedin.com/in/kenyi001" target="_blank" rel="noopener noreferrer" class="contact-card linkedin">
-          <span class="label">→ LINKEDIN</span>
+        <a href="https://www.linkedin.com/in/kenyi001/?locale=es" target="_blank" rel="noopener noreferrer" class="contact-card linkedin">
+          <span class="label">LINKEDIN</span>
           <span class="value">linkedin.com/in/kenyi001</span>
         </a>
 
         <a href="https://github.com/Kenyi001" target="_blank" rel="noopener noreferrer" class="contact-card github">
-          <span class="label">→ GITHUB</span>
+          <span class="label">GITHUB</span>
           <span class="value">github.com/Kenyi001</span>
+        </a>
+
+        <a href="/cv/CV_Dax_Kenji_AI_Backend_ES.pdf" class="contact-card cv">
+          <span class="label">CV</span>
+          <span class="value">Download AI Backend CV</span>
         </a>
       </div>
     </div>
@@ -53,7 +53,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
     width: 100%;
   }
@@ -64,7 +64,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .tagline {
     font-family: var(--font-mono);
-    color: var(--hash-color);
+    color: var(--accent-2);
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -74,11 +74,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .page-title {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-size: 5rem;
     color: var(--ink-primary);
     line-height: 0.95;
     font-weight: 900;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     margin-bottom: 1.5rem;
   }
 
@@ -87,17 +87,17 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     font-size: 1.25rem;
     color: var(--ink-secondary);
     line-height: 1.6;
-    max-width: 600px;
+    max-width: 680px;
   }
 
   .status-msg {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    border: 1px solid var(--border-color);
-    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-subtle);
+    background-color: rgba(245, 241, 234, 0.045);
     padding: 0.75rem 1.25rem;
-    border-radius: 4px;
+    border-radius: 999px;
     margin-bottom: 3.5rem;
     font-family: var(--font-mono);
     font-size: 0.9rem;
@@ -126,10 +126,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   .contact-card {
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
+    background: rgba(245, 241, 234, 0.045);
+    border: 1px solid var(--border-subtle);
     padding: 2rem;
-    border-radius: 4px;
+    border-radius: 8px;
     transition: transform 0.3s ease, border-color 0.3s ease;
     text-decoration: none;
     color: inherit;
@@ -137,13 +137,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   }
 
   .contact-card:hover {
-    transform: translateX(8px);
+    transform: translateY(-3px);
     border-color: var(--accent);
+    box-shadow: var(--shadow-soft);
   }
 
   .label {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     color: var(--ink-secondary);
     letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
@@ -155,7 +156,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
   .value {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.45rem;
     color: var(--ink-primary);
     font-weight: 700;
   }
@@ -168,6 +169,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
     .status-msg {
       margin-bottom: 2.5rem;
       font-size: 0.8rem;
+    }
+
+    .page-title {
+      font-size: 3rem;
+    }
+
+    .value {
+      font-size: 1.1rem;
     }
   }
 </style>

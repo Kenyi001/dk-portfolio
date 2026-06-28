@@ -4,7 +4,13 @@ const lang = getLangFromUrl(Astro.url);
 ---
 <section class="experience-section" data-reveal>
   <div class="container">
-    <h2 class="section-title">{lang === 'en' ? '// experience' : '// experiencia'}</h2>
+    <span class="eyebrow">{lang === 'en' ? 'Experience' : 'Experiencia'}</span>
+    <h2 class="section-title">{lang === 'en' ? 'Built in banking, data and production teams' : 'Construido en banca, datos y equipos de producción'}</h2>
+    <p class="section-subtitle">
+      {lang === 'en'
+        ? 'Hands-on backend and AI work across RAG, OCR, secure APIs, dashboards and operational workflows.'
+        : 'Trabajo práctico en backend e IA: RAG, OCR, APIs seguras, dashboards y flujos operativos.'}
+    </p>
     
     <div class="experience-list">
       
@@ -24,17 +30,17 @@ const lang = getLangFromUrl(Astro.url);
         <ul class="job-logros">
           {lang === 'en' ? (
             <>
-              <li>Node.js backend services for AI-integrated backoffice.</li>
-              <li>RAG system + prompt compression + Redis to cut LLM API costs.</li>
-              <li>Async pipelines with Webhooks for secure heavy inference processing.</li>
-              <li>Automated OCR + advanced image restoration (watermark removal).</li>
+              <li>Built production AI backoffice services with Node.js and C# .NET 8.</li>
+              <li>Implemented Token Saver System: crawler + RAG + Redis, reducing LLM token consumption up to 80%.</li>
+              <li>Evaluated AWS, Azure and GCP OCR platforms for a critical banking identity workflow.</li>
+              <li>Designed async Webhook pipelines and JWT/OAuth integrations under banking security standards.</li>
             </>
           ) : (
             <>
-              <li>Servicios backend Node.js para backoffice con IA integrada.</li>
-              <li>Sistema RAG + compresión de prompts + Redis para bajar el costo de API de los LLM.</li>
-              <li>Pipelines asíncronos con Webhooks para el procesamiento seguro de inferencias pesadas.</li>
-              <li>OCR automatizado + restauración avanzada de imágenes (watermark removal).</li>
+              <li>Construí servicios de backoffice con IA en Node.js y C# .NET 8 para producción bancaria.</li>
+              <li>Implementé Token Saver System: crawler + RAG + Redis, reduciendo consumo de tokens LLM hasta 80%.</li>
+              <li>Evalué AWS, Azure y GCP OCR para un flujo crítico de identidad bancaria.</li>
+              <li>Diseñé pipelines asíncronos con Webhooks e integraciones JWT/OAuth bajo estándares bancarios.</li>
             </>
           )}
         </ul>
@@ -106,41 +112,52 @@ const lang = getLangFromUrl(Astro.url);
 
 <style>
   .experience-section {
-    padding: 6rem 2rem;
+    padding: 6.5rem 2rem;
     background-color: var(--bg-primary);
   }
 
   .container {
-    max-width: 1000px;
+    max-width: 1080px;
     margin: 0 auto;
   }
 
   .section-title {
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    color: var(--hash-color);
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: var(--ink-primary);
+    margin: 0.75rem 0 1rem;
+    font-weight: 700;
+    line-height: 1.05;
+    max-width: 760px;
+  }
+
+  .section-subtitle {
+    color: var(--ink-secondary);
+    max-width: 720px;
     margin-bottom: 3rem;
-    font-weight: 500;
+    font-size: 1.03rem;
+    line-height: 1.7;
   }
 
   .experience-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
   }
 
   .job-card {
-    padding: 2.5rem;
-    background-color: var(--bg-surface);
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    border-left: 4px solid transparent;
+    padding: 2rem;
+    background: rgba(245, 241, 234, 0.045);
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid transparent;
     transition: transform 0.3s ease, border-color 0.3s ease;
   }
 
   .job-card:hover {
-    transform: translateX(8px);
+    transform: translateY(-3px);
     border-color: var(--border-accent);
+    box-shadow: var(--shadow-soft);
   }
 
   /* Specific styles for companies */
@@ -161,7 +178,7 @@ const lang = getLangFromUrl(Astro.url);
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1.5rem;
-    border-bottom: 1px dashed var(--border-color);
+    border-bottom: 1px solid var(--border-subtle);
     padding-bottom: 1.2rem;
   }
 
@@ -173,7 +190,7 @@ const lang = getLangFromUrl(Astro.url);
 
   .role {
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     color: var(--ink-primary);
     font-weight: bold;
   }
@@ -181,9 +198,9 @@ const lang = getLangFromUrl(Astro.url);
   .company {
     font-family: var(--font-mono);
     color: var(--accent);
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 0.86rem;
+    text-transform: none;
+    letter-spacing: 0;
   }
   
   .tigo-card .company {
@@ -194,10 +211,10 @@ const lang = getLangFromUrl(Astro.url);
     font-family: var(--font-mono);
     color: var(--ink-secondary);
     font-size: 0.85rem;
-    background-color: var(--bg-primary);
+    background-color: rgba(8, 10, 15, 0.48);
     padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    border: 1px solid var(--border-subtle);
   }
 
   .job-logros {
@@ -217,12 +234,14 @@ const lang = getLangFromUrl(Astro.url);
   }
 
   .job-logros li::before {
-    content: "→";
+    content: "";
     position: absolute;
     left: 0;
-    color: var(--accent);
-    font-family: var(--font-mono);
-    font-weight: bold;
+    top: 0.75rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
   }
 
   .tigo-card .job-logros li::before {
@@ -245,6 +264,10 @@ const lang = getLangFromUrl(Astro.url);
     
     .job-card {
       padding: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 2.15rem;
     }
   }
 </style>

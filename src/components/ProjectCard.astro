@@ -39,7 +39,7 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     <h3 class="title">{title}</h3>
   </div>
 
-  <span class="role-line">{lang === 'en' ? 'ROLE' : 'ROL'} → {role}</span>
+  <span class="role-line">{lang === 'en' ? 'Role' : 'Rol'} · {role}</span>
 
   <p class="description">{description}</p>
   
@@ -51,8 +51,8 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
 
   {(repoUrl || demoUrl) && (
     <div class="evidence-row">
-      {repoUrl && <span class="evidence-tag">[ OPEN_SOURCE ]</span>}
-      {demoUrl && <span class="evidence-tag">[ LIVE_DEMO ]</span>}
+      {repoUrl && <span class="evidence-tag">GitHub</span>}
+      {demoUrl && <span class="evidence-tag">Live demo</span>}
     </div>
   )}
 
@@ -69,36 +69,38 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
   .project-card {
     display: flex;
     flex-direction: column;
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    padding: 2.5rem 2rem;
-    border-radius: 4px;
+    background: linear-gradient(180deg, rgba(245, 241, 234, 0.055), rgba(245, 241, 234, 0.025));
+    border: 1px solid var(--border-subtle);
+    padding: 1.55rem;
+    border-radius: 8px;
     position: relative;
     transition: all 0.3s ease;
     height: 100%;
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    box-shadow: 0 0 0 rgba(0,0,0,0);
   }
 
   .project-card.highlighted {
-    border-left: 3px solid var(--accent);
+    border-color: rgba(236, 115, 87, 0.34);
   }
 
   .project-card:hover {
-    background-color: var(--bg-secondary);
-    border-left-color: var(--accent);
-    transform: translateX(4px);
+    background: linear-gradient(180deg, rgba(245, 241, 234, 0.075), rgba(245, 241, 234, 0.035));
+    border-color: var(--border-accent);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
   }
 
   .award-badge {
     background-color: var(--accent);
-    color: #FFF;
+    color: #140B08;
     font-family: var(--font-mono);
     font-size: 10px;
     font-weight: bold;
     padding: 0.2rem 0.6rem;
-    border-radius: 2px;
+    border-radius: 999px;
     align-self: flex-start;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -109,24 +111,25 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
+    gap: 1rem;
   }
 
   .badge {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.68rem;
     color: var(--accent);
     background: var(--accent-glow);
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-    font-weight: bold;
-    letter-spacing: 0.05em;
+    padding: 0.28rem 0.55rem;
+    border-radius: 999px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
   }
 
   .event-name {
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    color: var(--ink-secondary);
+    color: var(--ink-muted);
     text-align: right;
   }
 
@@ -136,7 +139,7 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
 
   .title {
     font-family: var(--font-display);
-    font-size: 1.6rem;
+    font-size: 1.35rem;
     color: var(--ink-primary);
     font-weight: 700;
   }
@@ -144,10 +147,10 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
   .role-line {
     font-family: var(--font-mono);
     font-size: 10px;
-    color: var(--ink-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1.5rem;
+    color: var(--accent-2);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.1rem;
   }
 
   .description {
@@ -155,7 +158,7 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     font-size: 1rem;
     color: var(--ink-secondary);
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     flex-grow: 1;
   }
 
@@ -170,10 +173,10 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     font-family: var(--font-mono);
     font-size: 10px;
     color: var(--ink-secondary);
-    background-color: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    padding: 0.25rem 0.5rem;
-    border-radius: 2px;
+    background-color: rgba(8, 10, 15, 0.42);
+    border: 1px solid var(--border-subtle);
+    padding: 0.28rem 0.5rem;
+    border-radius: 999px;
   }
 
   .project-card:hover .tech-tag {
@@ -192,12 +195,15 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     font-size: 10px;
     font-weight: bold;
     letter-spacing: 0.05em;
-    color: var(--accent);
+    color: var(--accent-2);
+    border: 1px solid rgba(125, 211, 176, 0.22);
+    border-radius: 999px;
+    padding: 0.24rem 0.5rem;
   }
 
   .metrics-row {
     margin-top: auto;
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-subtle);
     padding-top: 1rem;
     font-family: var(--font-mono);
     font-size: 0.85rem;
@@ -207,8 +213,8 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
 
   .card-arrow {
     position: absolute;
-    bottom: 1.5rem;
-    right: 1.5rem;
+    bottom: 1.25rem;
+    right: 1.25rem;
     font-family: var(--font-mono);
     font-size: 1.25rem;
     color: var(--ink-secondary);

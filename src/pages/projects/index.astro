@@ -11,9 +11,10 @@ const sortedProjects = projects.sort((a, b) => b.data.date.localeCompare(a.data.
   <main class="projects-page">
     <div class="container">
       <header class="projects-header">
-        <h1 class="page-title">// all_projects</h1>
+        <span class="tagline">Proyectos</span>
+        <h1 class="page-title">Trabajo curado para evaluar criterio técnico.</h1>
         <p class="subtitle">
-          7 proyectos — sistemas en prod, hackathons, builds propios. Filtrá por categoría.
+          Sistemas en producción, builds de hackathon y productos propios con foco en IA aplicada, backend y Web3.
         </p>
       </header>
     </div>
@@ -39,10 +40,21 @@ const sortedProjects = projects.sort((a, b) => b.data.date.localeCompare(a.data.
   }
 
   .page-title {
-    font-family: var(--font-mono);
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--hash-color);
+    font-family: var(--font-display);
+    font-size: 4.6rem;
+    color: var(--ink-primary);
+    line-height: 1;
     margin-bottom: 1.5rem;
+  }
+
+  .tagline {
+    display: block;
+    font-family: var(--font-mono);
+    color: var(--accent-2);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
   }
 
   .subtitle {
@@ -56,6 +68,10 @@ const sortedProjects = projects.sort((a, b) => b.data.date.localeCompare(a.data.
   @media (max-width: 768px) {
     .projects-page {
       padding-top: 2rem;
+    }
+
+    .page-title {
+      font-size: 2.9rem;
     }
   }
 </style>

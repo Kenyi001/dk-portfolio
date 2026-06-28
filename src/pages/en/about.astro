@@ -11,14 +11,14 @@ import CommunityNodes from '../../components/CommunityNodes.astro';
   <main class="about-page">
     <div class="container">
       <header class="about-header">
-        <span class="tagline">// ABOUT ME · path_and_vision</span>
-        <h1 class="page-title">// about_me</h1>
+        <span class="tagline">About</span>
+        <h1 class="page-title">AI Backend Engineer grounded in production work.</h1>
         <div class="bio-extended">
           <p>
-            Systems engineer based in Santa Cruz, Bolivia. I build AI systems and APIs — mostly in Node.js, TypeScript, and C# — with a focus on things that run in production, not just demos.
+            Systems engineer based in Santa Cruz, Bolivia. I build AI-powered backend systems with Node.js, TypeScript and C#, focused on products that work in production and make sense to both engineering and business teams.
           </p>
           <p>
-            My most recent work: LLM middleware for Banco de Crédito de Bolivia — RAG, prompt compression, and Redis caching cutting inference costs in production. In parallel I build Web3: smart contracts on Cardano and Stellar, and ranked #89 worldwide at DEV3PACK 2026 among 3,500+ teams.
+            My recent work includes RAG systems, OCR pipelines, Redis caching, Webhooks and cloud evaluation for banking workflows. In parallel, I build Web3 and SaaS projects, with international hackathon experience and a #89 worldwide DEV3PACK ranking.
           </p>
         </div>
       </header>
@@ -32,9 +32,9 @@ import CommunityNodes from '../../components/CommunityNodes.astro';
     
     <div class="contact-cta">
       <div class="container text-center">
-        <h2>Got a project?</h2>
-        <p>If you need solid backend or AI systems that actually run in prod, reach out.</p>
-        <a href="/en/contact" class="cta-link">→ GO_TO_CONTACT</a>
+        <h2>Looking for an AI Backend profile?</h2>
+        <p>I am open to international remote teams and selected on-site opportunities in Bolivia.</p>
+        <a href="/en/contact" class="cta-link">Contact me</a>
       </div>
     </div>
   </main>
@@ -62,7 +62,7 @@ import CommunityNodes from '../../components/CommunityNodes.astro';
 
   .tagline {
     font-family: var(--font-mono);
-    color: var(--accent);
+    color: var(--accent-2);
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -71,9 +71,10 @@ import CommunityNodes from '../../components/CommunityNodes.astro';
   }
 
   .page-title {
-    font-family: var(--font-mono);
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--hash-color);
+    font-family: var(--font-display);
+    font-size: 4.6rem;
+    color: var(--ink-primary);
+    line-height: 1;
     margin-bottom: 3rem;
   }
 
@@ -88,7 +89,7 @@ import CommunityNodes from '../../components/CommunityNodes.astro';
   .contact-cta {
     padding: 6rem 2rem;
     background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-subtle);
   }
 
   .contact-cta h2 {
@@ -111,7 +112,7 @@ import CommunityNodes from '../../components/CommunityNodes.astro';
     color: var(--bg-primary);
     background-color: var(--accent);
     padding: 0.8rem 1.6rem;
-    border-radius: 4px;
+    border-radius: 999px;
     font-weight: bold;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -134,6 +135,10 @@ import CommunityNodes from '../../components/CommunityNodes.astro';
     
     .bio-extended p {
       font-size: 1.1rem;
+    }
+
+    .page-title {
+      font-size: 2.9rem;
     }
 
     .contact-cta {
