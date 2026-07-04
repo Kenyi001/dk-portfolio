@@ -81,7 +81,7 @@ body {
   left: -26vw;
   top: -12%;
   background: radial-gradient(circle, rgba(242, 110, 72, 0.27) 0%, rgba(238, 112, 80, 0.10) 42%, transparent 68%);
-  animation: aura-warm-drift 34s ease-in-out infinite alternate;
+  animation: aura-warm-drift 29s ease-in-out infinite alternate;
   translate: 0 calc(var(--scroll-p, 0) * 150vh);
   filter: hue-rotate(calc(var(--scroll-p, 0) * -45deg));
 }
@@ -90,7 +90,7 @@ body {
   right: -24vw;
   bottom: -16%;
   background: radial-gradient(circle, rgba(96, 224, 178, 0.19) 0%, rgba(105, 218, 178, 0.07) 44%, transparent 66%);
-  animation: aura-cool-drift 42s ease-in-out infinite alternate;
+  animation: aura-cool-drift 37s ease-in-out infinite alternate;
   translate: 0 calc(var(--scroll-p, 0) * -170vh);
   filter: hue-rotate(calc(var(--scroll-p, 0) * 40deg));
 }
@@ -107,14 +107,23 @@ body {
   animation-delay: -21s;
 }
 
+/* Luz ambiental fluida estilo iPad: la luz respira y ondula con fases
+   asimétricas — escala elíptica variable + intensidad que pulsa suave.
+   Nunca se detiene ni se repite de forma evidente (períodos primos). */
 @keyframes aura-warm-drift {
-  from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.75; }
-  to   { transform: translate3d(7vw, 9vh, 0) scale(1.14); opacity: 1; }
+  0%   { transform: translate3d(0, 0, 0) scale(1, 1);          opacity: 0.72; }
+  28%  { transform: translate3d(5vw, 7vh, 0) scale(1.16, 0.94); opacity: 1; }
+  55%  { transform: translate3d(1.5vw, 13vh, 0) scale(0.92, 1.14); opacity: 0.8; }
+  78%  { transform: translate3d(7vw, 5vh, 0) scale(1.08, 1.02); opacity: 0.95; }
+  100% { transform: translate3d(3vw, 10vh, 0) scale(1.12, 0.98); opacity: 0.85; }
 }
 
 @keyframes aura-cool-drift {
-  from { transform: translate3d(0, 0, 0) scale(1.1); opacity: 1; }
-  to   { transform: translate3d(-6vw, -8vh, 0) scale(0.96); opacity: 0.7; }
+  0%   { transform: translate3d(0, 0, 0) scale(1.1, 1);        opacity: 1; }
+  26%  { transform: translate3d(-4vw, -6vh, 0) scale(0.95, 1.12); opacity: 0.75; }
+  52%  { transform: translate3d(-7vw, -2vh, 0) scale(1.14, 0.92); opacity: 0.92; }
+  80%  { transform: translate3d(-2vw, -9vh, 0) scale(1, 1.08);  opacity: 0.7; }
+  100% { transform: translate3d(-5.5vw, -4vh, 0) scale(1.06, 1.02); opacity: 0.88; }
 }
 
 @media (prefers-reduced-motion: reduce) {
