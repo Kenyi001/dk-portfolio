@@ -110,6 +110,8 @@ const {
   <div class="ambient-auras" aria-hidden="true">
     <span class="aura aura-warm"></span>
     <span class="aura aura-cool"></span>
+    <span class="aura aura-warm aura-warm-b"></span>
+    <span class="aura aura-cool aura-cool-b"></span>
   </div>
   <Nav />
   <main>
@@ -160,9 +162,11 @@ const {
       update();
     })();
 
-    /* ─── auras reactivas al scroll (--scroll-p: 0 → 1) ─── */
+    /* ─── auras reactivas al scroll (--scroll-p: 0 → 1) ───
+       No se gatea por prefers-reduced-motion: el movimiento responde
+       1:1 al gesto del usuario (como un parallax directo), no es
+       animación autónoma. La deriva automática sí se apaga en CSS. */
     (function () {
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const root = document.documentElement;
       let ticking = false;
       function update() {
