@@ -65,25 +65,27 @@ body {
 
 .aura {
   position: absolute;
-  width: 52vw;
-  height: 52vw;
-  max-width: 900px;
-  max-height: 900px;
+  width: 58vw;
+  height: 58vw;
+  max-width: 1050px;
+  max-height: 1050px;
   border-radius: 50%;
+  /* screen = luz aditiva: visible incluso en paneles que aplastan negros */
+  mix-blend-mode: screen;
   will-change: transform, opacity;
 }
 
 .aura-warm {
-  left: -28vw;
-  top: -6%;
-  background: radial-gradient(circle, rgba(236, 115, 87, 0.085) 0%, transparent 62%);
+  left: -26vw;
+  top: -8%;
+  background: radial-gradient(circle, rgba(236, 115, 87, 0.17) 0%, rgba(236, 115, 87, 0.06) 42%, transparent 68%);
   animation: aura-warm-drift 34s ease-in-out infinite alternate;
 }
 
 .aura-cool {
-  right: -26vw;
-  bottom: -18%;
-  background: radial-gradient(circle, rgba(125, 211, 176, 0.06) 0%, transparent 60%);
+  right: -24vw;
+  bottom: -16%;
+  background: radial-gradient(circle, rgba(125, 211, 176, 0.12) 0%, rgba(125, 211, 176, 0.04) 45%, transparent 66%);
   animation: aura-cool-drift 42s ease-in-out infinite alternate;
 }
 
