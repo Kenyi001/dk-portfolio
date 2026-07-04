@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Archivo:wght@400;500;600&display=swap');
 
 :root {
   --bg-base:       #080A0F;
@@ -23,7 +23,7 @@
   --shadow-soft:   0 24px 70px rgba(0, 0, 0, 0.34);
   --font-display:  'Space Grotesk', 'Arial Black', sans-serif;
   --font-mono:     'JetBrains Mono', 'Courier New', monospace;
-  --font-body:     'Inter', system-ui, sans-serif;
+  --font-body:     'Archivo', system-ui, sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,6 +49,62 @@ body {
   height: 100%;
   z-index: 0;
   pointer-events: none;
+}
+
+/* ─── Auras ambientales laterales ───
+   Luz difusa en los bordes con la paleta propia (terracota + verde).
+   Solo transform/opacity para no costar frames; se apagan con
+   prefers-reduced-motion. */
+.ambient-auras {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aura {
+  position: absolute;
+  width: 52vw;
+  height: 52vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
+.aura-warm {
+  left: -28vw;
+  top: -6%;
+  background: radial-gradient(circle, rgba(236, 115, 87, 0.085) 0%, transparent 62%);
+  animation: aura-warm-drift 34s ease-in-out infinite alternate;
+}
+
+.aura-cool {
+  right: -26vw;
+  bottom: -18%;
+  background: radial-gradient(circle, rgba(125, 211, 176, 0.06) 0%, transparent 60%);
+  animation: aura-cool-drift 42s ease-in-out infinite alternate;
+}
+
+@keyframes aura-warm-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.75; }
+  to   { transform: translate3d(7vw, 9vh, 0) scale(1.14); opacity: 1; }
+}
+
+@keyframes aura-cool-drift {
+  from { transform: translate3d(0, 0, 0) scale(1.1); opacity: 1; }
+  to   { transform: translate3d(-6vw, -8vh, 0) scale(0.96); opacity: 0.7; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-warm, .aura-cool { animation: none; }
+}
+
+@media (max-width: 768px) {
+  .aura { width: 90vw; height: 90vw; }
+  .aura-warm { left: -55vw; }
+  .aura-cool { right: -55vw; }
 }
 
 /* El contenido queda por encima del canvas */
