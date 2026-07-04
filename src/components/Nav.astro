@@ -20,7 +20,7 @@ const isActive = (path: string) => {
       <a href={lang === 'es' ? '/' : '/en'} class="logo">
         <span class="logo-d">D</span><span class="logo-k">K</span>
       </a>
-      <span class="handle">@daxkenyi001</span>
+      <span class="handle">Backend / AI Systems</span>
     </div>
 
     <!-- Desktop links -->
@@ -84,7 +84,7 @@ const isActive = (path: string) => {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(8, 10, 15, 0.78);
+    background: rgba(8, 10, 15, 0.86);
     backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border-subtle);
   }
@@ -108,7 +108,7 @@ const isActive = (path: string) => {
     font-family: var(--font-display);
     font-size: 1.45rem;
     font-weight: 900;
-    letter-spacing: -0.05em;
+    letter-spacing: 0;
     text-decoration: none;
   }
 
@@ -123,7 +123,9 @@ const isActive = (path: string) => {
   .handle {
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    color: var(--ink-muted);
+    color: var(--ink-secondary);
+    border-left: 1px solid var(--border-mid);
+    padding-left: 1rem;
   }
 
   .links {
@@ -182,7 +184,7 @@ const isActive = (path: string) => {
     letter-spacing: 0;
     border: 1px solid rgba(120, 211, 158, 0.22);
     background: rgba(120, 211, 158, 0.08);
-    border-radius: 999px;
+    border-radius: 4px;
     padding: 0.32rem 0.6rem;
   }
 
@@ -208,7 +210,7 @@ const isActive = (path: string) => {
     color: var(--ink-secondary);
     border: 1px solid var(--border-subtle);
     padding: 5px 10px;
-    border-radius: 999px;
+    border-radius: 4px;
     text-decoration: none;
     transition: color 0.2s, border-color 0.2s;
   }
@@ -281,11 +283,8 @@ const isActive = (path: string) => {
   @media (max-width: 768px) {
     .nav-container { padding: 1rem 1.5rem; }
 
-    /* Handle visible pero más pequeño */
     .handle {
-      display: block;
-      font-size: 0.72rem;
-      opacity: 0.55;
+      display: none;
     }
 
     .links       { display: none; }

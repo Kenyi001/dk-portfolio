@@ -8,7 +8,7 @@ const sortedProjects = projects.sort((a, b) => b.data.date.localeCompare(a.data.
 ---
 
 <BaseLayout title="Projects | Dax Kenji">
-  <main class="projects-page">
+  <div class="projects-page">
     <div class="container">
       <header class="projects-header">
         <span class="tagline">Projects</span>
@@ -20,7 +20,7 @@ const sortedProjects = projects.sort((a, b) => b.data.date.localeCompare(a.data.
     </div>
     
     <ProjectsGrid projects={sortedProjects} />
-  </main>
+  </div>
 </BaseLayout>
 
 <style>
