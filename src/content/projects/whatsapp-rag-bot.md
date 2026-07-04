@@ -12,6 +12,8 @@ role_en: "Python Automation Developer"
 stack: ["Python", "WhatsApp Web", "Automatización"]
 date: "2025"
 featured: false
+metrics: "Envío masivo personalizado · sin API oficial de Meta"
+metrics_en: "Bulk personalized messaging · no official Meta API"
 ---
 
 ## Problema

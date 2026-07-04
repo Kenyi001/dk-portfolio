@@ -14,6 +14,8 @@ repoUrl: "https://github.com/Kenyi001/ledgerlens"
 demoUrl: "https://ledgerlens-backend.vercel.app"
 date: "2026"
 featured: true
+metrics: "Multi-chain (Avalanche + Ethereum) · clasificación IA Humano/Bot · pagos x402 en USDC"
+metrics_en: "Multi-chain (Avalanche + Ethereum) · AI Human/Bot classification · x402 USDC payments"
 ---
 
 ## Problema

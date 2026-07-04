@@ -160,6 +160,23 @@ const {
       update();
     })();
 
+    /* ─── auras reactivas al scroll (--scroll-p: 0 → 1) ─── */
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const root = document.documentElement;
+      let ticking = false;
+      function update() {
+        const max = root.scrollHeight - window.innerHeight;
+        const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+        root.style.setProperty('--scroll-p', p.toFixed(4));
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+      }, { passive: true });
+      update();
+    })();
+
     /* ─── fondo reactivo al mouse — dual glow + color transition ─── */
     (function () {
       if (window.matchMedia('(hover: none)').matches) return;

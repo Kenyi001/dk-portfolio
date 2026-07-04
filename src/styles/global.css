@@ -70,23 +70,29 @@ body {
   max-width: 1050px;
   max-height: 1050px;
   border-radius: 50%;
-  /* screen = luz aditiva: visible incluso en paneles que aplastan negros */
+  /* screen = luz aditiva: visible incluso en paneles que aplastan negros (gamma 2.2) */
   mix-blend-mode: screen;
-  will-change: transform, opacity;
+  will-change: transform, opacity, translate, filter;
 }
 
+/* Al scrollear (--scroll-p 0→1) las auras viajan por el lateral y viran de tono:
+   la cálida baja y se dora, la fría sube y se enfría hacia cian. */
 .aura-warm {
   left: -26vw;
-  top: -8%;
-  background: radial-gradient(circle, rgba(236, 115, 87, 0.17) 0%, rgba(236, 115, 87, 0.06) 42%, transparent 68%);
+  top: -10%;
+  background: radial-gradient(circle, rgba(236, 115, 87, 0.24) 0%, rgba(236, 115, 87, 0.09) 40%, transparent 68%);
   animation: aura-warm-drift 34s ease-in-out infinite alternate;
+  translate: 0 calc(var(--scroll-p, 0) * 55vh);
+  filter: hue-rotate(calc(var(--scroll-p, 0) * -28deg));
 }
 
 .aura-cool {
   right: -24vw;
-  bottom: -16%;
-  background: radial-gradient(circle, rgba(125, 211, 176, 0.12) 0%, rgba(125, 211, 176, 0.04) 45%, transparent 66%);
+  bottom: -18%;
+  background: radial-gradient(circle, rgba(125, 211, 176, 0.17) 0%, rgba(125, 211, 176, 0.06) 43%, transparent 66%);
   animation: aura-cool-drift 42s ease-in-out infinite alternate;
+  translate: 0 calc(var(--scroll-p, 0) * -60vh);
+  filter: hue-rotate(calc(var(--scroll-p, 0) * 24deg));
 }
 
 @keyframes aura-warm-drift {

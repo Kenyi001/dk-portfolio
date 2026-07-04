@@ -12,6 +12,8 @@ stack: ["Cardano", "Plutus", "Haskell", "TypeScript", "React"]
 repoUrl: "https://github.com/Odig0/Enaid"
 date: "2024"
 featured: true
+metrics: "Contratos en Plutus/Haskell · equipo de 3 · modelo eUTXO"
+metrics_en: "Plutus/Haskell contracts · team of 3 · eUTXO model"
 ---
 
 ## Problema

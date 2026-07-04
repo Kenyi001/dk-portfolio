@@ -11,6 +11,8 @@ role_en: "Builder & Backend Lead"
 stack: ["Stellar", "NFT", "Smart Contracts", "React", "Node.js"]
 date: "2025"
 featured: true
+metrics: "Certificados NFT en Stellar · verificación on-chain sin intermediarios"
+metrics_en: "NFT certificates on Stellar · on-chain verification without intermediaries"
 ---
 
 ## Problema
