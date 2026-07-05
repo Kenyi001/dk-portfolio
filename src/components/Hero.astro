@@ -344,6 +344,15 @@ const t = useTranslations(lang);
     text-decoration: none;
   }
 
+  /* Target táctil ≥40px solo donde hay dedo (no rompe el fold en desktop) */
+  @media (pointer: coarse) {
+    .profile-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+    }
+  }
+
   .profile-links a:hover {
     color: var(--accent-2);
   }
