@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&family=Archivo:wght@400;500;600&display=swap');
 
 :root {
-  --bg-base:       #080A0F;
-  --bg-primary:    rgba(8, 10, 15, 0.92);
-  --bg-secondary:  rgba(14, 17, 24, 0.86);
-  --bg-surface:    rgba(22, 26, 36, 0.88);
-  --bg-surface-2:  rgba(30, 35, 48, 0.92);
+  /* Piso elevado unos pasos sobre el negro: en paneles gamma 2.2/OLED
+     los primeros valores RGB se aplastan y desaparecen — un gris muy
+     oscuro conserva profundidad visible donde el casi-negro se pierde. */
+  --bg-base:       #0B0D13;
+  --bg-primary:    rgba(11, 13, 19, 0.84);
+  --bg-secondary:  rgba(17, 20, 29, 0.78);
+  --bg-surface:    rgba(24, 28, 39, 0.88);
+  --bg-surface-2:  rgba(32, 37, 51, 0.92);
   --ink-primary:   #F5F1EA;
   --ink-secondary: #A7B0BE;
   --ink-muted:     #768191;
@@ -32,7 +35,7 @@ html { scroll-behavior: smooth; background: var(--bg-base); }
 body {
   background:
     radial-gradient(circle at 50% -20%, rgba(125, 211, 176, 0.10), transparent 34rem),
-    linear-gradient(180deg, #0B0D13 0%, #080A0F 44%, #0D1017 100%);
+    linear-gradient(180deg, #0D0F16 0%, #0B0D13 44%, #121623 100%);
   color: var(--ink-primary);
   font-family: var(--font-body);
   font-size: 16px;
@@ -134,6 +137,25 @@ body {
   52%  { transform: translate3d(-7vw, -2vh, 0) scale(1.14, 0.92); opacity: 0.92; }
   80%  { transform: translate3d(-2vw, -9vh, 0) scale(1, 1.08);  opacity: 0.7; }
   100% { transform: translate3d(-5.5vw, -4vh, 0) scale(1.06, 1.02); opacity: 0.88; }
+}
+
+/* Paneles de gama amplia (P3): colores fuera del alcance sRGB con más
+   croma — la luz se ve rica en monitores buenos en vez de apagarse. */
+@media (color-gamut: p3) {
+  .aura-warm {
+    background: radial-gradient(circle at 42% 38%,
+      color(display-p3 0.95 0.45 0.26 / 0.30) 0%,
+      color(display-p3 0.92 0.40 0.32 / 0.13) 36%,
+      color(display-p3 0.90 0.58 0.24 / 0.06) 54%,
+      transparent 70%);
+  }
+  .aura-cool {
+    background: radial-gradient(circle at 58% 62%,
+      color(display-p3 0.34 0.90 0.70 / 0.22) 0%,
+      color(display-p3 0.32 0.80 0.77 / 0.09) 40%,
+      color(display-p3 0.36 0.70 0.80 / 0.05) 56%,
+      transparent 68%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
