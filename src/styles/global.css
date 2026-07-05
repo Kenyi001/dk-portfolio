@@ -80,7 +80,12 @@ body {
 .aura-warm {
   left: -26vw;
   top: -12%;
-  background: radial-gradient(circle, rgba(242, 110, 72, 0.27) 0%, rgba(238, 112, 80, 0.10) 42%, transparent 68%);
+  /* núcleo coral descentrado + halo ámbar: luz direccional, no un disco */
+  background: radial-gradient(circle at 42% 38%,
+    rgba(244, 118, 70, 0.28) 0%,
+    rgba(236, 104, 84, 0.12) 36%,
+    rgba(232, 148, 62, 0.05) 54%,
+    transparent 70%);
   animation: aura-warm-drift 29s ease-in-out infinite alternate;
   translate: 0 calc(var(--scroll-p, 0) * 150vh);
   filter: hue-rotate(calc(var(--scroll-p, 0) * -45deg));
@@ -89,7 +94,12 @@ body {
 .aura-cool {
   right: -24vw;
   bottom: -16%;
-  background: radial-gradient(circle, rgba(96, 224, 178, 0.19) 0%, rgba(105, 218, 178, 0.07) 44%, transparent 66%);
+  /* núcleo menta descentrado + halo teal frío */
+  background: radial-gradient(circle at 58% 62%,
+    rgba(92, 226, 180, 0.20) 0%,
+    rgba(86, 202, 194, 0.08) 40%,
+    rgba(96, 180, 200, 0.04) 56%,
+    transparent 68%);
   animation: aura-cool-drift 37s ease-in-out infinite alternate;
   translate: 0 calc(var(--scroll-p, 0) * -170vh);
   filter: hue-rotate(calc(var(--scroll-p, 0) * 40deg));

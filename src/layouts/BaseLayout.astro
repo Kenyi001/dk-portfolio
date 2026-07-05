@@ -163,22 +163,33 @@ const {
     })();
 
     /* ─── auras reactivas al scroll (--scroll-p: 0 → 1) ───
-       No se gatea por prefers-reduced-motion: el movimiento responde
-       1:1 al gesto del usuario (como un parallax directo), no es
-       animación autónoma. La deriva automática sí se apaga en CSS. */
+       Con inercia amortiguada: la luz persigue el scroll con un lag
+       suave (lerp) en vez de responder rígida. El rAF loop solo corre
+       mientras hay distancia que recorrer — sin costo en reposo. */
     (function () {
       const root = document.documentElement;
-      let ticking = false;
-      function update() {
+      let target = 0, current = 0, raf = null;
+      function measure() {
         const max = root.scrollHeight - window.innerHeight;
-        const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-        root.style.setProperty('--scroll-p', p.toFixed(4));
-        ticking = false;
+        target = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      }
+      function tick() {
+        current += (target - current) * 0.06;
+        if (Math.abs(target - current) < 0.0004) {
+          current = target;
+          raf = null;
+        } else {
+          raf = requestAnimationFrame(tick);
+        }
+        root.style.setProperty('--scroll-p', current.toFixed(4));
       }
       window.addEventListener('scroll', () => {
-        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        measure();
+        if (!raf) raf = requestAnimationFrame(tick);
       }, { passive: true });
-      update();
+      measure();
+      current = target;
+      root.style.setProperty('--scroll-p', current.toFixed(4));
     })();
 
     /* ─── fondo reactivo al mouse — dual glow + color transition ─── */
