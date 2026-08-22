@@ -1,51 +1,66 @@
 # Dax Kenji Tellez Duran — Perfil Completo
 
-> Backend Engineer & AI Developer | Santa Cruz, Bolivia
-> daxkenyi001@gmail.com | https://daxkenyi.is-a.dev
+> Systems Engineer · AI Developer / AI Integrations | Santa Cruz, Bolivia
+> Open to roles | daxkenyi001@gmail.com | https://daxkenyi.is-a.dev
 
 ## Experiencia Laboral
 
-### Backend Developer — Hola S.R.L.
-Desarrollo de sistemas de IA, automatización de procesos e integraciones empresariales.
-Stack: Node.js, TypeScript, Python, integración con LLMs.
+### Desarrollador IA / Integraciones IA — CoolFix Ethical Service
+Ago 2026 — Presente.
+Automatización comercial WhatsApp (n8n + Meta WABA): cotizar → agendar → confirmar.
+Integraciones IA/NLP en captura de leads; webhooks, plantillas y patrones Wait.
 
-### Proyectos — Tigo Bolivia
-Telecomunicaciones, infraestructura de datos, sistemas empresariales.
+### Technical Analyst — AI Team — Hola S.R.L. · BCP de Bolivia
+Ago 2025 — Jun 2026 (**pasado**).
+Servicios de IA en producción bancaria: Token Saver (crawler + RAG + Redis, −80% tokens),
+OCR multi-cloud, Webhooks async, JWT/OAuth.
 
-## Skills Técnicos
+### Analista de Datos — Tigo Bolivia (Tigo Money)
+Jun 2023 — Jun 2024.
+Soporte analítico al área comercial: consolidación y normalización en Excel avanzado y tablas dinámicas
+de la base de Puntos Tigo Money (PTM), que estaba repartida en bases distintas con información
+inconsistente — identificando puntos activos vs. los que requerían actualización.
+Procesos ETL con Python, pandas y SQL sobre datos transaccionales.
+Dashboards en Power BI y Tableau (+30% visibilidad de indicadores, −5 h/semana de trabajo manual).
+QA de la pasarela de pagos para validar calidad de datos antes del reporte.
 
-Backend: Node.js, TypeScript, C# .NET 8, Python
-IA/ML: RAG Systems, LLM Optimization, ElevenLabs Voice AI, OCR
+### Auxiliar Soporte TIC — UTEPSA
+Ene 2021 — Mar 2022.
+
+## Educación
+
+Ingeniería de Sistemas — UTEPSA. Feb 2020 — Ago 2026.
+Defensa de grado aprobada: **13 de agosto de 2026**.
+
+## Comunidad / actividades 2026
+
+- Staff + cámara — Cursor Buildathon Bolivia (UTEPSA, 25–26 jul 2026).
+- YAIS Lab — AI Research Tour Track 06 Continual Learning (prep).
+- Co-organizador / AI Tech Speaker — GDG Santa Cruz.
+- ComunidadETH Bolivia.
+
+## Skills
+
+Backend: Node.js, TypeScript, C# .NET, Python
+IA/ML: RAG, LLM Optimization, Voice AI, OCR, n8n/WABA automation
 Cloud: Docker, GCP, Azure, AWS, Redis, CI/CD
-Frontend (aprendiendo): Next.js, Astro
-Web3: Verificación de identidad, contratos inteligentes
 
-## Proyectos Detallados
+## Proyectos Destacados
 
-### TrustArk
-URL: https://daxkenyi.is-a.dev/projects/trustark
-Sistema de verificación de identidad descentralizado usando Web3 e IA.
-Permite validar identidades sin exponer datos sensibles, usando contratos inteligentes
-y modelos de IA para detección de fraude.
+### Token Saver / OCR Pipeline (Hola · BCP)
+Producción bancaria — ver daxkenyi.is-a.dev/projects/
 
-### ENAid
-URL: https://daxkenyi.is-a.dev/projects/enaid
-Agente de voz inteligente para atención al cliente construido con ElevenLabs.
-Maneja llamadas en lenguaje natural, integra con CRMs, reduce carga de soporte humano.
+### Sistema de Alerta Temprana para la Deserción Estudiantil (Proyecto de Grado)
+Análisis de datos end-to-end: 4.424 registros, 37 variables, CRISP-DM.
+Recall 90,49% · Precisión 86,82% · ROC-AUC 0,9677. API desplegada + tablero con umbral ajustable.
+Defensa aprobada 13 ago 2026.
 
-### LedgerLens
-URL: https://daxkenyi.is-a.dev/projects/ledgerlens
-Sistema OCR + IA para extracción y clasificación automática de facturas y documentos contables.
-Reduce tiempo de procesamiento manual, integra con sistemas de contabilidad.
+### TrustArk · ENAid · LedgerLens · WhatsApp RAG Bot
+Portafolio: https://daxkenyi.is-a.dev/projects/
 
-### WhatsApp RAG Bot
-URL: https://daxkenyi.is-a.dev/projects/whatsapp-rag-bot
-Asistente conversacional via WhatsApp con memoria persistente y RAG (Retrieval Augmented Generation).
-El bot mantiene contexto entre sesiones y responde usando documentos/base de conocimiento propia.
-
-## Contacto y Redes
+## Contacto
 
 Portfolio: https://daxkenyi.is-a.dev
-Email: daxkenyi001@gmail.com
 LinkedIn: https://linkedin.com/in/kenyi001
 GitHub: https://github.com/Kenyi001
+Email: daxkenyi001@gmail.com

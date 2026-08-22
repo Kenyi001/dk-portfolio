@@ -13,6 +13,36 @@ const lang = getLangFromUrl(Astro.url);
     </p>
     
     <div class="experience-list">
+
+      <!-- CoolFix Ethical Service -->
+      <div class="job-card coolfix-card">
+        <div class="job-header">
+          <div class="job-title-group">
+            <h3 class="role">
+              {lang === 'en' ? 'AI Developer / AI Integrations' : 'Desarrollador IA / Integraciones IA'}
+            </h3>
+            <span class="company">CoolFix Ethical Service</span>
+          </div>
+          <span class="duration">
+            {lang === 'en' ? 'Aug 2026 — Present' : 'Ago 2026 — Presente'}
+          </span>
+        </div>
+        <ul class="job-logros">
+          {lang === 'en' ? (
+            <>
+              <li>Building WhatsApp commercial automation (n8n + Meta WABA): quote → schedule → confirm flows.</li>
+              <li>Integrating AI/NLP into lead capture and operational workflows with human escalation.</li>
+              <li>Shipping webhook, template and wait-pattern integrations for production messaging.</li>
+            </>
+          ) : (
+            <>
+              <li>Automatización comercial por WhatsApp (n8n + Meta WABA): flujos cotizar → agendar → confirmar.</li>
+              <li>Integración de IA/NLP en captura de leads y flujos operativos con escalado a humano.</li>
+              <li>Webhooks, plantillas y patrones Wait para mensajería en producción.</li>
+            </>
+          )}
+        </ul>
+      </div>
       
       <!-- Hola S.R.L. -->
       <div class="job-card hola-card">

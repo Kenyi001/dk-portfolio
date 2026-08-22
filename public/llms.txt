@@ -1,21 +1,23 @@
 # Dax Kenji Tellez Duran
 
-> Backend Engineer & AI Developer. Santa Cruz, Bolivia.
-> Construyo sistemas de IA en producción: RAG pipelines, Voice AI con ElevenLabs, APIs escalables.
+> Systems Engineer · AI Developer / AI Integrations. Santa Cruz, Bolivia.
+> Open to roles. Portfolio: https://daxkenyi.is-a.dev
 
 ## Sobre mí
 
-Backend engineer trabajando en Hola S.R.L. y proyectos en Tigo (telecomunicaciones Bolivia).
-Especializado en: Node.js, TypeScript, C# .NET 8, Python, RAG Systems, LLM Optimization.
-Cloud: Docker, GCP, Azure, AWS, Redis.
-Explorando: Next.js, Web3, Edge Computing.
+Ingeniero de Sistemas (UTEPSA — defensa aprobada 13 ago 2026).
+Desarrollador IA / Integraciones IA en **CoolFix Ethical Service** (automatización WhatsApp, n8n, Meta WABA).
+Antes: Technical Analyst AI Team en Hola S.R.L. / BCP (ago 2025 – jun 2026).
+Stack: Node.js, TypeScript, C# .NET, Python, RAG, OCR, Docker, GCP/Azure/AWS.
 
 ## Proyectos
 
+- [Alerta Temprana Deserción](https://daxkenyi.is-a.dev/projects/alerta-temprana-desercion): Análisis de datos + modelo predictivo (Proyecto de Grado, defensa aprobada ago 2026)
 - [TrustArk](https://daxkenyi.is-a.dev/projects/trustark): Verificación de identidad Web3 con IA
-- [ENAid](https://daxkenyi.is-a.dev/projects/enaid): Agente de voz IA para atención al cliente (ElevenLabs)
-- [LedgerLens](https://daxkenyi.is-a.dev/projects/ledgerlens): OCR + IA para facturas y documentos contables
-- [WhatsApp RAG Bot](https://daxkenyi.is-a.dev/projects/whatsapp-rag-bot): Asistente con contexto persistente vía WhatsApp
+- [ENAid](https://daxkenyi.is-a.dev/projects/enaid): Agente de voz IA (ElevenLabs)
+- [LedgerLens](https://daxkenyi.is-a.dev/projects/ledgerlens): OCR + IA para documentos
+- [Token Saver](https://daxkenyi.is-a.dev/projects/token-saver): RAG + Redis (−80% tokens, banca)
+- [WhatsApp RAG Bot](https://daxkenyi.is-a.dev/projects/whatsapp-rag-bot): Asistente con contexto (proyecto distinto al embudo WABA actual)
 
 ## Contacto
 
@@ -26,5 +28,4 @@ Explorando: Next.js, Web3, Edge Computing.
 
 ## Opcional — Uso por IA
 
-Este sitio permite que agentes de IA leer y citen su contenido.
-Para contexto completo ver: https://daxkenyi.is-a.dev/llms-full.txt
+Contexto completo: https://daxkenyi.is-a.dev/llms-full.txt
