@@ -97,7 +97,7 @@ export const GET: APIRoute = async () => {
                       margin: '0',
                       letterSpacing: '0.02em',
                     },
-                    children: 'Backend engineer · Node.js · TypeScript · C# · RAG · LLMs · Web3',
+                    children: 'Ingeniero de Sistemas · Datos · IA aplicada · Python · SQL · RAG',
                   },
                 },
               ],
@@ -109,7 +109,7 @@ export const GET: APIRoute = async () => {
             type: 'div',
             props: {
               style: { display: 'flex', gap: '10px', alignItems: 'center' },
-              children: ['Node.js', 'TypeScript', 'C# .NET', 'RAG', 'Redis', 'Docker', 'GCP'].map(t => ({
+              children: ['Python', 'SQL', 'pandas', 'Power BI', 'RAG', 'Node.js', 'Docker'].map(t => ({
                 type: 'span',
                 props: {
                   style: {

@@ -5,14 +5,36 @@ const lang = getLangFromUrl(Astro.url);
 <section class="skills-section" data-reveal>
   <div class="container">
     <span class="eyebrow">{lang === 'en' ? 'Core stack' : 'Stack principal'}</span>
-    <h2 class="section-title">{lang === 'en' ? 'Backend depth with applied AI judgment' : 'Profundidad backend con criterio de IA aplicada'}</h2>
+    <h2 class="section-title">{lang === 'en' ? 'Data analysis with production engineering behind it' : 'Análisis de datos con ingeniería de producción detrás'}</h2>
     <p class="section-subtitle">
       {lang === 'en'
-        ? 'The tools I use to move from prototype to maintainable production systems.'
-        : 'Herramientas que uso para pasar de prototipo a sistemas mantenibles en producción.'}
+        ? 'The tools I use to turn scattered data into decisions — and to keep the systems behind them running.'
+        : 'Herramientas que uso para convertir datos dispersos en decisiones, y para sostener los sistemas que las alimentan.'}
     </p>
     
     <div class="skills-grid">
+      <!-- Datos & Análisis -->
+      <div class="skill-category">
+        <h3>{lang === 'en' ? 'Data & Analytics' : 'Datos & Análisis'}</h3>
+        <ul class="skill-list">
+          <li>Python / pandas / NumPy</li>
+          <li>{lang === 'en' ? 'SQL / analytical queries' : 'SQL / consultas analíticas'}</li>
+          <li>{lang === 'en' ? 'Advanced Excel (pivot tables, Power Query)' : 'Excel avanzado (tablas dinámicas, Power Query)'}</li>
+          <li>{lang === 'en' ? 'ETL, data cleaning and validation' : 'ETL, limpieza y validación de datos'}</li>
+        </ul>
+      </div>
+
+      <!-- Visualización & Estadística -->
+      <div class="skill-category">
+        <h3>{lang === 'en' ? 'Visualization & Statistics' : 'Visualización & Estadística'}</h3>
+        <ul class="skill-list">
+          <li>Power BI / Tableau</li>
+          <li>{lang === 'en' ? 'Dashboards and KPI definition' : 'Dashboards y definición de KPIs'}</li>
+          <li>{lang === 'en' ? 'EDA, correlations, outliers' : 'EDA, correlaciones, valores atípicos'}</li>
+          <li>{lang === 'en' ? 'scikit-learn / cross-validation' : 'scikit-learn / validación cruzada'}</li>
+        </ul>
+      </div>
+
       <!-- Backend -->
       <div class="skill-category">
         <h3>Backend & APIs</h3>
