@@ -80,6 +80,9 @@ const typeLabels = {
               </a>
             )}
           </div>
+          {entry.data.demoUrl && (entry.data.demoNote_en ?? entry.data.demoNote) && (
+            <p class="demo-note">{entry.data.demoNote_en ?? entry.data.demoNote}</p>
+          )}
         </div>
       </header>
       
@@ -240,6 +243,15 @@ const typeLabels = {
     flex-wrap: wrap;
   }
 
+  .demo-note {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--text-muted, #8a8a8a);
+    margin: 0.6rem 0 0;
+    max-width: 62ch;
+  }
+
   .link-btn {
     font-family: var(--font-mono);
     font-size: 0.9rem;
@@ -296,6 +308,27 @@ const typeLabels = {
 
   .content-body p {
     margin-bottom: 1.5rem;
+  }
+
+  /* :global is required — markdown from <Content /> does not get Astro's
+     scope attribute, so a plain selector never matches it. */
+  .content-body :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2.5rem auto 0.75rem;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  /* Figure caption: the italic paragraph following an image */
+  .content-body :global(p:has(> img) + p em) {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--text-muted, #8a8a8a);
+    font-style: normal;
   }
 
   .back-link-wrapper {

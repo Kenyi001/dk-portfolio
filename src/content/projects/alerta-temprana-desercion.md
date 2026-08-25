@@ -14,6 +14,11 @@ date: "2026"
 featured: true
 metrics: "✓ Defensa aprobada (ago 2026) · Recall 90,49% · Precisión 86,82% · ROC-AUC 0,9677 · API desplegada"
 metrics_en: "✓ Thesis approved (Aug 2026) · Recall 90.49% · Precision 86.82% · ROC-AUC 0.9677 · API deployed"
+image: "/projects/alerta-temprana-interfaz.png"
+repoUrl: "https://github.com/Kenyi001/defensa-grado-ia"
+demoUrl: "https://defenza-grado-api.onrender.com"
+demoNote: "La demo corre en plan gratuito de Render y el servicio se duerme sin tráfico: la primera carga puede tardar hasta un minuto en despertar. Después responde al instante."
+demoNote_en: "The demo runs on Render's free tier and sleeps when idle: the first load can take up to a minute to wake up. After that it responds instantly."
 ---
 
 ## Problema
@@ -34,6 +39,10 @@ Un hallazgo del análisis exploratorio cambió el preprocesamiento: 718 notas en
 
 Se compararon seis alternativas con validación cruzada estratificada y pruebas estadísticas pareadas, documentando cuándo las diferencias eran significativas y cuándo no se distinguían del ruido.
 
+![Qué variables pesan más en la predicción de riesgo](/projects/07_importancia_variables.png)
+
+*Qué mira el modelo para decidir. El rendimiento del segundo semestre domina — y es exactamente lo que un área de Bienestar puede observar a tiempo.*
+
 ## Resultado
 
 | Métrica | Valor |
@@ -42,7 +51,19 @@ Se compararon seis alternativas con validación cruzada estratificada y pruebas 
 | Precisión | 86,82% |
 | ROC-AUC | 0,9677 |
 
+![Curva Precisión-Recall del modelo final](/projects/08_curva_precision_recall.png)
+
+*Curva Precisión-Recall, no ROC. Con clases desbalanceadas la curva ROC se ve optimista porque normaliza los falsos positivos contra un universo grande de negativos; la PR muestra el intercambio real entre a cuántos detecto y a cuántos molesto de más.*
+
+![Matriz de confusión sobre datos de prueba](/projects/05_matriz_confusion.png)
+
+*El mismo resultado en crudo: a cuántos detecta y a cuántos se le escapan, sobre datos que el modelo nunca vio durante el entrenamiento.*
+
 Más allá de los números: el entregable fue un **tablero para gente que no programa**. Bienestar mueve un umbral y ve en vivo cuántas personas entran en la lista de atención según la capacidad real de tutorías que tenga ese período.
+
+![Diagrama de flujo del sistema completo](/projects/09_diagrama_flujo.png)
+
+*De los datos crudos al reporte que llega a Bienestar. El modelo es una pieza del recorrido, no el producto.*
 
 ## Una decisión de comunicación, no de modelo
 

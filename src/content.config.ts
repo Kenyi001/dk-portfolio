@@ -18,6 +18,8 @@ const projects = defineCollection({
     award: z.string().optional(),
     repoUrl: z.string().url().optional(),
     demoUrl: z.string().url().optional(),
+    demoNote: z.string().optional(),
+    demoNote_en: z.string().optional(),
     date: z.string(),
     featured: z.boolean().default(false),
     metrics: z.string().optional(),
