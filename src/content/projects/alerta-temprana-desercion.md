@@ -3,10 +3,10 @@ title: "Sistema de Alerta Temprana para la Deserción Estudiantil"
 title_en: "Early Warning System for Student Dropout"
 event: "Proyecto de Grado — UTEPSA"
 eventType: "personal"
-description: "Modelo predictivo que identifica estudiantes en riesgo de abandonar la universidad antes de que ocurra, con un tablero que permite a un área no técnica priorizar a quién atender según su presupuesto real."
-description_en: "Predictive model that flags students at risk of dropping out before it happens, with a dashboard that lets a non-technical team prioritize who to reach based on their actual budget."
-longDescription: "Análisis de datos de punta a punta sobre 4.424 registros y 37 variables, siguiendo CRISP-DM: exploración (EDA), detección de valores atípicos, correlaciones y tratamiento de desbalanceo de clases. Se compararon seis familias de modelos con validación cruzada estratificada de 5 pliegues y pruebas estadísticas pareadas. La decisión clave no fue técnica sino de negocio: se priorizó Recall sobre exactitud porque el costo de no detectar a alguien es mucho mayor que el de una falsa alarma. El modelo se desplegó como API REST con una interfaz donde Bienestar Universitario ajusta el umbral y ve en vivo a cuántas personas alcanza cada escenario."
-longDescription_en: "End-to-end data analysis over 4,424 records and 37 variables following CRISP-DM: exploratory analysis, outlier detection, correlations, and class imbalance handling. Six model families were compared using 5-fold stratified cross-validation and paired statistical tests. The key decision was not technical but a business one: Recall was prioritized over accuracy because the cost of missing someone far outweighs a false alarm. The model was deployed as a REST API with an interface where the student welfare team adjusts the threshold and sees live how many people each scenario reaches."
+description: "Modelo predictivo que identifica estudiantes en riesgo de abandonar la universidad antes de que ocurra. El entregable es una API REST para que la institución la conecte a sus propios sistemas."
+description_en: "Predictive model that flags students at risk of dropping out before it happens. The deliverable is a REST API the institution plugs into its own systems."
+longDescription: "Análisis de datos de punta a punta sobre 4.424 registros y 37 variables, siguiendo CRISP-DM: exploración (EDA), detección de valores atípicos, correlaciones y tratamiento de desbalanceo de clases. Se compararon seis familias de modelos con validación cruzada estratificada de 5 pliegues y pruebas estadísticas pareadas. La decisión clave no fue técnica sino de negocio: se priorizó Recall sobre exactitud porque el costo de no detectar a alguien es mucho mayor que el de una falsa alarma. El entregable es una API REST desplegada: endpoints de predicción, reporte y salud, con contrato validado, para que la universidad la integre a sus propios sistemas sin depender de un notebook. Se construyó además una interfaz que demuestra esas capacidades a un área no técnica."
+longDescription_en: "End-to-end data analysis over 4,424 records and 37 variables following CRISP-DM: exploratory analysis, outlier detection, correlations, and class imbalance handling. Six model families were compared using 5-fold stratified cross-validation and paired statistical tests. The key decision was not technical but a business one: Recall was prioritized over accuracy because the cost of missing someone far outweighs a false alarm. The deliverable is a deployed REST API — prediction, report and health endpoints with a validated contract — so the university can integrate it into its own systems instead of depending on a notebook. An interface was also built to demonstrate those capabilities to a non-technical team."
 role: "Análisis de datos, modelado y despliegue"
 role_en: "Data analysis, modeling and deployment"
 stack: ["Python", "pandas", "scikit-learn", "FastAPI", "Render", "CRISP-DM"]
@@ -59,11 +59,17 @@ Se compararon seis alternativas con validación cruzada estratificada y pruebas 
 
 *El mismo resultado en crudo: a cuántos detecta y a cuántos se le escapan, sobre datos que el modelo nunca vio durante el entrenamiento.*
 
-Más allá de los números: el entregable fue un **tablero para gente que no programa**. Bienestar mueve un umbral y ve en vivo cuántas personas entran en la lista de atención según la capacidad real de tutorías que tenga ese período.
+## El entregable es una API, no un tablero
+
+Un modelo dentro de un notebook no lo usa nadie. Por eso lo que se entrega es una **API REST desplegada**, con endpoints de predicción, reporte y estado del servicio, y el contrato validado: si llega un valor fuera de rango, responde con el error correspondiente en vez de devolver una predicción sin sentido.
+
+Eso permite que la universidad la **conecte a sus propios sistemas** — al que ya usa para matrículas, notas o seguimiento — sin depender de que alguien abra un notebook y corra celdas.
+
+Encima de esa API construí una interfaz, y su función es distinta: **demostrar las capacidades del servicio a quien no programa**. Ahí se mueve el umbral y se ve en vivo a cuántas personas alcanza cada escenario según la capacidad real de tutorías del período. La interfaz existe para que se entienda qué hace la API; el producto integrable es la API.
 
 ![Diagrama de flujo del sistema completo](/projects/09_diagrama_flujo.png)
 
-*De los datos crudos al reporte que llega a Bienestar. El modelo es una pieza del recorrido, no el producto.*
+*De los datos crudos al servicio en producción. El modelo es una pieza del recorrido, no el producto.*
 
 ## Una decisión de comunicación, no de modelo
 

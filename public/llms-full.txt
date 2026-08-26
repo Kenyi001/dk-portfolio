@@ -53,7 +53,10 @@ Producción bancaria — ver daxkenyi.is-a.dev/projects/
 
 ### Sistema de Alerta Temprana para la Deserción Estudiantil (Proyecto de Grado)
 Análisis de datos end-to-end: 4.424 registros, 37 variables, CRISP-DM.
-Recall 90,49% · Precisión 86,82% · ROC-AUC 0,9677. API desplegada + tablero con umbral ajustable.
+Recall 90,49% · Precisión 86,82% · ROC-AUC 0,9677.
+Entregable: **API REST desplegada** (predicción, reporte, salud; contrato validado) para que la
+institución la integre a sus propios sistemas. La interfaz web demuestra sus capacidades a un
+área no técnica — no es el entregable.
 Defensa aprobada 13 ago 2026.
 
 ### TrustArk · ENAid · LedgerLens · WhatsApp RAG Bot
