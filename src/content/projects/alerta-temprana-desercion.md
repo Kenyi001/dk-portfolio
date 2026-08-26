@@ -33,16 +33,23 @@ Por eso la métrica de éxito no fue la exactitud sino el **Recall**: de los que
 
 ## Análisis
 
+<div class="split split-wide">
+<div>
+
 Sobre 4.424 registros y 37 variables: exploración de datos, detección de valores atípicos, correlaciones y tratamiento del desbalanceo de clases.
 
 Un hallazgo del análisis exploratorio cambió el preprocesamiento: 718 notas en cero durante el primer semestre **no eran datos faltantes** — coincidían exactamente con quienes no aprobaron ninguna materia. Imputarlas habría borrado la señal más fuerte del conjunto.
 
 Se compararon seis alternativas con validación cruzada estratificada y pruebas estadísticas pareadas, documentando cuándo las diferencias eran significativas y cuándo no se distinguían del ruido.
 
+</div>
+
 <figure class="fig fig-wide">
   <img src="/projects/07_importancia_variables.png" alt="Ranking de las 10 variables más influyentes en la predicción de riesgo" loading="lazy" decoding="async" />
   <figcaption>Qué mira el modelo para decidir. El rendimiento del segundo semestre domina — y es exactamente lo que un área de Bienestar puede observar a tiempo.</figcaption>
 </figure>
+
+</div>
 
 ## Resultado
 
@@ -77,16 +84,23 @@ Se compararon seis alternativas con validación cruzada estratificada y pruebas 
 
 ## El entregable es una API, no un tablero
 
+<div class="split">
+<div>
+
 Un modelo dentro de un notebook no lo usa nadie. Por eso lo que se entrega es una **API REST desplegada**, con endpoints de predicción, reporte y estado del servicio, y el contrato validado: si llega un valor fuera de rango, responde con el error correspondiente en vez de devolver una predicción sin sentido.
 
 Eso permite que la universidad la **conecte a sus propios sistemas** — al que ya usa para matrículas, notas o seguimiento — sin depender de que alguien abra un notebook y corra celdas.
 
 Encima de esa API construí una interfaz, y su función es distinta: **demostrar las capacidades del servicio a quien no programa**. Ahí se mueve el umbral y se ve en vivo a cuántas personas alcanza cada escenario según la capacidad real de tutorías del período. La interfaz existe para que se entienda qué hace la API; el producto integrable es la API.
 
+</div>
+
 <figure class="fig fig-tall">
   <img src="/projects/09_diagrama_flujo.png" alt="Diagrama de flujo del sistema: de los datos crudos al reporte en producción" loading="lazy" decoding="async" />
   <figcaption>De los datos crudos al servicio en producción. El modelo es una pieza del recorrido, no el producto.</figcaption>
 </figure>
+
+</div>
 
 ## Una decisión de comunicación, no de modelo
 

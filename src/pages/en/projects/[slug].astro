@@ -32,10 +32,13 @@ const typeLabels = {
         
         <h1 class="title">{entry.data.title_en || entry.data.title}</h1>
         
+        <div class="header-cols">
+        <div class="header-intro">
         <span class="role-line">ROLE → {entry.data.role_en || entry.data.role}</span>
-        
+
         <p class="description">{entry.data.longDescription_en || entry.data.longDescription || entry.data.description_en || entry.data.description}</p>
-        
+        </div>
+
         <div class="meta-info">
           <div class="stack">
             {entry.data.stack.map(tech => (
@@ -84,6 +87,7 @@ const typeLabels = {
             <p class="demo-note">{entry.data.demoNote_en ?? entry.data.demoNote}</p>
           )}
         </div>
+        </div>
       </header>
       
       {entry.data.image && (
@@ -125,6 +129,86 @@ const typeLabels = {
     margin-bottom: 4rem;
     padding-bottom: 3rem;
     border-bottom: 1px solid var(--border-mid);
+  }
+
+  /* ── Desktop optimization ──────────────────────────────────────
+     Measured before changing anything: 4.4 screens of scroll, and the
+     header alone was 1,104px — more than a full screen before any
+     content. Wide screens have horizontal room to spare, so use it
+     instead of stacking. */
+  @media (min-width: 1100px) {
+    .container {
+      max-width: 1120px;
+    }
+
+    .header-cols {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .project-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2.25rem;
+    }
+
+    /* Text does not stretch to 1120px — at that measure the eye loses
+       the line on wrap. Figures do use the full width. */
+    .content-body :global(p),
+    .content-body :global(ul),
+    .content-body :global(ol) {
+      max-width: 74ch;
+    }
+
+    /* max-width is required alongside width:auto — without it the image
+       takes its natural width (1440px) and the container's
+       overflow:hidden clips the last column. */
+    .project-screenshot img {
+      max-height: 44vh;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* Global height cap: no figure should eat half a screen.
+       Measured: the importance chart reached 609px tall. */
+    .content-body :global(.fig img) {
+      max-height: 46vh;
+      width: auto;
+    }
+
+    /* Variant giving the figure the wide side — for charts with long
+       labels, which stop being readable at half a column.
+       Double class on purpose: .split is declared further down and
+       would win on order at equal specificity. */
+    .content-body :global(.split.split-wide) {
+      grid-template-columns: 0.78fr 1.22fr;
+    }
+
+    /* Text and figure in parallel. Two columns earn their place here:
+       the diagram is vertical, and beside its explanation it saves
+       ~550px of scroll without shrinking either one. */
+    .content-body :global(.split) {
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+      margin: 2.5rem 0;
+    }
+
+    .content-body :global(.split > div p:last-child) {
+      margin-bottom: 0;
+    }
+
+    .content-body :global(.split .fig) {
+      margin: 0;
+    }
+
+    .content-body :global(.split .fig-tall img) {
+      max-height: 52vh;
+    }
   }
 
   .meta-top {
