@@ -297,19 +297,127 @@ const typeLabels = {
     display: block;
     max-width: 100%;
     height: auto;
-    margin: 2.5rem auto 0.75rem;
+    margin: 0 auto;
     border-radius: 6px;
     background: #fff;
   }
 
-  /* Pie de figura: el párrafo en cursiva que sigue a una imagen */
-  .content-body :global(p:has(> img) + p em) {
+  /* ── Figuras ──────────────────────────────────────────────────
+     El texto se lee a ~70ch; las figuras rompen ese ancho porque un
+     gráfico con etiquetas necesita espacio o no se lee.            */
+  .content-body :global(.fig) {
+    margin: 2.75rem 0 2.25rem;
+  }
+
+  .content-body :global(.fig-wide) {
+    width: 100%;
+  }
+
+  /* Diagrama vertical: si no se limita la altura ocupa más de una
+     pantalla de scroll (medido: 924px) y rompe el ritmo de lectura. */
+  .content-body :global(.fig-tall img) {
+    max-height: 62vh;
+    width: auto;
+  }
+
+  .content-body :global(figcaption) {
     display: block;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     line-height: 1.6;
     color: var(--text-muted, #8a8a8a);
-    font-style: normal;
+    margin-top: 0.85rem;
+    max-width: 68ch;
+  }
+
+  /* Dos figuras cuadradas apiladas son 1.500px de scroll; una al lado
+     de la otra son ~450px y además invitan a compararlas. */
+  .content-body :global(.fig-pair) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    align-items: start;
+    margin: 2.75rem 0 2.25rem;
+  }
+
+  .content-body :global(.fig-pair .fig) {
+    margin: 0;
+  }
+
+  /* ── Métricas destacadas ──────────────────────────────────────
+     Reemplaza una tabla que renderizaba a 157px y se leía como
+     texto suelto. Cada número lleva qué significa, no solo su nombre. */
+  .content-body :global(.stat-row) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin: 2rem 0 2.5rem;
+  }
+
+  .content-body :global(.stat) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--border-strong, rgba(255,255,255,0.14));
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .content-body :global(.stat-num) {
+    font-family: var(--font-mono);
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--accent, #ec7357);
+  }
+
+  .content-body :global(.stat-lbl) {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-primary);
+  }
+
+  .content-body :global(.stat-sub) {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--text-muted, #8a8a8a);
+  }
+
+  /* Tablas del markdown: sin esto colapsan al ancho del contenido. */
+  .content-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+  }
+
+  .content-body :global(th),
+  .content-body :global(td) {
+    text-align: left;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--border-strong, rgba(255,255,255,0.12));
+  }
+
+  .content-body :global(th) {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted, #8a8a8a);
+  }
+
+  @media (max-width: 780px) {
+    .content-body :global(.fig-pair),
+    .content-body :global(.stat-row) {
+      grid-template-columns: 1fr;
+    }
+    .content-body :global(.fig-tall img) {
+      max-height: none;
+      width: 100%;
+    }
   }
 
   .project-screenshot {

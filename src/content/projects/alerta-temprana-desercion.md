@@ -39,25 +39,41 @@ Un hallazgo del análisis exploratorio cambió el preprocesamiento: 718 notas en
 
 Se compararon seis alternativas con validación cruzada estratificada y pruebas estadísticas pareadas, documentando cuándo las diferencias eran significativas y cuándo no se distinguían del ruido.
 
-![Qué variables pesan más en la predicción de riesgo](/projects/07_importancia_variables.png)
-
-*Qué mira el modelo para decidir. El rendimiento del segundo semestre domina — y es exactamente lo que un área de Bienestar puede observar a tiempo.*
+<figure class="fig fig-wide">
+  <img src="/projects/07_importancia_variables.png" alt="Ranking de las 10 variables más influyentes en la predicción de riesgo" loading="lazy" decoding="async" />
+  <figcaption>Qué mira el modelo para decidir. El rendimiento del segundo semestre domina — y es exactamente lo que un área de Bienestar puede observar a tiempo.</figcaption>
+</figure>
 
 ## Resultado
 
-| Métrica | Valor |
-|---|---|
-| Recall | 90,49% |
-| Precisión | 86,82% |
-| ROC-AUC | 0,9677 |
+<div class="stat-row">
+  <div class="stat">
+    <span class="stat-num">90,49%</span>
+    <span class="stat-lbl">Recall</span>
+    <span class="stat-sub">De los que sí desertan, a cuántos alcanza a detectar</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">86,82%</span>
+    <span class="stat-lbl">Precisión</span>
+    <span class="stat-sub">De los que marca como riesgo, cuántos lo eran de verdad</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">0,9677</span>
+    <span class="stat-lbl">ROC-AUC</span>
+    <span class="stat-sub">Capacidad general de separar los dos grupos</span>
+  </div>
+</div>
 
-![Curva Precisión-Recall del modelo final](/projects/08_curva_precision_recall.png)
-
-*Curva Precisión-Recall, no ROC. Con clases desbalanceadas la curva ROC se ve optimista porque normaliza los falsos positivos contra un universo grande de negativos; la PR muestra el intercambio real entre a cuántos detecto y a cuántos molesto de más.*
-
-![Matriz de confusión sobre datos de prueba](/projects/05_matriz_confusion.png)
-
-*El mismo resultado en crudo: a cuántos detecta y a cuántos se le escapan, sobre datos que el modelo nunca vio durante el entrenamiento.*
+<div class="fig-pair">
+  <figure class="fig">
+    <img src="/projects/08_curva_precision_recall.png" alt="Curva Precisión-Recall del modelo final sobre el conjunto de prueba" loading="lazy" decoding="async" />
+    <figcaption>Curva Precisión-Recall, no ROC. Con clases desbalanceadas la ROC se ve optimista porque normaliza los falsos positivos contra un universo grande de negativos; la PR muestra el intercambio real entre a cuántos detecto y a cuántos molesto de más.</figcaption>
+  </figure>
+  <figure class="fig">
+    <img src="/projects/05_matriz_confusion.png" alt="Matriz de confusión sobre el conjunto de prueba" loading="lazy" decoding="async" />
+    <figcaption>El mismo resultado en crudo: a cuántos detecta y a cuántos se le escapan, sobre datos que el modelo nunca vio durante el entrenamiento.</figcaption>
+  </figure>
+</div>
 
 ## El entregable es una API, no un tablero
 
@@ -67,9 +83,10 @@ Eso permite que la universidad la **conecte a sus propios sistemas** — al que 
 
 Encima de esa API construí una interfaz, y su función es distinta: **demostrar las capacidades del servicio a quien no programa**. Ahí se mueve el umbral y se ve en vivo a cuántas personas alcanza cada escenario según la capacidad real de tutorías del período. La interfaz existe para que se entienda qué hace la API; el producto integrable es la API.
 
-![Diagrama de flujo del sistema completo](/projects/09_diagrama_flujo.png)
-
-*De los datos crudos al servicio en producción. El modelo es una pieza del recorrido, no el producto.*
+<figure class="fig fig-tall">
+  <img src="/projects/09_diagrama_flujo.png" alt="Diagrama de flujo del sistema: de los datos crudos al reporte en producción" loading="lazy" decoding="async" />
+  <figcaption>De los datos crudos al servicio en producción. El modelo es una pieza del recorrido, no el producto.</figcaption>
+</figure>
 
 ## Una decisión de comunicación, no de modelo
 

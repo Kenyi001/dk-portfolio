@@ -316,19 +316,125 @@ const typeLabels = {
     display: block;
     max-width: 100%;
     height: auto;
-    margin: 2.5rem auto 0.75rem;
+    margin: 0 auto;
     border-radius: 6px;
     background: #fff;
   }
 
-  /* Figure caption: the italic paragraph following an image */
-  .content-body :global(p:has(> img) + p em) {
+  /* Figures break the reading width: a chart with axis labels needs
+     room or it becomes unreadable. */
+  .content-body :global(.fig) {
+    margin: 2.75rem 0 2.25rem;
+  }
+
+  .content-body :global(.fig-wide) {
+    width: 100%;
+  }
+
+  /* Tall diagram: uncapped it runs past a full screen of scroll
+     (measured: 924px) and breaks the reading rhythm. */
+  .content-body :global(.fig-tall img) {
+    max-height: 62vh;
+    width: auto;
+  }
+
+  .content-body :global(figcaption) {
     display: block;
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     line-height: 1.6;
     color: var(--text-muted, #8a8a8a);
-    font-style: normal;
+    margin-top: 0.85rem;
+    max-width: 68ch;
+  }
+
+  /* Two square figures stacked are 1,500px of scroll; side by side
+     they are ~450px and invite comparison. */
+  .content-body :global(.fig-pair) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    align-items: start;
+    margin: 2.75rem 0 2.25rem;
+  }
+
+  .content-body :global(.fig-pair .fig) {
+    margin: 0;
+  }
+
+  /* Headline metrics — replaces a table that collapsed to 157px
+     and read like loose text. */
+  .content-body :global(.stat-row) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin: 2rem 0 2.5rem;
+  }
+
+  .content-body :global(.stat) {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1.25rem 1.35rem;
+    border: 1px solid var(--border-strong, rgba(255,255,255,0.14));
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .content-body :global(.stat-num) {
+    font-family: var(--font-mono);
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--accent, #ec7357);
+  }
+
+  .content-body :global(.stat-lbl) {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-primary);
+  }
+
+  .content-body :global(.stat-sub) {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    color: var(--text-muted, #8a8a8a);
+  }
+
+  /* Markdown tables collapse to content width without this. */
+  .content-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.95rem;
+  }
+
+  .content-body :global(th),
+  .content-body :global(td) {
+    text-align: left;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid var(--border-strong, rgba(255,255,255,0.12));
+  }
+
+  .content-body :global(th) {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted, #8a8a8a);
+  }
+
+  @media (max-width: 780px) {
+    .content-body :global(.fig-pair),
+    .content-body :global(.stat-row) {
+      grid-template-columns: 1fr;
+    }
+    .content-body :global(.fig-tall img) {
+      max-height: none;
+      width: 100%;
+    }
   }
 
   .back-link-wrapper {
