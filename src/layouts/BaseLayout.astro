@@ -129,8 +129,6 @@ const {
   <div class="ambient-auras" aria-hidden="true">
     <span class="aura aura-warm"></span>
     <span class="aura aura-cool"></span>
-    <span class="aura aura-warm aura-warm-b"></span>
-    <span class="aura aura-cool aura-cool-b"></span>
   </div>
   <Nav />
   <main>
@@ -181,16 +179,24 @@ const {
       update();
     })();
 
-    /* ─── auras reactivas al scroll (--scroll-p: 0 → 1) ───
-       Con inercia amortiguada: la luz persigue el scroll con un lag
-       suave (lerp) en vez de responder rígida. El rAF loop solo corre
-       mientras hay distancia que recorrer — sin costo en reposo. */
+    /* ─── auras reactivas al scroll (--scroll-p: 0 → 1 → 0 cíclico) ───
+       Antes --scroll-p era la fracción de TODA la página (0 a 1 una sola
+       vez): en una página de ~9000px eso deja las luces casi quietas
+       durante el 90% del scroll y varadas fuera de pantalla en el medio
+       (reportado 2026-09-19: "se pierden y no relucen"). Ahora es una
+       onda triangular que completa un ciclo ida-vuelta cada PERIOD px
+       de scroll, sin importar cuánto mida la página — así siempre hay
+       movimiento visible, en cualquier punto del scroll, no solo cerca
+       del top o el fondo. Con la misma inercia amortiguada (lerp) de
+       antes: la luz persigue el objetivo con un lag suave. */
     (function () {
       const root = document.documentElement;
+      const PERIOD = 1500; // px de scroll para un ciclo completo 0→1→0
       let target = 0, current = 0, raf = null;
       function measure() {
-        const max = root.scrollHeight - window.innerHeight;
-        target = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+        const half = PERIOD / 2;
+        const t = ((window.scrollY % PERIOD) + PERIOD) % PERIOD;
+        target = t <= half ? t / half : 2 - t / half;
       }
       function tick() {
         current += (target - current) * 0.06;

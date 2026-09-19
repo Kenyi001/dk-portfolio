@@ -78,20 +78,30 @@ body {
   will-change: transform, opacity, translate, filter;
 }
 
-/* Al scrollear (--scroll-p 0→1) las auras viajan por el lateral y viran de tono:
-   la cálida baja y se dora, la fría sube y se enfría hacia cian. */
+/* --scroll-p ahora es una onda triangular cíclica (0→1→0 cada ~1500px
+   de scroll, ver BaseLayout.astro), no la fracción de toda la página.
+   La oscilación queda centrada en la posición de reposo (top/left):
+   a mitad de ciclo (p=0.5) el aura está en su lugar "natural"; en los
+   extremos se desplaza ±la mitad del rango. Así la luz nunca viaja tan
+   lejos como para perderse, pero nunca deja de moverse tampoco. */
 .aura-warm {
   left: -26vw;
   top: -12%;
-  /* núcleo coral descentrado + halo ámbar: luz direccional, no un disco */
+  /* núcleo coral descentrado + halo ámbar: luz direccional, no un disco.
+     Intensidad subida (2026-09-19): las secciones de contenido pintan
+     su propio fondo semitransparente ENCIMA de este layer fixed — el
+     screen-blend se atenúa dos veces (el gradiente ya es translúcido,
+     y la sección vuelve a restar alfa al pintar arriba). A esta
+     intensidad el brillo se nota incluso debajo de las cards, no solo
+     en el hero. */
   background: radial-gradient(circle at 42% 38%,
-    rgba(244, 118, 70, 0.28) 0%,
-    rgba(236, 104, 84, 0.12) 36%,
-    rgba(232, 148, 62, 0.05) 54%,
+    rgba(244, 118, 70, 0.40) 0%,
+    rgba(236, 104, 84, 0.19) 36%,
+    rgba(232, 148, 62, 0.08) 54%,
     transparent 70%);
   animation: aura-warm-drift 29s ease-in-out infinite alternate;
-  translate: 0 calc(var(--scroll-p, 0) * 150vh);
-  filter: hue-rotate(calc(var(--scroll-p, 0) * -45deg));
+  translate: 0 calc((var(--scroll-p, 0.5) - 0.5) * 85vh);
+  filter: hue-rotate(calc((var(--scroll-p, 0.5) - 0.5) * 64deg));
 }
 
 .aura-cool {
@@ -99,25 +109,13 @@ body {
   bottom: -16%;
   /* núcleo menta descentrado + halo teal frío */
   background: radial-gradient(circle at 58% 62%,
-    rgba(92, 226, 180, 0.20) 0%,
-    rgba(86, 202, 194, 0.08) 40%,
-    rgba(96, 180, 200, 0.04) 56%,
+    rgba(92, 226, 180, 0.32) 0%,
+    rgba(86, 202, 194, 0.14) 40%,
+    rgba(96, 180, 200, 0.06) 56%,
     transparent 68%);
   animation: aura-cool-drift 37s ease-in-out infinite alternate;
-  translate: 0 calc(var(--scroll-p, 0) * -170vh);
-  filter: hue-rotate(calc(var(--scroll-p, 0) * 40deg));
-}
-
-/* Segunda pareja desfasada: entra cuando la primera sale del viewport,
-   así siempre hay luz lateral sin importar cuánto se haya scrolleado. */
-.aura-warm-b {
-  top: calc(-12% - 150vh);
-  animation-delay: -17s;
-}
-
-.aura-cool-b {
-  bottom: calc(-16% - 170vh);
-  animation-delay: -21s;
+  translate: 0 calc((var(--scroll-p, 0.5) - 0.5) * -95vh);
+  filter: hue-rotate(calc((var(--scroll-p, 0.5) - 0.5) * -58deg));
 }
 
 /* Luz ambiental fluida estilo iPad: la luz respira y ondula con fases
@@ -144,16 +142,16 @@ body {
 @media (color-gamut: p3) {
   .aura-warm {
     background: radial-gradient(circle at 42% 38%,
-      color(display-p3 0.95 0.45 0.26 / 0.30) 0%,
-      color(display-p3 0.92 0.40 0.32 / 0.13) 36%,
-      color(display-p3 0.90 0.58 0.24 / 0.06) 54%,
+      color(display-p3 0.95 0.45 0.26 / 0.42) 0%,
+      color(display-p3 0.92 0.40 0.32 / 0.20) 36%,
+      color(display-p3 0.90 0.58 0.24 / 0.09) 54%,
       transparent 70%);
   }
   .aura-cool {
     background: radial-gradient(circle at 58% 62%,
-      color(display-p3 0.34 0.90 0.70 / 0.22) 0%,
-      color(display-p3 0.32 0.80 0.77 / 0.09) 40%,
-      color(display-p3 0.36 0.70 0.80 / 0.05) 56%,
+      color(display-p3 0.34 0.90 0.70 / 0.34) 0%,
+      color(display-p3 0.32 0.80 0.77 / 0.15) 40%,
+      color(display-p3 0.36 0.70 0.80 / 0.07) 56%,
       transparent 68%);
   }
 }
