@@ -51,10 +51,12 @@ const isActive = (path: string) => {
 
   <!-- Mobile drawer -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <a href={lang === 'es' ? '/projects' : '/en/projects'} class={`mobile-link ${isActive('/projects') ? 'active' : ''}`}>{t('nav.projects')}</a>
-    <a href={lang === 'es' ? '/about' : '/en/about'} class={`mobile-link ${isActive('/about') ? 'active' : ''}`}>{t('nav.about')}</a>
-    <a href={lang === 'es' ? '/community' : '/en/community'} class={`mobile-link ${isActive('/community') ? 'active' : ''}`}>{lang === 'es' ? 'Comunidad' : 'Community'}</a>
-    <a href={lang === 'es' ? '/contact' : '/en/contact'} class={`mobile-link ${isActive('/contact') ? 'active' : ''}`}>{t('nav.contact')}</a>
+    <div class="mobile-menu-inner">
+      <a href={lang === 'es' ? '/projects' : '/en/projects'} class={`mobile-link ${isActive('/projects') ? 'active' : ''}`}>{t('nav.projects')}</a>
+      <a href={lang === 'es' ? '/about' : '/en/about'} class={`mobile-link ${isActive('/about') ? 'active' : ''}`}>{t('nav.about')}</a>
+      <a href={lang === 'es' ? '/community' : '/en/community'} class={`mobile-link ${isActive('/community') ? 'active' : ''}`}>{lang === 'es' ? 'Comunidad' : 'Community'}</a>
+      <a href={lang === 'es' ? '/contact' : '/en/contact'} class={`mobile-link ${isActive('/contact') ? 'active' : ''}`}>{t('nav.contact')}</a>
+    </div>
   </div>
 </nav>
 
@@ -247,19 +249,25 @@ const isActive = (path: string) => {
   .hamburger.is-open span:nth-child(2) { opacity: 0; }
   .hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-  /* ─── Mobile drawer ─── */
+  /* ─── Mobile drawer ───
+     grid-template-rows 0fr→1fr en vez de max-height/padding: anima solo
+     una propiedad de grid, sin layout-thrash de max-height+padding
+     juntos (hallazgo del detector, auditoría 2026-09-19). */
   .mobile-menu {
     display: none;
-    flex-direction: column;
+    grid-template-rows: 0fr;
     border-top: 1px solid var(--border-subtle);
     background: rgba(8,10,15,0.98);
-    padding: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 250ms ease, padding 250ms ease;
+    transition: grid-template-rows 250ms ease;
   }
   .mobile-menu.open {
-    max-height: 320px;
+    grid-template-rows: 1fr;
+  }
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-height: 0;
     padding: 0.75rem 0 1rem;
   }
   .mobile-link {
@@ -298,6 +306,6 @@ const isActive = (path: string) => {
     .status      { gap: 0; }
 
     .hamburger   { display: flex; }
-    .mobile-menu { display: flex; }
+    .mobile-menu { display: grid; }
   }
 </style>
