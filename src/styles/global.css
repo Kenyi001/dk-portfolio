@@ -11,7 +11,13 @@
   --bg-surface-2:  rgba(32, 37, 51, 0.92);
   --ink-primary:   #F5F1EA;
   --ink-secondary: #A7B0BE;
-  --ink-muted:     #768191;
+  /* #768191 → #8B96A7 (2026-09-19): el original media 4.40:1 en
+     --bg-surface y 3.98:1 en --bg-surface-2 — falla AA (mínimo 4.5:1)
+     en texto normal. Se usa en .hero-name-sub, .profile-links y
+     .event-name, todos <14px, así que el umbral relajado de "texto
+     grande" (3:1) no aplica. Verificado con la fórmula de luminancia
+     relativa WCAG 2.1: el nuevo valor da 5.31:1 y 4.60:1 respectivamente. */
+  --ink-muted:     #8B96A7;
   --ink-dim:       #2A3040;
   --accent:        #EC7357;
   --accent-2:      #7DD3B0;
@@ -33,9 +39,13 @@
 html { scroll-behavior: smooth; background: var(--bg-base); }
 
 body {
+  /* Charcoal rico en vez de negro puro (2026-09-19): base un paso más
+     clara para que las auras tengan "aire" donde extenderse sin chocar
+     contra un piso demasiado oscuro — el mismo motivo que ya nos movió
+     de #080A0F a este rango por el gamma-crush, llevado un poco más lejos. */
   background:
     radial-gradient(circle at 50% -20%, rgba(125, 211, 176, 0.10), transparent 34rem),
-    linear-gradient(180deg, #0D0F16 0%, #0B0D13 44%, #121623 100%);
+    linear-gradient(180deg, #10131C 0%, #0D0F17 30%, #0E111A 55%, #151A28 100%);
   color: var(--ink-primary);
   font-family: var(--font-body);
   font-size: 16px;
@@ -68,10 +78,15 @@ body {
 
 .aura {
   position: absolute;
-  width: 58vw;
-  height: 58vw;
-  max-width: 1050px;
-  max-height: 1050px;
+  /* Plumas más extensas (2026-09-19): antes 58vw/1050px — la luz se
+     sentía como un foco puntual. Más grande = degradado más gradual
+     (el mismo rango de alfa repartido en más superficie), así se lee
+     como una pluma de luz que respira hacia el centro, no un círculo
+     con borde. */
+  width: 72vw;
+  height: 72vw;
+  max-width: 1300px;
+  max-height: 1300px;
   border-radius: 50%;
   /* Blend normal, no screen (2026-09-19): confirmado con una prueba de
      color sólido que la arquitectura de capas está bien — el problema
@@ -101,9 +116,11 @@ body {
      en el hero. */
   background: radial-gradient(circle at 42% 38%,
     rgba(244, 118, 70, 0.82) 0%,
+    rgba(238, 110, 78, 0.60) 20%,
     rgba(236, 104, 84, 0.46) 38%,
     rgba(232, 148, 62, 0.22) 58%,
-    transparent 74%);
+    rgba(232, 148, 62, 0.08) 70%,
+    transparent 82%);
   animation: aura-warm-drift 29s ease-in-out infinite alternate;
   translate: 0 calc((var(--scroll-p, 0.5) - 0.5) * 85vh);
   filter: hue-rotate(calc((var(--scroll-p, 0.5) - 0.5) * 64deg));
@@ -115,9 +132,11 @@ body {
   /* núcleo menta descentrado + halo teal frío */
   background: radial-gradient(circle at 58% 62%,
     rgba(92, 226, 180, 0.70) 0%,
+    rgba(88, 214, 187, 0.50) 22%,
     rgba(86, 202, 194, 0.38) 42%,
     rgba(96, 180, 200, 0.18) 60%,
-    transparent 72%);
+    rgba(96, 180, 200, 0.07) 72%,
+    transparent 84%);
   animation: aura-cool-drift 37s ease-in-out infinite alternate;
   translate: 0 calc((var(--scroll-p, 0.5) - 0.5) * -95vh);
   filter: hue-rotate(calc((var(--scroll-p, 0.5) - 0.5) * -58deg));
@@ -148,16 +167,20 @@ body {
   .aura-warm {
     background: radial-gradient(circle at 42% 38%,
       color(display-p3 0.95 0.45 0.26 / 0.85) 0%,
+      color(display-p3 0.93 0.43 0.31 / 0.62) 20%,
       color(display-p3 0.92 0.40 0.32 / 0.48) 38%,
       color(display-p3 0.90 0.58 0.24 / 0.23) 58%,
-      transparent 74%);
+      color(display-p3 0.90 0.58 0.24 / 0.08) 70%,
+      transparent 82%);
   }
   .aura-cool {
     background: radial-gradient(circle at 58% 62%,
       color(display-p3 0.34 0.90 0.70 / 0.72) 0%,
+      color(display-p3 0.33 0.85 0.73 / 0.52) 22%,
       color(display-p3 0.32 0.80 0.77 / 0.40) 42%,
       color(display-p3 0.36 0.70 0.80 / 0.19) 60%,
-      transparent 72%);
+      color(display-p3 0.36 0.70 0.80 / 0.07) 72%,
+      transparent 84%);
   }
 }
 
