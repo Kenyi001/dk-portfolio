@@ -21,6 +21,22 @@ const {
 <!DOCTYPE html>
 <html lang={lang}>
 <head>
+  {Astro.url.pathname === '/' && (
+    <script is:inline>
+      /* Redirige antes del primer paint: sitio estático, sin SSR, así que esto
+         reemplaza el chequeo client-side que corría después del render y
+         causaba un flash de español + recarga completa para navegadores en inglés. */
+      (function () {
+        try {
+          if (sessionStorage.getItem('lang-chosen')) return;
+          var bl = (navigator.language || (navigator.languages && navigator.languages[0]) || 'es').toLowerCase();
+          if (bl.indexOf('en') === 0) {
+            window.location.replace('/en/');
+          }
+        } catch (e) {}
+      })();
+    </script>
+  )}
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>

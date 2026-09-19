@@ -25,3 +25,12 @@ Thumbs.db
 
 .vercel
 graphify-out/
+
+# Claude Code: local-only settings, not shared
+.claude/settings.local.json
+
+# Impeccable skill: compiled binary (platform-specific, ~15MB), generated
+# font-index cache, and hook cache
+.claude/skills/impeccable/scripts/bin/
+.claude/skills/impeccable/scripts/data/
+.impeccable/hook.cache.json

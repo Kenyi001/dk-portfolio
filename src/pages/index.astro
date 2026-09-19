@@ -14,25 +14,6 @@ import AchievementsSection from '../components/AchievementsSection.astro';
   title="Dax Kenji Tellez Duran — Ingeniero de Sistemas · Datos e IA aplicada"
   description="Portfolio de Dax Kenji Tellez Duran, Ingeniero de Sistemas en Santa Cruz, Bolivia. Análisis de datos, IA aplicada y sistemas backend: Python, SQL, Power BI, RAG en producción bancaria, Node.js y C# .NET."
 >
-  <!-- Detección automática de idioma del browser -->
-  <!-- Solo redirige si el usuario NO eligió un idioma manualmente antes -->
-  <script>
-    (function() {
-      // Si el usuario ya eligió idioma manualmente, respetarlo
-      const chosen = sessionStorage.getItem('lang-chosen');
-      if (chosen) return;
-
-      // Detectar idioma del browser (ej: "en-US", "es-419", "en")
-      const browserLang = (navigator.language || navigator.languages?.[0] || 'es').toLowerCase();
-      const isEnglish = browserLang.startsWith('en');
-
-      // Solo redirigir si el browser es inglés y estamos en la raíz española
-      if (isEnglish && window.location.pathname === '/') {
-        window.location.replace('/en/');
-      }
-    })();
-  </script>
-
   <Hero />
   <ProjectsGrid />
   <ExperienceSection />
