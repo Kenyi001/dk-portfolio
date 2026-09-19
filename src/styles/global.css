@@ -73,8 +73,13 @@ body {
   max-width: 1050px;
   max-height: 1050px;
   border-radius: 50%;
-  /* screen = luz aditiva: visible incluso en paneles que aplastan negros (gamma 2.2) */
-  mix-blend-mode: screen;
+  /* Blend normal, no screen (2026-09-19): confirmado con una prueba de
+     color sólido que la arquitectura de capas está bien — el problema
+     era que screen-blend con alfa bajo se diluye casi a cero apenas hay
+     una sección (0.84 alfa) + una card encima (otra capa semitranspa-
+     rente) atenuando dos veces. Con blend normal y alfa más alto el
+     degradado pinta un color real que se nota en cualquier sección,
+     sin depender de cuánto se "aditivara" contra el fondo. */
   will-change: transform, opacity, translate, filter;
 }
 
@@ -95,10 +100,10 @@ body {
      intensidad el brillo se nota incluso debajo de las cards, no solo
      en el hero. */
   background: radial-gradient(circle at 42% 38%,
-    rgba(244, 118, 70, 0.40) 0%,
-    rgba(236, 104, 84, 0.19) 36%,
-    rgba(232, 148, 62, 0.08) 54%,
-    transparent 70%);
+    rgba(244, 118, 70, 0.82) 0%,
+    rgba(236, 104, 84, 0.46) 38%,
+    rgba(232, 148, 62, 0.22) 58%,
+    transparent 74%);
   animation: aura-warm-drift 29s ease-in-out infinite alternate;
   translate: 0 calc((var(--scroll-p, 0.5) - 0.5) * 85vh);
   filter: hue-rotate(calc((var(--scroll-p, 0.5) - 0.5) * 64deg));
@@ -109,10 +114,10 @@ body {
   bottom: -16%;
   /* núcleo menta descentrado + halo teal frío */
   background: radial-gradient(circle at 58% 62%,
-    rgba(92, 226, 180, 0.32) 0%,
-    rgba(86, 202, 194, 0.14) 40%,
-    rgba(96, 180, 200, 0.06) 56%,
-    transparent 68%);
+    rgba(92, 226, 180, 0.70) 0%,
+    rgba(86, 202, 194, 0.38) 42%,
+    rgba(96, 180, 200, 0.18) 60%,
+    transparent 72%);
   animation: aura-cool-drift 37s ease-in-out infinite alternate;
   translate: 0 calc((var(--scroll-p, 0.5) - 0.5) * -95vh);
   filter: hue-rotate(calc((var(--scroll-p, 0.5) - 0.5) * -58deg));
@@ -142,17 +147,17 @@ body {
 @media (color-gamut: p3) {
   .aura-warm {
     background: radial-gradient(circle at 42% 38%,
-      color(display-p3 0.95 0.45 0.26 / 0.42) 0%,
-      color(display-p3 0.92 0.40 0.32 / 0.20) 36%,
-      color(display-p3 0.90 0.58 0.24 / 0.09) 54%,
-      transparent 70%);
+      color(display-p3 0.95 0.45 0.26 / 0.85) 0%,
+      color(display-p3 0.92 0.40 0.32 / 0.48) 38%,
+      color(display-p3 0.90 0.58 0.24 / 0.23) 58%,
+      transparent 74%);
   }
   .aura-cool {
     background: radial-gradient(circle at 58% 62%,
-      color(display-p3 0.34 0.90 0.70 / 0.34) 0%,
-      color(display-p3 0.32 0.80 0.77 / 0.15) 40%,
-      color(display-p3 0.36 0.70 0.80 / 0.07) 56%,
-      transparent 68%);
+      color(display-p3 0.34 0.90 0.70 / 0.72) 0%,
+      color(display-p3 0.32 0.80 0.77 / 0.40) 42%,
+      color(display-p3 0.36 0.70 0.80 / 0.19) 60%,
+      transparent 72%);
   }
 }
 
