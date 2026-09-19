@@ -375,49 +375,55 @@ const t = useTranslations(lang);
     );
   }
 
-  /* ── Pantallas 1080p: compactar para que el hero entre en el fold ── */
+  /* ── Pantallas 1080p: compactar para que el hero entre en el fold ──
+     Calibrado a 940px de viewport útil (Chrome normal). Un usuario con
+     la barra de marcadores activa pierde ~35-40px más — a 880px el CTA
+     se pasaba del viewport y quedaba tapado por la barra de tareas
+     (reportado 2026-09-19). El signal-row ya estaba marcado como
+     redundante con el badge (crítica dual del mismo día); se oculta acá
+     también, no solo en mobile, para recuperar ese margen. */
   @media (min-width: 769px) and (max-height: 1160px) {
     .hero {
-      padding: 3.6rem 2rem 3rem;
+      padding: 2.6rem 2rem 2.2rem;
     }
     .title {
-      font-size: 4rem;
-      margin-bottom: 1.2rem;
+      font-size: 3.6rem;
+      margin-bottom: 1rem;
     }
     .hero-name-lockup {
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.7rem;
     }
     .hero-name-main {
-      font-size: 1.55rem;
+      font-size: 1.4rem;
     }
     .pre-title {
-      margin-bottom: 1rem;
+      margin-bottom: 0.85rem;
     }
     .badge-role {
-      margin-bottom: 1.2rem;
-    }
-    .bio {
-      font-size: 1.1rem;
-      margin-bottom: 1.3rem;
-    }
-    .stat-item {
-      min-height: 82px;
-      padding: 0.85rem;
-    }
-    .stat-num {
-      font-size: 1.5rem;
-    }
-    .hero-stats {
       margin-bottom: 1rem;
     }
-    .signal-row {
-      margin-bottom: 1.4rem;
-    }
-    .cta-group {
+    .bio {
+      font-size: 1.02rem;
       margin-bottom: 1.1rem;
     }
+    .stat-item {
+      min-height: 72px;
+      padding: 0.7rem;
+    }
+    .stat-num {
+      font-size: 1.35rem;
+    }
+    .hero-stats {
+      margin-bottom: 0.9rem;
+    }
+    .signal-row {
+      display: none;
+    }
+    .cta-group {
+      margin-bottom: 0.9rem;
+    }
     .hero-rule {
-      bottom: 1.75rem;
+      bottom: 1.5rem;
     }
   }
 
