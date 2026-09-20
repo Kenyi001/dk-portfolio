@@ -33,6 +33,19 @@
   --font-display:  'Space Grotesk', 'Arial Black', sans-serif;
   --font-mono:     'JetBrains Mono', 'Courier New', monospace;
   --font-body:     'Archivo', system-ui, sans-serif;
+
+  /* ── Motion tokens (apple-design, 2026-09-19) ──
+     Hover/settle: curva de desaceleración sin rebote, traducción a CSS
+     de "damping 1.0, response 0.3-0.4s" (crítico, sin overshoot) de la
+     skill. Press: valor que la propia skill prescribe para botones
+     simples (no gestos de arrastre) — instantáneo, sin teatro. */
+  --ease-hover:     cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-hover: 320ms;
+  --duration-fast:  150ms;
+  --ease-press:     ease-out;
+  --duration-press: 100ms;
+  --lift-button:    -2px;
+  --lift-card:      -4px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

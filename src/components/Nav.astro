@@ -145,7 +145,12 @@ const isActive = (path: string) => {
     padding: 0.4rem 0.2rem;
     text-decoration: none;
     position: relative;
-    transition: color 150ms ease;
+    transition: color var(--duration-fast) ease-out;
+  }
+
+  .nav-link:active {
+    opacity: 0.55;
+    transition: opacity var(--duration-press) var(--ease-press);
   }
 
   /* Underline que crece desde la izquierda */
@@ -214,11 +219,15 @@ const isActive = (path: string) => {
     padding: 5px 10px;
     border-radius: 4px;
     text-decoration: none;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color var(--duration-fast) ease-out, border-color var(--duration-fast) ease-out;
   }
   .lang-switch:hover {
     color: var(--accent);
     border-color: var(--accent);
+  }
+  .lang-switch:active {
+    opacity: 0.55;
+    transition: opacity var(--duration-press) var(--ease-press);
   }
 
   /* ─── Hamburger ─── */
@@ -243,6 +252,10 @@ const isActive = (path: string) => {
     transform-origin: center;
   }
   .hamburger:hover span { background: var(--accent); }
+  .hamburger:active {
+    transform: scale(0.9);
+    transition: transform var(--duration-press) var(--ease-press);
+  }
 
   /* X cuando está abierto */
   .hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -279,12 +292,16 @@ const isActive = (path: string) => {
     padding: 0.85rem 2rem;
     text-decoration: none;
     border-left: 2px solid transparent;
-    transition: color 150ms, border-color 150ms;
+    transition: color var(--duration-fast) ease-out, border-color var(--duration-fast) ease-out;
   }
   .mobile-link:hover,
   .mobile-link.active {
     color: var(--accent);
     border-left-color: var(--accent);
+  }
+  .mobile-link:active {
+    opacity: 0.55;
+    transition: opacity var(--duration-press) var(--ease-press);
   }
 
   /* ─── Responsive ─── */
@@ -307,5 +324,9 @@ const isActive = (path: string) => {
 
     .hamburger   { display: flex; }
     .mobile-menu { display: grid; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hamburger:active { transform: none !important; }
   }
 </style>

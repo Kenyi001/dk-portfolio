@@ -74,7 +74,11 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     padding: 1.55rem;
     border-radius: 6px;
     position: relative;
-    transition: all 0.3s ease;
+    transition:
+      transform var(--duration-hover) var(--ease-hover),
+      background var(--duration-hover) var(--ease-hover),
+      border-color var(--duration-hover) var(--ease-hover),
+      box-shadow var(--duration-hover) var(--ease-hover);
     height: 100%;
     text-decoration: none;
     color: inherit;
@@ -89,8 +93,13 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
   .project-card:hover {
     background: linear-gradient(180deg, rgba(245, 241, 234, 0.075), rgba(245, 241, 234, 0.035));
     border-color: var(--border-accent);
-    transform: translateY(-4px);
+    transform: translateY(var(--lift-card));
     box-shadow: var(--shadow-soft);
+  }
+
+  .project-card:active {
+    transform: translateY(-1px) scale(0.99);
+    transition: transform var(--duration-press) var(--ease-press);
   }
 
   .award-badge {
@@ -177,6 +186,8 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     border: 1px solid var(--border-subtle);
     padding: 0.28rem 0.5rem;
     border-radius: 4px;
+    /* no tenía transición: el color saltaba de golpe al hover de la card */
+    transition: color var(--duration-fast) ease-out, border-color var(--duration-fast) ease-out;
   }
 
   .project-card:hover .tech-tag {
@@ -218,11 +229,19 @@ const isTokenSaver = title === "Token Saver System" || slug === "token-saver" ||
     font-family: var(--font-mono);
     font-size: 1.25rem;
     color: var(--ink-secondary);
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: color var(--duration-hover) var(--ease-hover), transform var(--duration-hover) var(--ease-hover);
   }
 
   .project-card:hover .card-arrow {
     color: var(--accent);
     transform: translate(2px, -2px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card:hover,
+    .project-card:active,
+    .project-card:hover .card-arrow {
+      transform: none !important;
+    }
   }
 </style>

@@ -68,10 +68,17 @@ const year = new Date().getFullYear();
     display: inline-flex;
     align-items: center;
     min-height: 40px;
+    /* no tenía transición: el color saltaba de golpe al hover */
+    transition: color var(--duration-fast) ease-out;
   }
 
   .contact-link:hover {
     color: var(--accent);
+  }
+
+  .contact-link:active {
+    opacity: 0.55;
+    transition: opacity var(--duration-press) var(--ease-press);
   }
 
   .footer-bottom {

@@ -117,37 +117,56 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
 <script>
   // Filter logic
+  // apple-design §3 (interruptibilidad): la versión anterior usaba dos
+  // setTimeout encadenados (200ms + 50ms) que desvanecían TODAS las
+  // cards en cada click, incluso las que ya estaban visibles y se
+  // quedaban — clicks rápidos entre filtros podían pisarse entre sí y
+  // dejar una card a medio desvanecer. Ahora: solo se anima lo que
+  // realmente cambia de estado, atado a la transición CSS real que
+  // .grid-item ya declaraba (y que el JS anterior ignoraba por completo).
   const filterBtns = document.querySelectorAll('.filter-btn');
   const gridItems = document.querySelectorAll('.grid-item');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Toggle active state on buttons
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
       const filterValue = btn.getAttribute('data-filter');
 
       gridItems.forEach(item => {
-        const categoryAttr = item.getAttribute('data-category') || '';
+        const el = item as HTMLElement;
+        const categoryAttr = el.getAttribute('data-category') || '';
         const categories = categoryAttr.split(',');
-        const isFinalCard = item.classList.contains('final-build-card');
+        const isFinalCard = el.classList.contains('final-build-card');
+        const shouldShow = filterValue === 'all' || categories.includes(filterValue) || isFinalCard;
 
-        // Reset item opacity/transition
-        (item as HTMLElement).style.opacity = '0';
-        (item as HTMLElement).style.transform = 'scale(0.95)';
-
-        setTimeout(() => {
-          if (filterValue === 'all' || categories.includes(filterValue) || isFinalCard) {
-            (item as HTMLElement).style.display = 'block';
-            setTimeout(() => {
-              (item as HTMLElement).style.opacity = '1';
-              (item as HTMLElement).style.transform = 'scale(1)';
-            }, 50);
-          } else {
-            (item as HTMLElement).style.display = 'none';
+        if (shouldShow) {
+          if (el.style.display === 'none') {
+            el.style.display = 'block';
+            // Arranca desde oculto y deja que la transición CSS entre —
+            // en el mismo frame no animaría, por eso el rAF.
+            el.style.opacity = '0';
+            el.style.transform = reduceMotion ? 'none' : 'scale(0.95)';
+            requestAnimationFrame(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'scale(1)';
+            });
           }
-        }, 200);
+          // Ya visible y debe seguir así: no se toca, nada que animar.
+        } else {
+          if (el.style.display !== 'none') {
+            el.style.opacity = '0';
+            el.style.transform = reduceMotion ? 'none' : 'scale(0.95)';
+            const hideWhenFaded = (e: TransitionEvent) => {
+              if (e.propertyName !== 'opacity') return;
+              el.style.display = 'none';
+              el.removeEventListener('transitionend', hideWhenFaded);
+            };
+            el.addEventListener('transitionend', hideWhenFaded);
+          }
+        }
       });
     });
   });
@@ -210,12 +229,17 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
     cursor: pointer;
     padding: 0.5rem 0.85rem;
     border-radius: 4px;
-    transition: all 0.2s ease;
+    transition: color var(--duration-fast) ease-out, background var(--duration-fast) ease-out;
   }
 
   .filter-btn:hover, .filter-btn.active {
     color: var(--ink-primary);
     background: rgba(236, 115, 87, 0.12);
+  }
+
+  .filter-btn:active {
+    opacity: 0.6;
+    transition: opacity var(--duration-press) var(--ease-press);
   }
 
   .projects-grid {

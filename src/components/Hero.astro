@@ -176,7 +176,11 @@ const t = useTranslations(lang);
     line-height: 0.94;
     margin-bottom: 1.6rem;
     font-weight: 700;
-    letter-spacing: 0;
+    /* apple-design §15: texto display grande pide tracking negativo —
+       este es el texto más grande de la página y era el único punto
+       del componente con letter-spacing plano. Escala en em, no rompe
+       ninguna de las capas de breakpoint (ninguna sobreescribe esto). */
+    letter-spacing: -0.02em;
     max-width: 920px;
   }
 
@@ -229,6 +233,10 @@ const t = useTranslations(lang);
     font-weight: 500;
     line-height: 1.35;
     max-width: 100%;
+    /* apple-design §12: material real, no un relleno plano — mismo
+       patrón que ya usa el nav (blur), a menor escala por ser un chip. */
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
   }
 
   .bio {
@@ -258,6 +266,8 @@ const t = useTranslations(lang);
     border: 1px solid var(--border-subtle);
     border-radius: 6px;
     justify-content: space-between;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 
   .stat-num {
@@ -266,7 +276,7 @@ const t = useTranslations(lang);
     font-weight: 700;
     color: var(--accent);
     line-height: 1;
-    letter-spacing: 0;
+    letter-spacing: -0.01em;
   }
 
   .stat-label {
@@ -293,6 +303,8 @@ const t = useTranslations(lang);
     border-radius: 4px;
     padding: 0.38rem 0.7rem;
     background: rgba(8, 10, 15, 0.42);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .cta-group {
@@ -309,8 +321,21 @@ const t = useTranslations(lang);
     border-radius: 6px;
     font-weight: 600;
     letter-spacing: 0;
-    transition: all 0.3s ease;
+    transition:
+      transform var(--duration-hover) var(--ease-hover),
+      background-color var(--duration-hover) var(--ease-hover),
+      border-color var(--duration-hover) var(--ease-hover),
+      color var(--duration-hover) var(--ease-hover),
+      box-shadow var(--duration-hover) var(--ease-hover);
     text-decoration: none;
+  }
+
+  /* apple-design §1: feedback en pointer-down, no solo en hover/release.
+     El press cancela el lift y comprime — se siente empujado hacia la
+     superficie, no solo "soltado". */
+  .cta-button:active {
+    transform: translateY(0) scale(0.97);
+    transition: transform var(--duration-press) var(--ease-press);
   }
 
   .cta-button.primary {
@@ -320,7 +345,7 @@ const t = useTranslations(lang);
     box-shadow: 0 18px 50px rgba(236, 115, 87, 0.16);
   }
   .cta-button.primary:hover {
-    transform: translateY(-2px);
+    transform: translateY(var(--lift-button));
   }
   .cta-button.secondary {
     background-color: rgba(245, 241, 234, 0.045);
@@ -330,7 +355,7 @@ const t = useTranslations(lang);
   .cta-button.secondary:hover {
     border-color: var(--accent);
     color: var(--accent);
-    transform: translateY(-2px);
+    transform: translateY(var(--lift-button));
   }
 
   .profile-links {
@@ -344,6 +369,12 @@ const t = useTranslations(lang);
   .profile-links a {
     color: var(--ink-muted);
     text-decoration: none;
+    transition: color var(--duration-fast) ease-out;
+  }
+
+  .profile-links a:active {
+    opacity: 0.55;
+    transition: opacity var(--duration-press) var(--ease-press);
   }
 
   /* Target táctil ≥40px solo donde hay dedo (no rompe el fold en desktop) */
@@ -657,6 +688,15 @@ const t = useTranslations(lang);
     }
     .hero-rule {
       bottom: 1.5rem;
+    }
+  }
+
+  /* apple-design §14: reducir movimiento no es "cero feedback" — el
+     color/fondo del CTA sigue cambiando, solo se apaga el transform. */
+  @media (prefers-reduced-motion: reduce) {
+    .cta-button:hover,
+    .cta-button:active {
+      transform: none !important;
     }
   }
 

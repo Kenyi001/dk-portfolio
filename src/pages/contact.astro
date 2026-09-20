@@ -130,16 +130,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border: 1px solid var(--border-subtle);
     padding: 2rem;
     border-radius: 6px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    /* antes solo transform+border-color, pero box-shadow SÍ cambia en
+       hover (línea de abajo) y aparecía de golpe sin transición */
+    transition:
+      transform var(--duration-hover) var(--ease-hover),
+      border-color var(--duration-hover) var(--ease-hover),
+      box-shadow var(--duration-hover) var(--ease-hover);
     text-decoration: none;
     color: inherit;
     cursor: pointer;
   }
 
   .contact-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(var(--lift-card));
     border-color: var(--accent);
     box-shadow: var(--shadow-soft);
+  }
+
+  .contact-card:active {
+    transform: translateY(-1px) scale(0.99);
+    transition: transform var(--duration-press) var(--ease-press);
   }
 
   .label {
@@ -148,6 +158,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     color: var(--ink-secondary);
     letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
+    transition: color var(--duration-fast) ease-out;
   }
 
   .contact-card:hover .label {
@@ -177,6 +188,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .value {
       font-size: 1.1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-card:hover,
+    .contact-card:active {
+      transform: none !important;
     }
   }
 </style>
