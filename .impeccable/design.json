@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-20T19:35:00.000Z",
+  "title": "Design System: Dax Kenji Tellez Duran — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "signal-terracotta": {
+        "role": "primary",
+        "displayName": "Signal Terracotta",
+        "canonical": "#EC7357",
+        "tonalRamp": ["#361F1D", "#753C32", "#B55A46", "#EC7357", "#EF937C", "#F3B2A0", "#F6D2C5", "#F9ECE4"]
+      },
+      "system-mint": {
+        "role": "secondary",
+        "displayName": "System Mint",
+        "canonical": "#7DD3B0",
+        "tonalRamp": ["#1F322F", "#406A5C", "#61A389", "#7DD3B0", "#9BDCBF", "#B9E4CF", "#D7EDDE", "#F0F4EB"]
+      },
+      "neutral-canvas": {
+        "role": "neutral",
+        "displayName": "Neutral Canvas",
+        "canonical": "#0B0D13",
+        "tonalRamp": ["#090B10", "#090B11", "#0A0C12", "#0B0D13", "#444548", "#7E7D7D", "#B7B5B2", "#E7E4DE"]
+      },
+      "neutral-ink": { "role": "neutral", "displayName": "Neutral Ink", "canonical": "#F5F1EA" },
+      "neutral-ink-secondary": { "role": "neutral", "displayName": "Neutral Ink Secondary", "canonical": "#A7B0BE" },
+      "neutral-ink-muted": { "role": "neutral", "displayName": "Neutral Ink Muted", "canonical": "#8B96A7" },
+      "neutral-ink-dim": { "role": "neutral", "displayName": "Neutral Ink Dim", "canonical": "#2A3040" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titular del hero y headers de sección grandes." },
+      "body": { "displayName": "Body", "purpose": "Descripciones, bio, texto de lectura larga." },
+      "label": { "displayName": "Label / Mono", "purpose": "Metadata, badges, nav, chips de stack técnico — cualquier cosa que se presente como dato verificable." }
+    },
+    "shadows": [
+      { "name": "soft-lift", "value": "0 24px 70px rgba(0,0,0,0.34)", "purpose": "Hover de cards — nunca en reposo." },
+      { "name": "cta-glow", "value": "0 18px 50px rgba(236,115,87,0.16)", "purpose": "Sombra de color en el botón primario en reposo." }
+    ],
+    "motion": [
+      { "name": "ease-hover", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Desaceleración sin rebote — hover de botones y cards." },
+      { "name": "duration-hover", "value": "320ms", "purpose": "Duración estándar de hover en todo el sitio." },
+      { "name": "duration-fast", "value": "150ms", "purpose": "Micro-transiciones de color/borde en links de texto." },
+      { "name": "ease-press", "value": "ease-out", "purpose": "Feedback de press — instantáneo, sin teatro." },
+      { "name": "duration-press", "value": "100ms", "purpose": "Duración del press en cualquier elemento clickeable." },
+      { "name": "lift-button", "value": "-2px", "purpose": "translateY en hover de botones/controles chicos." },
+      { "name": "lift-card", "value": "-4px", "purpose": "translateY en hover de superficies tipo card." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "768px" },
+      { "name": "dk3d-visible", "value": "1200px" },
+      { "name": "dk3d-large", "value": "1600px" },
+      { "name": "hero-1080p-chrome", "value": "940px de alto útil" },
+      { "name": "hero-2k-chrome", "value": "1161-1360px de alto útil" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA principal — fondo terracota, texto oscuro para contraste, lift + press físicos.",
+      "html": "<a href=\"#\" class=\"ds-btn-primary\">Contactar</a>",
+      "css": ".ds-btn-primary { display: inline-block; background-color: #EC7357; color: #130B08; font-family: 'Archivo', system-ui, sans-serif; font-size: 0.98rem; font-weight: 600; padding: 0.82rem 1.25rem; border-radius: 6px; border: 1px solid rgba(236,115,87,0.84); box-shadow: 0 18px 50px rgba(236,115,87,0.16); text-decoration: none; transition: transform 320ms cubic-bezier(0.22,1,0.36,1), background-color 320ms cubic-bezier(0.22,1,0.36,1); } .ds-btn-primary:hover { transform: translateY(-2px); } .ds-btn-primary:active { transform: translateY(0) scale(0.97); transition: transform 100ms ease-out; } .ds-btn-primary:focus-visible { outline: 2px solid #EC7357; outline-offset: 3px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "CTA secundaria — fondo transparente, borde neutro que vira a terracota en hover.",
+      "html": "<a href=\"#\" class=\"ds-btn-secondary\">Ver proyectos</a>",
+      "css": ".ds-btn-secondary { display: inline-block; background-color: rgba(245,241,234,0.045); color: #F5F1EA; font-family: 'Archivo', system-ui, sans-serif; font-size: 0.98rem; font-weight: 600; padding: 0.82rem 1.25rem; border-radius: 6px; border: 1px solid rgba(245,241,234,0.16); text-decoration: none; transition: transform 320ms cubic-bezier(0.22,1,0.36,1), color 320ms cubic-bezier(0.22,1,0.36,1), border-color 320ms cubic-bezier(0.22,1,0.36,1); } .ds-btn-secondary:hover { border-color: #EC7357; color: #EC7357; transform: translateY(-2px); } .ds-btn-secondary:active { transform: translateY(0) scale(0.97); transition: transform 100ms ease-out; }"
+    },
+    {
+      "name": "Project Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Card de proyecto — gradiente sutil, lift al hover, press físico.",
+      "html": "<a href=\"#\" class=\"ds-card\"><span class=\"ds-card-badge\">HACKATHON</span><h3 class=\"ds-card-title\">Prisma</h3><p class=\"ds-card-desc\">Analizador financiero on-chain para billeteras Avalanche y Ethereum.</p></a>",
+      "css": ".ds-card { display: block; background: linear-gradient(180deg, rgba(245,241,234,0.055), rgba(245,241,234,0.025)); border: 1px solid rgba(245,241,234,0.08); padding: 1.55rem; border-radius: 6px; text-decoration: none; color: inherit; transition: transform 320ms cubic-bezier(0.22,1,0.36,1), background 320ms cubic-bezier(0.22,1,0.36,1), border-color 320ms cubic-bezier(0.22,1,0.36,1), box-shadow 320ms cubic-bezier(0.22,1,0.36,1); } .ds-card:hover { background: linear-gradient(180deg, rgba(245,241,234,0.075), rgba(245,241,234,0.035)); border-color: rgba(236,115,87,0.42); transform: translateY(-4px); box-shadow: 0 24px 70px rgba(0,0,0,0.34); } .ds-card:active { transform: translateY(-1px) scale(0.99); transition: transform 100ms ease-out; } .ds-card-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #EC7357; background: rgba(236,115,87,0.14); padding: 0.28rem 0.55rem; border-radius: 4px; } .ds-card-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; color: #F5F1EA; font-weight: 700; margin-top: 0.8rem; } .ds-card-desc { font-family: 'Archivo', system-ui, sans-serif; font-size: 1rem; color: #A7B0BE; line-height: 1.6; margin-top: 0.5rem; }"
+    },
+    {
+      "name": "Mono Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Tag de stack técnico / label mono — usado en cards, filtros, badges de rol.",
+      "html": "<span class=\"ds-chip\">Node.js</span>",
+      "css": ".ds-chip { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #A7B0BE; background-color: rgba(8,10,15,0.42); border: 1px solid rgba(245,241,234,0.08); padding: 0.28rem 0.5rem; border-radius: 4px; transition: color 150ms ease-out, border-color 150ms ease-out; }"
+    },
+    {
+      "name": "Nav Bar",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Barra de navegación fija con material real (blur) — el único backdrop-filter pesado del sitio.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-link ds-nav-link--active\">Proyectos</a><a href=\"#\" class=\"ds-nav-link\">Sobre mí</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 1.1rem; background: rgba(8,10,15,0.86); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(245,241,234,0.08); padding: 1rem 1.5rem; } .ds-nav-link { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #A7B0BE; text-decoration: none; position: relative; padding: 0.4rem 0.2rem; transition: color 150ms ease-out; } .ds-nav-link:hover { color: #F5F1EA; } .ds-nav-link--active { color: #EC7357; } .ds-nav-link:active { opacity: 0.55; transition: opacity 100ms ease-out; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Production Console",
+    "overview": "Este portafolio no vende una estética: presenta evidencia — sistemas reales en producción bancaria, hackathons con posición verificable, tests que corren contra una base de datos real, no contra mocks. El lenguaje visual sigue esa misma lógica: labels en monoespaciada como si fueran output de terminal, números y métricas con el mismo peso que un título, y un fondo oscuro que nunca compite con el dato que tiene encima.\n\nLa paleta terracota/menta y las auras laterales que respiran son la única concesión atmosférica del sistema, calibradas para no distraer: ajustadas para sobrevivir en monitores de gamma alta sin volverse ruido en los de gama baja.\n\nRechazos visuales confirmados: sin mix-blend-mode:screen (se probó y se abandonó), sin border-left de acento salvo donde el grosor codifica información real, sin sombras decorativas fuera de hover.",
+    "keyCharacteristics": [
+      "Mono-labels como convención de 'esto es un dato verificable', no decoración",
+      "Terracota = acción humana / menta = señal de sistema",
+      "Cero relleno: cada número en el hero es una cifra real, citable",
+      "Motion con propósito: press feedback real, sin bounce salvo donde hay momentum físico"
+    ],
+    "rules": [
+      { "name": "The No-Invented-Numbers Rule", "body": "Todo dato mostrado como métrica tiene que ser verificable — ningún porcentaje o cifra se muestra si no se puede defender en una entrevista.", "section": "colors" },
+      { "name": "The Tracking-by-Size Rule", "body": "El tracking nunca es un valor fijo repetido: negativo en display grande, cercano a 0 en body, positivo en mono pequeño.", "section": "typography" },
+      { "name": "The Purposeful Blur Rule", "body": "Nada flota porque sí. El backdrop-filter aparece solo donde una superficie necesita separarse visualmente de las auras/fondo, nunca como decoración de relleno.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usar mono para cualquier cosa que sea o parezca un dato verificable",
+      "Do dar feedback de press (:active) real en todo elemento clickeable",
+      "Do aplicar backdrop-filter solo con propósito, nunca como relleno",
+      "Do verificar contraste real contra el fondo compuesto antes de usar --ink-muted en texto nuevo"
+    ],
+    "donts": [
+      "Don't usar border-radius: 999px — el sistema usa 4-6px",
+      "Don't agregar un border-left grueso de acento como 'toque de color' — es el tell más reconocible de diseño generado por IA",
+      "Don't usar Inter, Roboto u otras fuentes marcadas como sobreusadas, salvo decisión de marca explícita",
+      "Don't inventar una métrica o logro para llenar una sección"
+    ]
+  }
+}
