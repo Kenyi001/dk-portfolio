@@ -117,16 +117,22 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
 
 <script>
   // Filter logic
-  // apple-design §3 (interruptibilidad): la versión anterior usaba dos
-  // setTimeout encadenados (200ms + 50ms) que desvanecían TODAS las
-  // cards en cada click, incluso las que ya estaban visibles y se
-  // quedaban — clicks rápidos entre filtros podían pisarse entre sí y
-  // dejar una card a medio desvanecer. Ahora: solo se anima lo que
-  // realmente cambia de estado, atado a la transición CSS real que
-  // .grid-item ya declaraba (y que el JS anterior ignoraba por completo).
+  // apple-design §3 (interruptibilidad): dos intentos previos de este fix
+  // (setTimeout encadenados, luego un guard leyendo `display`/
+  // `getComputedStyle().opacity`) seguían dejando cards trabadas con
+  // clicks rápidos — confirmado en vivo: 11/12 quedaban ocultas tras
+  // 3-4 clicks seguidos. La causa real: con clicks sincrónicos el
+  // navegador no llega a recalcular estilos entre uno y otro, así que
+  // leer CSS para decidir el estado "actual" de un item es una carrera
+  // que a veces se pierde. Fix real: un estado explícito por item en un
+  // WeakMap (nunca se lee CSS para decidir), más el listener pendiente
+  // cancelado en cada click sin importar la rama.
   const filterBtns = document.querySelectorAll('.filter-btn');
   const gridItems = document.querySelectorAll('.grid-item');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pendingHide = new WeakMap<HTMLElement, (e: TransitionEvent) => void>();
+  const itemState = new WeakMap<HTMLElement, 'visible' | 'hiding' | 'hidden'>();
+  gridItems.forEach(item => itemState.set(item as HTMLElement, 'visible'));
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -141,31 +147,47 @@ projects = projects.sort((a, b) => b.data.date.localeCompare(a.data.date));
         const categories = categoryAttr.split(',');
         const isFinalCard = el.classList.contains('final-build-card');
         const shouldShow = filterValue === 'all' || categories.includes(filterValue) || isFinalCard;
+        const state = itemState.get(el) ?? 'visible';
+
+        const stale = pendingHide.get(el);
+        if (stale) {
+          el.removeEventListener('transitionend', stale);
+          pendingHide.delete(el);
+        }
 
         if (shouldShow) {
-          if (el.style.display === 'none') {
+          if (state === 'hidden') {
+            // Completamente oculto (display:none): hace falta el truco
+            // del rAF — sin caja no hay nada que transicionar todavía.
+            itemState.set(el, 'visible');
             el.style.display = 'block';
-            // Arranca desde oculto y deja que la transición CSS entre —
-            // en el mismo frame no animaría, por eso el rAF.
             el.style.opacity = '0';
             el.style.transform = reduceMotion ? 'none' : 'scale(0.95)';
             requestAnimationFrame(() => {
               el.style.opacity = '1';
               el.style.transform = 'scale(1)';
             });
+          } else if (state === 'hiding') {
+            // A medio desvanecer, todavía con display:block — no hace
+            // falta el truco del rAF, solo redirigir el target y la
+            // transición ya en curso lo retoma desde donde esté.
+            itemState.set(el, 'visible');
+            el.style.opacity = '1';
+            el.style.transform = 'scale(1)';
           }
-          // Ya visible y debe seguir así: no se toca, nada que animar.
-        } else {
-          if (el.style.display !== 'none') {
-            el.style.opacity = '0';
-            el.style.transform = reduceMotion ? 'none' : 'scale(0.95)';
-            const hideWhenFaded = (e: TransitionEvent) => {
-              if (e.propertyName !== 'opacity') return;
-              el.style.display = 'none';
-              el.removeEventListener('transitionend', hideWhenFaded);
-            };
-            el.addEventListener('transitionend', hideWhenFaded);
-          }
+          // state === 'visible': ya se está mostrando, no tocar nada.
+        } else if (state !== 'hidden') {
+          itemState.set(el, 'hiding');
+          el.style.opacity = '0';
+          el.style.transform = reduceMotion ? 'none' : 'scale(0.95)';
+          const hideWhenFaded = (e: TransitionEvent) => {
+            if (e.propertyName !== 'opacity') return;
+            el.style.display = 'none';
+            itemState.set(el, 'hidden');
+            pendingHide.delete(el);
+          };
+          pendingHide.set(el, hideWhenFaded);
+          el.addEventListener('transitionend', hideWhenFaded, { once: true });
         }
       });
     });

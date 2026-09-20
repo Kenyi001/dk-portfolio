@@ -175,11 +175,6 @@
       return [cv.width / 2 + x1 * k * scale, cv.height / 2 + y1 * k * scale, k];
     }
 
-    // Solo para el frame estático de reduced-motion — no es hot path.
-    function project(x: number, y: number, z: number, ayy: number, axx: number) {
-      return projectFast(x, y, z, Math.cos(ayy), Math.sin(ayy), Math.cos(axx), Math.sin(axx));
-    }
-
     const TAU = Math.PI * 2;
 
     function strokeChains(chains: number[][], projected: Array<[number, number, number]>, colorIdx: 0 | 1) {

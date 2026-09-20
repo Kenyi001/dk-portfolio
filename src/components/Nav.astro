@@ -112,6 +112,17 @@ const isActive = (path: string) => {
     font-weight: 900;
     letter-spacing: 0;
     text-decoration: none;
+    display: inline-block;
+    transition: transform var(--duration-fast) ease-out, opacity var(--duration-fast) ease-out;
+  }
+
+  .logo:hover {
+    opacity: 0.8;
+  }
+
+  .logo:active {
+    transform: scale(0.94);
+    transition: transform var(--duration-press) var(--ease-press);
   }
 
   .logo-d {
@@ -327,6 +338,7 @@ const isActive = (path: string) => {
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hamburger:active { transform: none !important; }
+    .hamburger:active,
+    .logo:active { transform: none !important; }
   }
 </style>
