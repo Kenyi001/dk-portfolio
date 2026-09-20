@@ -13,29 +13,145 @@
     const rootStyle = getComputedStyle(document.documentElement);
     const INK = rootStyle.getPropertyValue('--ink-primary').trim() || '#E8E0D4';
     const ACCENT = rootStyle.getPropertyValue('--accent').trim() || '#D4513A';
-    const OUTLINE = '#0D1017';
-    const TONES: Record<string, { cap: string; wallL: string; wallD: string }> = {
-      D: { cap: INK, wallL: '#B5AEA2', wallD: '#7E786E' },
-      K: { cap: ACCENT, wallL: '#A8402C', wallD: '#6E2418' },
-    };
+    const MINT = rootStyle.getPropertyValue('--accent-2').trim() || '#7DD3B0';
 
     const DOUT = [[0,0],[0,4],[1.5,4],[2.4,3.1],[2.4,0.9],[1.5,0]];
     const DIN = [[0.7,0.7],[0.7,3.3],[1.3,3.3],[1.7,2.9],[1.7,1.1],[1.3,0.7]];
     const KPOLY = [[0,0],[0,4],[0.8,4],[0.8,2.7],[1.9,4],[2.9,4],[1.55,2.0],[2.9,0],[1.9,0],[0.8,1.35],[0.8,0]];
     const S = 0.6, DOFF = -3.2, KOFF = 0.35, DEPTH = 0.34;
-    const LETTERS: Array<[number[][], number[][] | null, number, string]> = [
-      [DOUT, DIN, DOFF, 'D'],
-      [KPOLY, null, KOFF, 'K'],
-    ];
 
-    type Face = { pts: number[][]; hole: number[][] | null; type: string; letter: string; z: number };
+    function P2(p: number[], offX: number): [number, number] {
+      return [(p[0] + offX) * S, -(p[1] - 2) * S];
+    }
+
+    /* ── Nube de partículas: datos dispersos que convergen en D/K ──
+       Cada partícula tiene una posición hogar (sobre el contorno o el
+       relleno de la letra) y un vector de dispersión fijo, calculado
+       una sola vez al construir la nube. Un escalar global (converge /
+       dragScatter) decide cuánto de ese vector se suma a la posición
+       hogar — así toda la nube se mueve como un solo cuerpo en vez de
+       partículas independientes, que se leería como ruido, no como
+       "la misma nube, dispersa". */
+    interface Particle {
+      hx: number; hy: number; hz: number;
+      vx: number; vy: number; vz: number;
+      color: 0 | 1 | 2; // 0 = INK (D), 1 = ACCENT (K), 2 = MINT (borde, minoría)
+    }
+
+    const particles: Particle[] = [];
+    const dChains: number[][] = [];
+    const kChains: number[][] = [];
+
+    function scatterVec(): [number, number, number] {
+      const u = Math.random() * 2 - 1;
+      const theta = Math.random() * Math.PI * 2;
+      const r = Math.sqrt(1 - u * u);
+      const mag = 1.4 + Math.random() * 1.8; // [1.4, 3.2]
+      return [r * Math.cos(theta) * mag, r * Math.sin(theta) * mag, u * mag];
+    }
+
+    function pointInPolygon(x: number, y: number, poly: number[][]): boolean {
+      let inside = false;
+      for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+        const xi = poly[i][0], yi = poly[i][1], xj = poly[j][0], yj = poly[j][1];
+        const hit = (yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi;
+        if (hit) inside = !inside;
+      }
+      return inside;
+    }
+
+    let mintCounter = 0;
+    function pushEdgeParticle(raw: number[], offX: number, z: number, baseColor: 0 | 1, chain: number[]) {
+      const [mx, my] = P2(raw, offX);
+      const jx = mx + (Math.random() - 0.5) * 0.02 * S;
+      const jy = my + (Math.random() - 0.5) * 0.02 * S;
+      const jz = z + (Math.random() - 0.5) * 0.03;
+      const [vx, vy, vz] = scatterVec();
+      const isMint = (mintCounter++ % 6) === 5;
+      particles.push({ hx: jx, hy: jy, hz: jz, vx, vy, vz, color: isMint ? 2 : baseColor });
+      chain.push(particles.length - 1);
+    }
+
+    const Z_LAYERS_EDGE = [-DEPTH, -DEPTH * 0.6, -DEPTH * 0.2, DEPTH * 0.2, DEPTH * 0.6, DEPTH];
+
+    function buildEdgeRing(poly: number[][], offX: number, baseColor: 0 | 1, targetChains: number[][]) {
+      let perim = 0;
+      const segs: number[] = [];
+      for (let i = 0; i < poly.length; i++) {
+        const a = poly[i], b = poly[(i + 1) % poly.length];
+        const d = Math.hypot(b[0] - a[0], b[1] - a[1]);
+        segs.push(d);
+        perim += d;
+      }
+      const step = 0.15;
+      const count = Math.max(4, Math.round(perim / step));
+      for (const z of Z_LAYERS_EDGE) {
+        const chain: number[] = [];
+        for (let i = 0; i < count; i++) {
+          const dist = (perim * i) / count;
+          let acc = 0, si = 0;
+          while (si < segs.length - 1 && acc + segs[si] < dist) { acc += segs[si]; si++; }
+          const a = poly[si], b = poly[(si + 1) % poly.length];
+          const t = segs[si] > 0 ? (dist - acc) / segs[si] : 0;
+          const raw = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+          pushEdgeParticle(raw, offX, z, baseColor, chain);
+        }
+        targetChains.push(chain);
+      }
+    }
+
+    function buildFill(outer: number[][], hole: number[][] | null, offX: number, baseColor: 0 | 1) {
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      for (const p of outer) {
+        x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]);
+        x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]);
+      }
+      const step = 0.22;
+      for (let gx = x0; gx <= x1; gx += step) {
+        for (let gy = y0; gy <= y1; gy += step) {
+          const jx = gx + (Math.random() - 0.5) * 0.08;
+          const jy = gy + (Math.random() - 0.5) * 0.08;
+          if (!pointInPolygon(jx, jy, outer)) continue;
+          if (hole && pointInPolygon(jx, jy, hole)) continue;
+          const [mx, my] = P2([jx, jy], offX);
+          for (let li = 0; li < 2; li++) {
+            const z = (Math.random() * 2 - 1) * DEPTH;
+            const [vx, vy, vz] = scatterVec();
+            particles.push({ hx: mx, hy: my, hz: z, vx, vy, vz, color: baseColor });
+          }
+        }
+      }
+    }
+
+    buildEdgeRing(DOUT, DOFF, 0, dChains);
+    buildEdgeRing(DIN, DOFF, 0, dChains);
+    buildEdgeRing(KPOLY, KOFF, 1, kChains);
+    buildFill(DOUT, DIN, DOFF, 0);
+    buildFill(KPOLY, null, KOFF, 1);
+
+    function hexToRgb(hex: string): [number, number, number] {
+      const clean = hex.replace('#', '');
+      const n = clean.length === 3 ? clean.split('').map((c) => c + c).join('') : clean;
+      const v = parseInt(n, 16) || 0;
+      return [(v >> 16) & 255, (v >> 8) & 255, v & 255];
+    }
+    const ALPHA_BUCKETS = 12;
+    const COLOR_TABLE: string[][] = [INK, ACCENT, MINT].map((hex) => {
+      const [r, g, b] = hexToRgb(hex);
+      return Array.from({ length: ALPHA_BUCKETS + 1 }, (_, i) => `rgba(${r},${g},${b},${(i / ALPHA_BUCKETS).toFixed(3)})`);
+    });
+    function colorFor(idx: 0 | 1 | 2, alpha: number): string {
+      const bucket = Math.max(0, Math.min(ALPHA_BUCKETS, Math.round(alpha * ALPHA_BUCKETS)));
+      return COLOR_TABLE[idx][bucket];
+    }
 
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let scale = 100;
     let rot = -1.15, rotTarget = 0.35, vel = 0, tickClock = 0;
     let tiltX = 0, tiltY = 0, tgtTX = 0, tgtTY = 0;
-    let explode = 0, explodeTarget = 0;
+    let converge = 0, convergeTarget = 0;
+    let dragScatter = 0, dragScatterVel = 0;
     let dragging = false, hasDragged = false, lastX = 0, lastY = 0, dragX = 0, dragY = 0;
     let running = false, rafId = 0;
 
@@ -49,103 +165,68 @@
       return true;
     }
 
-    function P2(p: number[], offX: number) {
-      return [(p[0] + offX) * S, -(p[1] - 2) * S];
-    }
-
-    function project(x: number, y: number, z: number, ayy: number, axx: number) {
-      let c = Math.cos(ayy), s = Math.sin(ayy);
-      const x1 = x * c - z * s, z1 = x * s + z * c;
-      c = Math.cos(axx); s = Math.sin(axx);
-      const y1 = y * c - z1 * s, z2 = y * s + z1 * c;
+    /* Hot path: seno/coseno se calculan UNA vez por frame en draw(), no
+       una vez por partícula — con ~2.000 partículas eso es la diferencia
+       entre 4 llamadas trig/frame y ~8.000. */
+    function projectFast(x: number, y: number, z: number, cy: number, sy: number, cx: number, sx: number): [number, number, number] {
+      const x1 = x * cy - z * sy, z1 = x * sy + z * cy;
+      const y1 = y * cx - z1 * sx, z2 = y * sx + z1 * cx;
       const k = 4.5 / (4.5 + z2);
-      return [cv.width / 2 + x1 * k * scale, cv.height / 2 + y1 * k * scale, z2];
+      return [cv.width / 2 + x1 * k * scale, cv.height / 2 + y1 * k * scale, k];
     }
 
-    function ringWalls(poly: number[][], offX: number, z0: number, z1: number, letter: string) {
-      const out: Array<{ pts: number[][]; type: string; letter: string }> = [];
-      for (let i = 0; i < poly.length; i++) {
-        const a = P2(poly[i], offX), b = P2(poly[(i + 1) % poly.length], offX);
-        const horiz = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
-        out.push({
-          pts: [[a[0], a[1], z0], [b[0], b[1], z0], [b[0], b[1], z1], [a[0], a[1], z1]],
-          type: horiz ? 'wallL' : 'wallD',
-          letter,
-        });
-      }
-      return out;
+    // Solo para el frame estático de reduced-motion — no es hot path.
+    function project(x: number, y: number, z: number, ayy: number, axx: number) {
+      return projectFast(x, y, z, Math.cos(ayy), Math.sin(ayy), Math.cos(axx), Math.sin(axx));
     }
 
-    function buildSlab(z0: number, z1: number) {
-      const faces: Array<{ pts: number[][]; hole?: number[][] | null; type: string; letter: string }> = [];
-      for (const [outer, hole, offX, letter] of LETTERS) {
-        for (const zc of [z1, z0]) {
-          faces.push({
-            pts: outer.map((p) => { const q = P2(p, offX); return [q[0], q[1], zc]; }),
-            hole: hole ? hole.map((p) => { const q = P2(p, offX); return [q[0], q[1], zc]; }) : null,
-            type: 'cap',
-            letter,
-          });
-        }
-        faces.push(...ringWalls(outer, offX, z0, z1, letter));
-        if (hole) faces.push(...ringWalls(hole, offX, z0, z1, letter));
-      }
-      return faces;
-    }
+    const TAU = Math.PI * 2;
 
-    function buildFaces() {
-      const g = explode * 0.5;
-      if (g < 0.005) return buildSlab(-DEPTH, DEPTH);
-      const th = (DEPTH * 2) / 3;
-      const faces = [];
-      for (const c of [-(th + g), 0, th + g]) faces.push(...buildSlab(c - th / 2, c + th / 2));
-      return faces;
-    }
-
-    function trace(pts: number[][]) {
-      ctx!.moveTo(pts[0][0], pts[0][1]);
-      for (let i = 1; i < pts.length; i++) ctx!.lineTo(pts[i][0], pts[i][1]);
-      ctx!.closePath();
-    }
-
-    function hatch(pts: number[][]) {
-      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-      for (const p of pts) {
-        x0 = Math.min(x0, p[0]); y0 = Math.min(y0, p[1]);
-        x1 = Math.max(x1, p[0]); y1 = Math.max(y1, p[1]);
-      }
-      ctx!.save();
-      ctx!.beginPath(); trace(pts); ctx!.clip();
-      ctx!.strokeStyle = 'rgba(13,16,23,0.5)';
-      ctx!.lineWidth = 1.4;
+    function strokeChains(chains: number[][], projected: Array<[number, number, number]>, colorIdx: 0 | 1) {
+      ctx!.strokeStyle = colorFor(colorIdx, 0.12);
       ctx!.beginPath();
-      for (let d = x0 - (y1 - y0); d < x1; d += 9) {
-        ctx!.moveTo(d, y1); ctx!.lineTo(d + (y1 - y0), y0);
+      for (const chain of chains) {
+        if (!chain.length) continue;
+        const [sx0, sy0] = projected[chain[0]];
+        ctx!.moveTo(sx0, sy0);
+        for (let i = 1; i < chain.length; i++) {
+          const [px, py] = projected[chain[i]];
+          ctx!.lineTo(px, py);
+        }
+        ctx!.lineTo(sx0, sy0);
       }
       ctx!.stroke();
-      ctx!.restore();
     }
 
     function draw(ayy: number, axx: number) {
       ctx!.clearRect(0, 0, cv.width, cv.height);
-      const faces: Face[] = buildFaces()
-        .map((f) => {
-          const pts = f.pts.map((p) => project(p[0], p[1], p[2], ayy, axx));
-          const hole = f.hole ? f.hole.map((p) => project(p[0], p[1], p[2], ayy, axx)) : null;
-          return { ...f, pts, hole, z: pts.reduce((a, p) => a + p[2], 0) / pts.length };
-        })
-        .sort((a, b) => b.z - a.z);
+      const cy = Math.cos(ayy), sy = Math.sin(ayy), cx = Math.cos(axx), sx = Math.sin(axx);
+      const offset = (1 - converge) + 0.22 * dragScatter;
 
-      for (const f of faces) {
-        const tone = TONES[f.letter];
-        ctx!.beginPath(); trace(f.pts); if (f.hole) trace(f.hole);
-        ctx!.fillStyle = f.type === 'cap' ? tone.cap : (tone as any)[f.type];
-        ctx!.fill('evenodd');
-        if (f.type === 'wallD') hatch(f.pts);
-        ctx!.strokeStyle = OUTLINE;
-        ctx!.lineWidth = 2.2;
-        ctx!.beginPath(); trace(f.pts); if (f.hole) trace(f.hole);
-        ctx!.stroke();
+      const projected: Array<[number, number, number]> = new Array(particles.length);
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        projected[i] = projectFast(
+          p.hx + p.vx * offset,
+          p.hy + p.vy * offset,
+          p.hz + p.vz * offset,
+          cy, sy, cx, sx
+        );
+      }
+
+      ctx!.lineWidth = 0.7;
+      strokeChains(dChains, projected, 0);
+      strokeChains(kChains, projected, 1);
+
+      for (let i = 0; i < particles.length; i++) {
+        const [px, py, k] = projected[i];
+        const r = Math.max(0.9, Math.min(3.2, 1.8 * k));
+        const kn = Math.max(0, Math.min(1, (k - 0.6) / 1.2));
+        const alpha = 0.3 + 0.6 * kn;
+        ctx!.beginPath();
+        ctx!.arc(px, py, r, 0, TAU);
+        ctx!.fillStyle = colorFor(particles[i].color, alpha);
+        ctx!.fill();
       }
 
       if (!hasDragged && !reduceMotion) {
@@ -166,7 +247,11 @@
       rot += vel;
       tiltX += (tgtTX - tiltX) * 0.07;
       tiltY += (tgtTY - tiltY) * 0.07;
-      explode += (explodeTarget - explode) * 0.08;
+      converge += (convergeTarget - converge) * 0.045;
+      const dragScatterTarget = dragging ? 1 : 0;
+      dragScatterVel += (dragScatterTarget - dragScatter) * 0.06;
+      dragScatterVel *= 0.80;
+      dragScatter += dragScatterVel;
       draw(rot + tiltY + dragY, 0.16 + tiltX + dragX);
       rafId = requestAnimationFrame(frame);
     }
@@ -174,6 +259,7 @@
     function start() {
       if (running || reduceMotion) return;
       if (!fit()) return;
+      convergeTarget = 1;
       running = true;
       rafId = requestAnimationFrame(frame);
     }
@@ -184,6 +270,7 @@
     }
 
     if (reduceMotion) {
+      converge = 1;
       if (fit()) draw(0.35, 0.16);
     } else {
       const io = new IntersectionObserver(
@@ -193,10 +280,6 @@
       io.observe(cv);
 
       addEventListener('resize', () => { if (fit() && !running) draw(rot, 0.16); }, { passive: true });
-
-      addEventListener('scroll', () => {
-        explodeTarget = Math.min(1, Math.max(0, (scrollY - 60) / 480));
-      }, { passive: true });
 
       addEventListener('pointermove', (e) => {
         const r = cv.getBoundingClientRect();
